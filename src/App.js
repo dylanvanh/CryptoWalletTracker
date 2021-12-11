@@ -1,10 +1,14 @@
-import './App.css';
-import WalletDropDown from "./components/WalletSelectors/WalletDropdown";
-
+import "./App.css";
+import { Fragment } from 'react'
+import OverviewForm from "./components/OverviewDisplay/OverviewForm";
+import SearchBar from "./components/WalletSelectors/SearchBar";
 
 function App() {
   return (
-    <WalletDropDown/>
+    <Fragment>
+      <SearchBar />
+      <OverviewForm />
+    </Fragment>
   );
 }
 

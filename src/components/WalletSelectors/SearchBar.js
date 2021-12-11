@@ -1,6 +1,13 @@
 
+import Card from "../UI/Card";
+
 const SearchBar = () => {
-  return
+  return(
+    <input
+      type="text"
+      placeholder="WalletID"
+      />
+  )
 }
 
 export default SearchBar;
