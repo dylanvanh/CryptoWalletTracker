@@ -1,13 +1,15 @@
 import "./App.css";
 import { Fragment } from 'react'
-import OverviewForm from "./components/OverviewDisplay/OverviewForm";
-import SearchBar from "./components/WalletSelectors/SearchBar";
+import Header from "./components/HeaderBar/Header"
 
 function App() {
   return (
     <Fragment>
-      <SearchBar />
-      <OverviewForm />
+      <div className={"mainContainer"}>
+        <div className={"titleContainer"}>
+          <Header />
+        </div>
+      </div>
     </Fragment>
   );
 }

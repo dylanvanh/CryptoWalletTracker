@@ -1,3 +1,5 @@
-html{
-  background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
-} 
+.titleContainer{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+}

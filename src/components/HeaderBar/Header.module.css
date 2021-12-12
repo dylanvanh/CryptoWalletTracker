@@ -1,0 +1,9 @@
+.title{
+  font-size: 1.5rem;
+}
+
+.wallet_button{
+  display:flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
