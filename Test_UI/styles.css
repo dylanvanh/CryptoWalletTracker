@@ -6,7 +6,8 @@ html {
 
 .headerContainer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .title>p{
@@ -20,7 +21,14 @@ html {
 }
 .walletBtns>button{
   background-color: #F49F0A;
-  width:5rem;
-  height:4rem;
+  height:3rem;
   margin: 10px;
+}
+
+#btn1{
+  width:8rem;
+}
+
+#btn2{
+  width: 12rem;
 }
