@@ -1,0 +1,26 @@
+html {
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.title>p{
+  color: #FFFFFF;
+  font-size:1.5rem;
+}
+
+.walletBtns{
+  display: flex;
+  justify-content: space-between;
+}
+.walletBtns>button{
+  background-color: #F49F0A;
+  width:5rem;
+  height:4rem;
+  margin: 10px;
+}
