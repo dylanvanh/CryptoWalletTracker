@@ -1,3 +1,8 @@
-button{
-  color: #F49F0A;
+.btn {
+  font-size: 1.5rem;
+  margin: 1rem;
+  background-color: chocolate;
+  border-color: rgba(255, 4, 242, 0.253);
+  border-radius: 8px;
+  padding: 1rem;
 }

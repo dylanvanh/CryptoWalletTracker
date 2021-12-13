@@ -1,4 +1,5 @@
 
-.title_name{
-  color: #FFFFFF
+.title{
+  color:white; /* replace */
+  font-size: 2rem;
 }

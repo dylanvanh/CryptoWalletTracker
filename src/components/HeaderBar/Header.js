@@ -1,22 +1,22 @@
 import { Fragment } from 'react';
-import WalletButton from '../WalletSelectors/WalletButton';
+import Logo from "./Logo";
+import WalletButton from './WalletButton';
 import Title from "./Title";
 import classes from './Header.module.css';
 
 const Header = (props) => {
   return (
-    <div className={classes.container}>
-      <div className={classes.title}>
-        <div>
-          <Title titleName={'Crypto Dashboard'}/>
-        </div>
-        <div>
-          <Title titleName={'Wallet Address'}/>
-        </div>
+    <div className={classes.headerContainer} >
+      <div className={classes.logoContainer}>
+        <Logo />
       </div>
-      <div className={classes.wallet_button}>
-        <WalletButton btnName={'Ethereum'} />
-        <WalletButton btnName={'Connect Wallet'} />
+      <div className={classes.titleContainer}>
+        <Title name={'Crypto Dashboard'} />
+        <Title name={'Wallet Address'} />
+      </div>
+      <div className={classes.buttonContainer}>
+        <WalletButton name={'Ethereum'} />
+        <WalletButton name={'Connect Wallet'} />
       </div>
     </div>
   )

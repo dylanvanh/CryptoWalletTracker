@@ -6,7 +6,7 @@ const WalletButton = (props) => {
   return (
     <Fragment>
       <button className={classes.btn}>
-        {props.btnName} 
+        {props.name}
       </button>
     </Fragment>
   )

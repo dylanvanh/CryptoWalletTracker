@@ -1,4 +1,3 @@
-
 import Card from "../UI/Card";
 
 const SearchBar = () => {
