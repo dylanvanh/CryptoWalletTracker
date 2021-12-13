@@ -1,9 +1,9 @@
-import Card from "../UI/Card";
+import Card from "../../UI/Card";
 
 const OverviewForm = () => {
   return (
     <Card>
-      Overview Form
+      <h1>Overview Form</h1>
     </Card>
   )
 }
