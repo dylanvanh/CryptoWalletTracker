@@ -19,23 +19,18 @@ html{
   align-items: center;
 }
 
-.box1>img {
+.logo>img {
   height: 70%;
-
 }
 
-.box2 {
+.title {
   flex-direction: column;
   flex-grow: 1;
   font-size: 1.5rem;
   color: #FFFFFF
 }
 
-.box3{
-
-}
-
-.box3 > button{
+.buttons > button{
   font-size: 1.5rem;
   margin:1rem;
   background-color: chocolate;
