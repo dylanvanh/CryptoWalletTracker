@@ -8,12 +8,15 @@
   flex-direction: row;
   height: 10rem;
   width: 100%;
+  background-color: grey;
 }
 
-.logoContainer {
+.iconContainer {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
+  margin-top:3rem;
   padding-left: 2rem;
   width: 25%;
 }

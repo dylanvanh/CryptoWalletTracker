@@ -1,0 +1,23 @@
+.mainContainer {
+  display: flex;
+}
+
+.leftContainer {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  padding: 1.5%;
+}
+
+.middleContainer {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  padding: 1.5%;
+}

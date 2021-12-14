@@ -5,7 +5,7 @@ import WalletDropDown from "./WalletSelectors/WalletDropdown";
 import TransactionsForm from "./TransactionsDisplay/TransactionsForm";
 
 //Middle
-import SearchBar from "./WalletSelectors/SearchBar";
+import AddTrackWallet from "./WalletSelectors/AddTrackWallet";
 import OverviewForm from "./OverviewDisplay/OverviewForm";
 import LinkButton from "./OverviewDisplay/LinkButton";
 
@@ -20,7 +20,7 @@ const MainDisplay = (props) => {
         <TransactionsForm />
       </div>
       <div className={classes.middleContainer}>
-        <SearchBar />
+        <AddTrackWallet />
         <OverviewForm />
         <LinkButton />
       </div>
