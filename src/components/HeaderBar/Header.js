@@ -1,25 +1,17 @@
 import { Fragment } from 'react';
-import WalletIcon from "./WalletIcon";
-import WalletButton from './WalletButton';
-import Title from "./Title";
 import classes from './Header.module.css';
+import WalletIcon from "./WalletIcon";
+
+import NavItem from './Navbar/NavItem'
+import { ReactComponent as CaretIcon } from '../../icons/caret.svg'
+
+import Navbar from './Navbar/Navbar';
+import DropdownMenu from './Dropdown/DropdownMenu';
 
 const Header = (props) => {
   return (
-    <div className={classes.headerContainer} >
-      <div className={classes.iconContainer}>
-        <WalletIcon />
-        <Title name={'Wallet Address'} />
-      </div>
-      <div className={classes.titleContainer}>
-        <Title name={'Crypto Dashboard'} />
-      </div>
-      <div className={classes.buttonContainer}>
-        <WalletButton name={'Ethereum'} />
-        <WalletButton name={'Connect Wallet'} />
-      </div>
-    </div>
+    <Navbar />
   )
-}
+};
 
 export default Header;
