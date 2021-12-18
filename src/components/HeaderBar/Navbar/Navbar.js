@@ -1,37 +1,19 @@
-
 import classes from "./Navbar.module.css";
-import NavItem from './NavItem';
-import WalletIcon from '../WalletIcon';
-import { ReactComponent as CaretIcon } from '../../../icons/caret.svg'
+import NavItem from "./NavItem";
+import WalletIcon from "../WalletIcon";
+import { ReactComponent as CaretIcon } from "../../../icons/caret.svg";
 import DropdownMenu from "../Dropdown/DropdownMenu";
 
-
-const Navbar = (props) => {
+const Navbar = () => {
   return (
-    <div className={classes.container}>
-      <nav className={classes.navbar}>
-        <WalletIcon className={classes['wallet-icon']} />
-        <ul className={classes["navbar-nav"]}>{props.children}</ul>
-        <NavItem icon={<CaretIcon />}>
-          <DropdownMenu />
-        </NavItem>
-        <h2 className={classes['dropdown-title']}>Wallet Details</h2>
-
-      </nav>
-    </div>
-
-  );
-}
-
-/*
-<Navbar>
-      <WalletIcon className={classes['wallet-icon']} />
+    <nav className={classes.navbar}>
+      <WalletIcon/>
       <NavItem icon={<CaretIcon />}>
         <DropdownMenu />
       </NavItem>
-    
-    </Navbar>
-*/
+      <h2 className={classes["dropdown-title"]}>Wallet Details</h2>
+    </nav>
+  );
+};
 
 export default Navbar;
-

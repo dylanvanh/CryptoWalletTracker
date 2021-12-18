@@ -1,3 +1,7 @@
+.nav-item {
+  list-style: none;
+}
+
 .icon-button {
   --button-size: calc(var(--nav-size) * 0.5);
   width: var(--button-size);
@@ -10,4 +14,8 @@
   align-items: center;
   justify-content: center;
   transition: filter 300ms;
+}
+
+ul {
+  list-style: none;
 }
