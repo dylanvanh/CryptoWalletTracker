@@ -3,17 +3,17 @@
   justify-content: space-evenly;
 }
 
-.left-container{
+.transactions-display-container{
   background-color: blue;
   width:30%
 }
 
-.middle-container{
+.portfolio-display-container{
   background-color: yellow;
   flex-grow: 1;
 }
 
-.right-container{
+.gas-stats-container{
   background-color: green;
   width:30%
 }

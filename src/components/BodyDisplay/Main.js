@@ -8,9 +8,15 @@ import GasStats from "./GasStats/GasDisplay";
 const MainDisplay = () => {
   return (
     <div className={classes["main-container"]}>
-      <div className={classes["left-container"]}>left</div>
-      <div className={classes["middle-container"]}>middle</div>
-      <div className={classes["right-container"]}>right</div>
+      <div className={classes["transactions-display-container"]}>
+        <TransactionsDisplay />
+      </div>
+      <div className={classes["portfolio-display-container"]}>
+        <PortfolioDisplay />
+      </div>
+      <div className={classes["gas-stats-container"]}>
+        <GasStats />
+      </div>
     </div>
   );
 };
