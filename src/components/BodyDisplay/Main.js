@@ -1,12 +1,16 @@
 import classes from "./Main.module.css";
-import { Fragment } from "react";
 
+import TransactionsDisplay from "./Transactions/TransactionsDisplay";
+import PortfolioDisplay from "./Portfolio/PortfolioDisplay";
+import GasStats from "./GasStats/GasDisplay";
+
+//handles all the body components (BodyDisplay)
 const MainDisplay = () => {
   return (
-    <div className={classes["whole-container"]}>
-      <div className={classes["left-container"]}></div>
-      <div className={classes["middle-container"]}></div>
-      <div classNAme={classes["right-container"]}></div>
+    <div className={classes["main-container"]}>
+      <div className={classes["left-container"]}>left</div>
+      <div className={classes["middle-container"]}>middle</div>
+      <div className={classes["right-container"]}>right</div>
     </div>
   );
 };

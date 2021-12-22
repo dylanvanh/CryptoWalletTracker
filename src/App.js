@@ -7,7 +7,7 @@ const App = () => {
   return (
     <Fragment>
       <Header />
-      {/* <MainDisplay /> */}
+      <Main />
     </Fragment>
   );
 };
