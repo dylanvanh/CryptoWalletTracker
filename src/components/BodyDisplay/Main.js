@@ -7,7 +7,7 @@ import GasStats from "./GasStats/GasDisplay";
 //handles all the body components (BodyDisplay)
 const MainDisplay = () => {
   return (
-    <div className={classes["main-container"]}>
+    <main className={classes["main-container"]}>
       <div className={classes["transactions-display-container"]}>
         <TransactionsDisplay />
       </div>
@@ -17,7 +17,7 @@ const MainDisplay = () => {
       <div className={classes["gas-stats-container"]}>
         <GasStats />
       </div>
-    </div>
+    </main>
   );
 };
 

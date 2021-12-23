@@ -1,7 +1,14 @@
-import classes from "./WalletSearch/WalletSearchBar.module.css";
+import classes from "./WalletSearchBar.module.css";
 
 const WalletSearchBar = () => {
-  return "";
+  return (
+    <div className={classes.container}>
+      <input type='text' title='ens'></input>
+      <button>
+        <p>-></p>
+      </button>
+    </div>
+  );
 };
 
 export default WalletSearchBar;
