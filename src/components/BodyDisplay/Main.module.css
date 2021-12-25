@@ -6,18 +6,13 @@
 }
 
 .transactions-display-container{
-  /* background-color: blue; */
   width:25%;
-  /* width:30% */
 }
 
 .portfolio-display-container{
-  /* background-color: yellow; */
   width:40%;
-  /* flex-grow: 1; */
 }
 
 .gas-stats-container{
-  /* background-color: green; */
   width:25%;
 }
