@@ -9,8 +9,8 @@ const App = () => {
   return (
     <div className={classes.container}>
       <Navbar/>
-      <Main className={classes.main} />
-      <Footer className={classes.footer} />
+      <Main/>
+      <Footer/>
     </div>
   );
 };
