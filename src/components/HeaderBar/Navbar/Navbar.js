@@ -23,7 +23,7 @@ const Navbar = () => {
         <div className={classes["btn"]}>
           <NavItem icon={<Ethereum />} />
         </div>
-        <div className={classes["btn-connect-wallet"]}>
+        <div>
           <NavItem icon={<MetamaskIcon />} />
         </div>
       </div>

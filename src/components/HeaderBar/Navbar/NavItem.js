@@ -7,7 +7,7 @@ const NavItem = (props) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <li className="nav-item" >
+    <li>
       <a href="#" className={classes["icon-button"]} onClick={() => setOpen(!open)}>
         {props.icon}
       </a>
