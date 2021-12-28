@@ -3,15 +3,15 @@ import classes from "./App.module.css";
 import Main from "./components/BodyDisplay/Main";
 import Navbar from "./components/HeaderBar/Navbar/Navbar";
 import Footer from "./components/FooterBar/Footer";
-
+import UserProvider from './components/Context/UserProvider';
 
 const App = () => {
   return (
-    <div className={classes.container}>
-      <Navbar/>
-      <Main/>
-      <Footer/>
-    </div>
+    <UserProvider>
+      <Navbar />
+      <Main />
+      <Footer />
+    </UserProvider>
   );
 };
 export default App;
