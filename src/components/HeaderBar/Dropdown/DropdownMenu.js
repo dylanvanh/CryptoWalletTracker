@@ -1,6 +1,10 @@
 import classes from "./DropdownMenu.module.css";
-
 import { ReactComponent as PlusIcon } from "../../../icons/plus.svg";
+import { useContext } from 'react';
+
+import UserContext from "../../../store/UserContext";
+import AddWalletModal from '../AddWalletModal/AddWalletModal';
+import AddWallet from "../AddWalletModal/AddWalletModal";
 
 const DropdownMenu = (props) => {
 
@@ -9,7 +13,7 @@ const DropdownMenu = (props) => {
       <a
         href="#"
         className={classes["menu-item"]}
-        // onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}
+      // onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}
       >
         <span className={classes["icon-button"]}>{props.leftIcon}</span>
         {props.children}
@@ -20,14 +24,16 @@ const DropdownMenu = (props) => {
   //Opens a modal for adding the wallet, 
   //where the user can enter the details of the new added wallet
   const AddWalletButton = (props) => {
+
+    const userCtx = useContext(UserContext);
+
     return (
       <a>
-        <span className={classes["add-wallet-button"]}>{props.leftIcon}</span>
+        <span onClick={userCtx.showModal} className={classes["add-wallet-button"]}>{props.leftIcon}</span>
         {props.children}
       </a>
     );
   }
-
 
   // return (
   //   <div className={classes.dropdown}>
@@ -37,7 +43,6 @@ const DropdownMenu = (props) => {
   //     </AddWalletButton>
   //   </div>
   // );
-
 
   return (
     <div className={classes.dropdown}>

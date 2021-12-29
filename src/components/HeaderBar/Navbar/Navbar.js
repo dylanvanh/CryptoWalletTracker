@@ -4,14 +4,17 @@ import WalletIcon from "../WalletIcon";
 import { ReactComponent as CaretIcon } from "../../../icons/caret.svg";
 import { ReactComponent as MetamaskIcon } from "../../../icons/metamask.svg";
 import { ReactComponent as Ethereum } from "../../../icons/ethereum.svg";
-
+import { useContext } from 'react';
 
 import DropdownMenu from "../Dropdown/DropdownMenu";
-import Button from "../../Button";
+import UserContext from "../../../store/UserContext";
+import AddWalletModal from '../AddWalletModal/AddWalletModal';
+const Navbar = (props) => {
 
-const Navbar = () => {
+  const userCtx = useContext(UserContext)
+
   return (
-    <nav className={classes.navbar}>
+    <nav className={classes.navbar} >
       <div className={classes["left-nav"]}>
         <WalletIcon />
         <NavItem icon={<CaretIcon />}>
@@ -27,7 +30,7 @@ const Navbar = () => {
           <NavItem icon={<MetamaskIcon />} />
         </div>
       </div>
-    </nav>
+    </nav >
   );
 };
 
