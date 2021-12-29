@@ -7,7 +7,7 @@ import Modal from "./Modal";
 
 //Wallet add allows you to search for a wallet location and click add 
 //Adds the wallet to list of drop down wallets
-const AddWallet = (props) => {
+const AddWalletModal = (props) => {
 
   const userCtx = useContext(UserContext)
   return (
@@ -21,4 +21,4 @@ const AddWallet = (props) => {
   )
 };
 
-export default AddWallet;
+export default AddWalletModal;
