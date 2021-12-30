@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import classes from "./TransactionsDisplay.module.css";
 import Card from "../../UI/Card";
 

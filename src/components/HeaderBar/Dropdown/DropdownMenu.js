@@ -3,8 +3,6 @@ import { ReactComponent as PlusIcon } from "../../../icons/plus.svg";
 import { useContext } from 'react';
 
 import UserContext from "../../../store/UserContext";
-import AddWalletModal from '../AddWalletModal/AddWalletModal';
-import AddWallet from "../AddWalletModal/AddWalletModal";
 
 const DropdownMenu = (props) => {
 

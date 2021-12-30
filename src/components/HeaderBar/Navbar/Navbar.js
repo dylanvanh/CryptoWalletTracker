@@ -7,12 +7,7 @@ import { ReactComponent as Ethereum } from "../../../icons/ethereum.svg";
 import { useContext } from 'react';
 
 import DropdownMenu from "../Dropdown/DropdownMenu";
-import UserContext from "../../../store/UserContext";
-import AddWalletModal from '../AddWalletModal/AddWalletModal';
 const Navbar = (props) => {
-
-  const userCtx = useContext(UserContext)
-
   return (
     <nav className={classes.navbar} >
       <div className={classes["left-nav"]}>

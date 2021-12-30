@@ -1,7 +1,6 @@
 import classes from "./PortfolioDisplay.module.css";
 import Card from "../../UI/Card";
 import WalletSearchBar from "./WalletSearch/WalletSearchBar";
-import { Fragment } from "react/cjs/react.production.min";
 
 const PortfolioDisplay = () => {
   return (
