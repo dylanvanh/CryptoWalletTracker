@@ -24,24 +24,21 @@ const userReducer = (state, action) => {
       };
     case 'ADD':
       console.log('ADD!')
-      const updatedWallets = state.wallets;
-      console.log('wallets before add =', updatedWallets)
-      updatedWallets.push(action.walletAddress)
-      console.log('wallets after add =', updatedWallets)
+      const updatedWallets = state.wallets
+      console.log('updatedWallets=', updatedWallets)
+      updatedWallets.push(action.walletAddress);
+      // console.log('wallet address', action.walletAddress)
+      // const updatedWallets = state.wallets;
+      // updatedWallets.push(action.walletAddress);
+      // state.wallets.concat(action.walletAddress);
+
+      // console.log('wallets after add =', updatedWallets)
       return {
         wallets: updatedWallets,
-        ...state
+        isModalShowing: state.isModalShowing,
       }
-    default:
-      return {
-        ...state
-      }
-
   }
 }
-
-
-
 const UserProvider = (props) => {
   const [userState, dispatchUserAction] = useReducer(
     userReducer,
