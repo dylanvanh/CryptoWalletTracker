@@ -12,7 +12,7 @@ const DropdownMenu = (props) => {
 
   const AddWalletButton = (props) => {
     return (
-      <a>
+      <a href="#">
         <span onClick={userCtx.showModal} className={classes["add-wallet-button"]}>{props.leftIcon}</span>
         {props.children}
       </a>
@@ -22,8 +22,10 @@ const DropdownMenu = (props) => {
   const dropDownItems = (
     <ul>
       {userCtx.wallets.map((walletAddress) => (
-        <DropdownItem className={classes['wallet-address']}>
-          <h3>{walletAddress}</h3>
+        <DropdownItem className={classes['wallet-address']} key={walletAddress} name={walletAddress}>
+          <h3>
+            {walletAddress}
+          </h3>
         </DropdownItem>
       ))}
     </ul>
@@ -31,7 +33,9 @@ const DropdownMenu = (props) => {
 
   return (
     <div className={classes.dropdown}>
-      {dropDownItems}
+      <div>
+        {dropDownItems}
+      </div>
       <AddWalletButton leftIcon={<PlusIcon />}>
         <h3>Add Wallet</h3>
       </AddWalletButton>

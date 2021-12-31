@@ -7,43 +7,59 @@ const availableActions = {
   HIDE: 'HIDE',
   ADD: 'ADD',
   REMOVE: 'REMOVE',
+  SELECTWALLET: 'SELECTWALLET'
 }
 
 const initialUserState = {
-  wallets: [],
+  wallets: ['0x1', '0x2'],
   isModalShowing: false,
   selectedWallet: null,
 };
 
 const userReducer = (state, action) => {
   switch (action.type) {
-    case availableActions.DISPLAY:
+
+    case availableActions.DISPLAY: {
       console.log('display!')
       return {
         wallets: state.wallets,
         isModalShowing: true,
         selectedWallet: state.selectedWallet,
       };
-    case availableActions.HIDE:
+    }
+
+    case availableActions.HIDE: {
       console.log('hide!')
       return {
         wallets: state.wallets,
         isModalShowing: false,
         selectedWallet: state.selectedWallet,
       };
-    case availableActions.ADD:
+    }
+
+    case availableActions.ADD: {
       console.log('ADD!')
       const updatedWallets = state.wallets
       updatedWallets.push(action.walletAddress);
 
       //set new added wallet to be the selected wallet
       const updatedSelectedWallet = action.walletAddress;
-
       return {
         wallets: updatedWallets,
         isModalShowing: state.isModalShowing,
         selectedWallet: updatedSelectedWallet,
       }
+    }
+
+    case availableActions.SELECTWALLET: {
+      console.log('Select wallet')
+      const updatedSelectedWallet = action.walletAddress;
+
+      return {
+        ...state,
+        selectedWallet: updatedSelectedWallet,
+      }
+    }
   }
 }
 const UserProvider = (props) => {
@@ -64,6 +80,10 @@ const UserProvider = (props) => {
     dispatchUserAction({ type: availableActions.ADD, walletAddress: walletAddress })
   }
 
+  const selectedWalletHandler = (walletAddress) => {
+    dispatchUserAction({ type: availableActions.SELECTWALLET, walletAddress: walletAddress })
+  }
+
   // const removeWalletHandler = (walletAddress) => {
   //   dispatchUserAction({ type: 'ADD', walletAddress: walletAddress })
   // }
@@ -75,6 +95,7 @@ const UserProvider = (props) => {
     showModal: showModalHandler,
     hideModal: hideModalHandler,
     addWallet: addWalletHandler,
+    selectWallet: selectedWalletHandler,
   }
 
 
