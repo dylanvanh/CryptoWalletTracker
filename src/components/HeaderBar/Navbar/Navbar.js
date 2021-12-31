@@ -29,7 +29,7 @@ const Navbar = (props) => {
           <DropdownMenu />
         </NavItem>
         <h2 className={classes["dropdown-title"]}>Wallet Details</h2>
-        <div>
+        <div className={classes['wallet-name']}>
           <h2>{selectedWallet}</h2>
         </div>
       </div>
