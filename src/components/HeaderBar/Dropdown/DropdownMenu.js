@@ -4,21 +4,10 @@ import { useContext } from 'react';
 
 import UserContext from "../../../store/UserContext";
 
+import DropdownItem from "./DropDownItem";
+
+
 const DropdownMenu = (props) => {
-
-  const DropdownItem = (props) => {
-    return (
-      <a
-        href="#"
-        className={classes["menu-item"]}
-      // onClick={() => props.goToMenu && setActiveMenu(props.goToMenu)}
-      >
-        <span className={classes["icon-button"]}>{props.leftIcon}</span>
-        {props.children}
-      </a>
-    );
-  };
-
   //Opens a modal for adding the wallet, 
   //where the user can enter the details of the new added wallet
   const AddWalletButton = (props) => {
