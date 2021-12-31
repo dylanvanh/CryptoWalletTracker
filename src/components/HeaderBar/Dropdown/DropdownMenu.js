@@ -8,12 +8,9 @@ import DropdownItem from "./DropDownItem";
 
 
 const DropdownMenu = (props) => {
-  //Opens a modal for adding the wallet, 
-  //where the user can enter the details of the new added wallet
+  const userCtx = useContext(UserContext);
+
   const AddWalletButton = (props) => {
-
-    const userCtx = useContext(UserContext);
-
     return (
       <a>
         <span onClick={userCtx.showModal} className={classes["add-wallet-button"]}>{props.leftIcon}</span>
@@ -22,23 +19,19 @@ const DropdownMenu = (props) => {
     );
   }
 
-  // return (
-  //   <div className={classes.dropdown}>
-  // { userCtx.walletAddresses.map() }
-  //     <AddWalletButton onClick={ } leftIcon={<PlusIcon />}>
-  //       <h3>Add Wallet</h3>
-  //     </AddWalletButton>
-  //   </div>
-  // );
+  const dropDownItems = (
+    <ul>
+      {userCtx.wallets.map((walletAddress) => (
+        <DropdownItem className={classes['wallet-address']}>
+          <h3>{walletAddress}</h3>
+        </DropdownItem>
+      ))}
+    </ul>
+  )
 
   return (
     <div className={classes.dropdown}>
-      <DropdownItem className={classes["wallet-address"]}>
-        <h3>0xx2....B9a</h3>
-      </DropdownItem>
-      <DropdownItem className={classes["wallet-address"]}>
-        <h3>0x31....F1b</h3>
-      </DropdownItem>
+      {dropDownItems}
       <AddWalletButton leftIcon={<PlusIcon />}>
         <h3>Add Wallet</h3>
       </AddWalletButton>

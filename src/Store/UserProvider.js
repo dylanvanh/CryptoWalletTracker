@@ -7,7 +7,6 @@ const initialUserState = {
   isModalShowing: false,
 };
 
-
 const userReducer = (state, action) => {
   switch (action.type) {
     case 'DISPLAY':
