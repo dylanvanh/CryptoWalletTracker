@@ -2,39 +2,47 @@ import { useReducer } from "react";
 import UserContext from './UserContext';
 
 
+const availableActions = {
+  DISPLAY: 'DISPLAY',
+  HIDE: 'HIDE',
+  ADD: 'ADD',
+  REMOVE: 'REMOVE',
+}
+
 const initialUserState = {
   wallets: [],
   isModalShowing: false,
+  selectedWallet: null,
 };
 
 const userReducer = (state, action) => {
   switch (action.type) {
-    case 'DISPLAY':
+    case availableActions.DISPLAY:
       console.log('display!')
       return {
         wallets: state.wallets,
-        isModalShowing: true
+        isModalShowing: true,
+        selectedWallet: state.selectedWallet,
       };
-    case 'HIDE':
+    case availableActions.HIDE:
       console.log('hide!')
       return {
         wallets: state.wallets,
-        isModalShowing: false
+        isModalShowing: false,
+        selectedWallet: state.selectedWallet,
       };
-    case 'ADD':
+    case availableActions.ADD:
       console.log('ADD!')
       const updatedWallets = state.wallets
-      console.log('updatedWallets=', updatedWallets)
       updatedWallets.push(action.walletAddress);
-      // console.log('wallet address', action.walletAddress)
-      // const updatedWallets = state.wallets;
-      // updatedWallets.push(action.walletAddress);
-      // state.wallets.concat(action.walletAddress);
 
-      // console.log('wallets after add =', updatedWallets)
+      //set new added wallet to be the selected wallet
+      const updatedSelectedWallet = action.walletAddress;
+
       return {
         wallets: updatedWallets,
         isModalShowing: state.isModalShowing,
+        selectedWallet: updatedSelectedWallet,
       }
   }
 }
@@ -45,15 +53,15 @@ const UserProvider = (props) => {
   );
 
   const showModalHandler = () => {
-    dispatchUserAction({ type: 'DISPLAY' })
+    dispatchUserAction({ type: availableActions.DISPLAY })
   }
 
   const hideModalHandler = () => {
-    dispatchUserAction({ type: 'HIDE' })
+    dispatchUserAction({ type: availableActions.HIDE })
   }
 
   const addWalletHandler = (walletAddress) => {
-    dispatchUserAction({ type: 'ADD', walletAddress: walletAddress })
+    dispatchUserAction({ type: availableActions.ADD, walletAddress: walletAddress })
   }
 
   // const removeWalletHandler = (walletAddress) => {
@@ -63,6 +71,7 @@ const UserProvider = (props) => {
   const userContext = {
     wallets: userState.wallets,
     isModalShowing: userState.isModalShowing,
+    selectedWallet: userState.selectedWallet,
     showModal: showModalHandler,
     hideModal: hideModalHandler,
     addWallet: addWalletHandler,
