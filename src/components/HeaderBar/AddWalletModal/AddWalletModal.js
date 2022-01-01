@@ -1,6 +1,6 @@
 
 import { useContext, useRef } from "react";
-import UserContext from "../../../store/UserContext";
+import UserContext from "../../../context/UserContext";
 import classes from "./AddWalletModal.module.css";
 import Modal from "./Modal";
 

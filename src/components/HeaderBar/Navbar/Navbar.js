@@ -7,7 +7,7 @@ import { ReactComponent as Ethereum } from "../../../icons/ethereum.svg";
 import { useContext } from 'react';
 
 import DropdownMenu from "../Dropdown/DropdownMenu";
-import UserContext from "../../../store/UserContext";
+import UserContext from "../../../context/UserContext";
 
 const Navbar = (props) => {
 

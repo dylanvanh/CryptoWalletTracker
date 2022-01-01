@@ -3,7 +3,7 @@ import Main from "./components/BodyDisplay/Main";
 import Navbar from "./components/HeaderBar/Navbar/Navbar";
 import Footer from "./components/FooterBar/Footer";
 import AddWalletModal from "./components/HeaderBar/AddWalletModal/AddWalletModal";
-import UserContext from './store/UserContext';
+import UserContext from './context/UserContext';
 
 const App = () => {
   const userCtx = useContext(UserContext);

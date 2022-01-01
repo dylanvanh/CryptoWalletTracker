@@ -2,7 +2,7 @@ import classes from "./DropdownMenu.module.css";
 import { ReactComponent as PlusIcon } from "../../../icons/plus.svg";
 import { useContext } from 'react';
 
-import UserContext from "../../../store/UserContext";
+import UserContext from "../../../context/UserContext";
 
 import DropdownItem from "./DropDownItem";
 
