@@ -12,8 +12,8 @@ const DropdownMenu = (props) => {
 
   const AddWalletButton = (props) => {
     return (
-      <a href="#">
-        <span onClick={userCtx.showModal} className={classes["add-wallet-button"]}>{props.leftIcon}</span>
+      <a href="#" onClick={userCtx.showModal}>
+        <span className={classes["add-wallet-button"]}>{props.leftIcon}</span>
         {props.children}
       </a>
     );
