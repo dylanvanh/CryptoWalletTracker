@@ -7,13 +7,21 @@ const availableActions = {
   HIDE: 'HIDE',
   ADD: 'ADD',
   REMOVE: 'REMOVE',
-  SELECTWALLET: 'SELECTWALLET'
+  SELECTWALLET: 'SELECTWALLET',
 }
+
+const availableChains = {
+  ETHEREUM: 'ETHEREUM',
+  POLYGON: 'POLYGON',
+  AVALANCHE: 'AVALANCHE',
+}
+
 
 const initialUserState = {
   wallets: ['0x1', '0x2'],
   isModalShowing: false,
   selectedWallet: null,
+  selectedChain: 
 };
 
 const userReducer = (state, action) => {
