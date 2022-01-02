@@ -8,6 +8,7 @@ const availableActions = {
   ADD: 'ADD',
   REMOVE: 'REMOVE',
   SELECTWALLET: 'SELECTWALLET',
+  SELECTCHAIN: 'SELECTCHAIN'
 }
 
 const availableChains = {
@@ -21,7 +22,7 @@ const initialUserState = {
   wallets: ['0x1', '0x2'],
   isModalShowing: false,
   selectedWallet: null,
-  selectedChain: 
+  selectedChain: availableActions.ETHEREUM,
 };
 
 const userReducer = (state, action) => {
@@ -33,6 +34,7 @@ const userReducer = (state, action) => {
         wallets: state.wallets,
         isModalShowing: true,
         selectedWallet: state.selectedWallet,
+        selectedChain: state.selectedChain,
       };
     }
 
@@ -42,6 +44,7 @@ const userReducer = (state, action) => {
         wallets: state.wallets,
         isModalShowing: false,
         selectedWallet: state.selectedWallet,
+        selectedChain: state.selectedChain,
       };
     }
 
@@ -50,26 +53,41 @@ const userReducer = (state, action) => {
       const updatedWallets = state.wallets
       updatedWallets.push(action.walletAddress);
 
+
       //set new added wallet to be the selected wallet
       const updatedSelectedWallet = action.walletAddress;
       return {
         wallets: updatedWallets,
         isModalShowing: state.isModalShowing,
         selectedWallet: updatedSelectedWallet,
+        selectedChain: state.selectedChain,
       }
     }
 
     case availableActions.SELECTWALLET: {
-      console.log('Select wallet')
+      console.log('Select wallet');
       const updatedSelectedWallet = action.walletAddress;
 
       return {
         ...state,
         selectedWallet: updatedSelectedWallet,
+        selectedChain: state.selectedChain,
+      }
+    }
+
+
+    case availableActions.SELECTCHAIN: {
+      console.log('Select Chain');
+      const updatedChain = action.chainName;
+
+      return {
+        ...state,
+        selectedChain: updatedChain,
       }
     }
   }
 }
+
 const UserProvider = (props) => {
   const [userState, dispatchUserAction] = useReducer(
     userReducer,
@@ -92,6 +110,10 @@ const UserProvider = (props) => {
     dispatchUserAction({ type: availableActions.SELECTWALLET, walletAddress: walletAddress })
   }
 
+  const selectChainHandler = (chainName) => {
+    dispatchUserAction({ type: availableActions.SELECTCHAIN, chainName: chainName })
+  }
+
   // const removeWalletHandler = (walletAddress) => {
   //   dispatchUserAction({ type: 'ADD', walletAddress: walletAddress })
   // }
@@ -105,7 +127,6 @@ const UserProvider = (props) => {
     addWallet: addWalletHandler,
     selectWallet: selectedWalletHandler,
   }
-
 
   return (
     <UserContext.Provider value={userContext}>
