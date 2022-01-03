@@ -3,26 +3,26 @@ import UserContext from './UserContext';
 
 
 const availableActions = {
-  DISPLAY: 'DISPLAY',
-  HIDE: 'HIDE',
-  ADD: 'ADD',
-  REMOVE: 'REMOVE',
-  SELECTWALLET: 'SELECTWALLET',
-  SELECTCHAIN: 'SELECTCHAIN'
+  DISPLAY: 'display',
+  HIDE: 'hide',
+  ADD: 'add',
+  REMOVE: 'remove',
+  SELECTWALLET: 'selectwallet',
+  SELECTCHAIN: 'selectchain'
 }
 
 const availableChains = {
-  ETHEREUM: 'ETHEREUM',
-  POLYGON: 'POLYGON',
-  AVALANCHE: 'AVALANCHE',
+  ETHEREUM: 'eth',
+  POLYGON: 'polygon',
+  AVALANCHE: 'avalanche',
+  ALL_AVAILABLE: 'all',
 }
-
 
 const initialUserState = {
   wallets: ['0x1', '0x2'],
   isModalShowing: false,
   selectedWallet: null,
-  selectedChain: availableActions.ETHEREUM,
+  selectedChain: availableActions.POLYGON,
 };
 
 const userReducer = (state, action) => {
@@ -49,7 +49,7 @@ const userReducer = (state, action) => {
     }
 
     case availableActions.ADD: {
-      console.log('ADD!')
+      console.log('add!')
       const updatedWallets = state.wallets
       updatedWallets.push(action.walletAddress);
 
@@ -110,6 +110,7 @@ const UserProvider = (props) => {
     dispatchUserAction({ type: availableActions.SELECTWALLET, walletAddress: walletAddress })
   }
 
+  //chain dropdown in menu
   const selectChainHandler = (chainName) => {
     dispatchUserAction({ type: availableActions.SELECTCHAIN, chainName: chainName })
   }
