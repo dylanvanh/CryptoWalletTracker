@@ -8,7 +8,8 @@ const availableActions = {
   ADD: 'add',
   REMOVE: 'remove',
   SELECTWALLET: 'selectwallet',
-  SELECTCHAIN: 'selectchain'
+  SELECTCHAIN: 'selectchain',
+  ISDATAFETCHED: 'isDataFetched'
 }
 
 const availableChains = {
@@ -23,6 +24,7 @@ const initialUserState = {
   isModalShowing: false,
   selectedWallet: null,
   selectedChain: availableActions.POLYGON,
+  isDataFetched: false,
 };
 
 const userReducer = (state, action) => {
@@ -85,6 +87,19 @@ const userReducer = (state, action) => {
         selectedChain: updatedChain,
       }
     }
+
+
+    case availableActions.ISDATAFETCHED: {
+      console.log('Is Data Fetched')
+
+      //all fetch requests are complete -> true
+      const updatedIsDataFetched = true;
+
+      return {
+        ...state,
+        isDataFetched: updatedIsDataFetched,
+      }
+    }
   }
 }
 
@@ -115,6 +130,11 @@ const UserProvider = (props) => {
     dispatchUserAction({ type: availableActions.SELECTCHAIN, chainName: chainName })
   }
 
+  //sets the isdatafetched state to true
+  const isDataFetchedHandler = () => {
+    dispatchUserAction({ type: availableActions.ISDATAFETCHED });
+  }
+
   // const removeWalletHandler = (walletAddress) => {
   //   dispatchUserAction({ type: 'ADD', walletAddress: walletAddress })
   // }
@@ -123,10 +143,12 @@ const UserProvider = (props) => {
     wallets: userState.wallets,
     isModalShowing: userState.isModalShowing,
     selectedWallet: userState.selectedWallet,
+    isDataFetched: userState.isDataFetched,
     showModal: showModalHandler,
     hideModal: hideModalHandler,
     addWallet: addWalletHandler,
     selectWallet: selectedWalletHandler,
+    changeDataRetrievedStatus: isDataFetchedHandler,
   }
 
   return (
