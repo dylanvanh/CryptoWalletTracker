@@ -33,24 +33,23 @@ const App = () => {
   }
 
   //fetches token balances
-  const nativeData = undefined;
-  const erc20Data = undefined;
-
+  const [tokenData, setTokenData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [dataRetrived, setDataRetrieved] = useState(false);
 
 
-  console.log('main data fetched(1) = ', userCtx.isDataFetched)
+  // console.log('main data fetched(1) = ', userCtx.isDataFetched)
 
   const fetchWalletDataHandler = useCallback(async (nativeData, erc20Data) => {
     setIsLoading(true);
     setError(null);
+    console.log('fetchwalletdatahandler!')
 
     try {
       const responseErc20 = await fetch(api_call_native, {
         headers: apiHeaders,
       });
+
       const responseNative = await fetch(api_call_erc20, {
         headers: apiHeaders,
       });
@@ -60,20 +59,30 @@ const App = () => {
       }
 
       //native token data
-      nativeData = await responseErc20.json();
-      erc20Data = await responseNative.json();
+      const nativeData = await responseErc20.json();
+      const erc20Data = await responseNative.json();
       console.log('ue = ', nativeData)
-      console.log('ue = ', erc20Data)
+      console.log('ue = ', erc20Data);
+
+      const transformedTokenData = erc20Data.map((tokenData) => {
+        return {
+          tokenAddress: tokenData.token_address,
+          name: tokenData.name,
+          balance: tokenData.balance,
+          decimals: tokenData.decimals,
+          symbol: tokenData.symbol,
+        };
+      });
+
+      setTokenData(transformedTokenData)
+      console.log('transformed data = ', transformedTokenData);
 
     } catch (error) {
-      setError(error.message)
+      setError(error.message);
     }
-
     setIsLoading(false);
-    setDataRetrieved(true);
-
     userCtx.changeDataRetrievedStatus();
-    console.log('main data fetched(2) = ', userCtx.isDataFetched)
+    // console.log('main data fetched(2) = ', userCtx.isDataFetched)
   }, [])
 
 
@@ -84,22 +93,24 @@ const App = () => {
 
   let content = <h1>NO DATA FOUND!</h1>
 
-  // if (nativeData.length > 0){
-  //   content = <TokenList></TokenList>
-  // }
-
-  if(error){
-    content = <h1>AN ERROR HAS OCCURED!</h1>
+  if (tokenData.length> 0) {
+    content = <p>hello/</p>;
   }
 
-  if(isLoading){
+
+  if (error) {
+    content = <h1>AN ERROR HAS OCCURED!</h1>
+    console.log(error)
+  }
+
+  if (isLoading) {
     content = <h2>Loading...</h2>;
   }
 
   return (
     <>
       {userCtx.isModalShowing && <AddWalletModal />}
-      <Navbar />
+      <Navbar fetchData={fetchWalletDataHandler} />
       <div>
         {content}
       </div>

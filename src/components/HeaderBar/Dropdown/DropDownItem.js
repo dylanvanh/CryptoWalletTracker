@@ -19,7 +19,7 @@ const DropdownItem = (props) => {
     console.log(updatedSelectedWallet);
 
     //if selected wallet is the same as currently active
-    if (updatedSelectedWallet == userCtx.selectedWallet) {
+    if (updatedSelectedWallet === userCtx.selectedWallet) {
       return;
     }
     userCtx.selectWallet(updatedSelectedWallet);

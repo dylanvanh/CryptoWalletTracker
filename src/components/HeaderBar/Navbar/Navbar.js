@@ -15,12 +15,6 @@ const Navbar = (props) => {
 
   const selectedWallet = userCtx.selectedWallet;
 
-  //REMOVE LATER -> just for testing purposes , also remove div
-  const showUserCtxHandler = (event) => {
-    event.preventDefault();
-    console.log(userCtx);
-  }
-
   return (
     <nav className={classes.navbar} >
       <div className={classes["left-nav"]}>
@@ -34,7 +28,7 @@ const Navbar = (props) => {
         </div>
       </div>
       <div className={classes["right-nav"]}>
-        <div onClick={showUserCtxHandler} className={classes["btn"]}>
+        <div onClick={props.fetchData} className={classes["btn"]}>
           <NavItem icon={<Ethereum />} />
         </div>
         <div>

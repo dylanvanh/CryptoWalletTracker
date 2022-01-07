@@ -34,7 +34,7 @@
 .right-nav{
   display:flex;
   float:right;  
-  margin-left: 62rem;
+  /* margin-left: 62rem; */
 }
 
 .dropdown-title {
