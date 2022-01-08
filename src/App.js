@@ -1,16 +1,18 @@
 import { useContext, useEffect, useState, useCallback } from 'react';
+import classes from './App.module.css';
 import Main from "./components/BodyDisplay/Main";
 import Navbar from "./components/HeaderBar/Navbar/Navbar";
 import Footer from "./components/FooterBar/Footer";
 import AddWalletModal from "./components/HeaderBar/AddWalletModal/AddWalletModal";
 import UserContext from './context/UserContext';
 import TokenList from './components/BodyDisplay/Portfolio/TokenList';
+import Card from './components/UI/Card';
 
 const App = () => {
   const userCtx = useContext(UserContext);
 
   //temp wallet for testing
-  const selectedWallet = '0x057Ec652A4F150f7FF94f089A38008f49a0DF88e'
+  const selectedWallet = '0x6404331b77E488a314A9092d737F5ADE1CB9fBAf'
 
   //constants for searches
   const CHAIN_NAMES = {
@@ -93,8 +95,8 @@ const App = () => {
 
   let content = <h1>NO DATA FOUND!</h1>
 
-  if (tokenData.length> 0) {
-    content = <p>hello/</p>;
+  if (tokenData.length > 0) {
+    content = <Main tokenData={tokenData} />
   }
 
 
@@ -104,21 +106,17 @@ const App = () => {
   }
 
   if (isLoading) {
-    content = <h2>Loading...</h2>;
+    content = <Card><h1 className={classes.loading}>Loading...</h1></Card>;
   }
 
   return (
     <>
       {userCtx.isModalShowing && <AddWalletModal />}
       <Navbar fetchData={fetchWalletDataHandler} />
-      <div>
-        {content}
-      </div>
-      <Main />
-      <Footer />
+      {content}
+      {/* <Footer /> */}
     </>
   );
-
 
 };
 export default App;
