@@ -11,8 +11,8 @@ import Card from './components/UI/Card';
 const App = () => {
   const userCtx = useContext(UserContext);
 
-  //temp wallet for testing
-  const selectedWallet = '0x6404331b77E488a314A9092d737F5ADE1CB9fBAf'
+  //get selected/active wallet address
+  const selectedWallet = userCtx.wallets[0];
 
   //constants for searches
   const CHAIN_NAMES = {
@@ -85,7 +85,7 @@ const App = () => {
     setIsLoading(false);
     userCtx.changeDataRetrievedStatus();
     // console.log('main data fetched(2) = ', userCtx.isDataFetched)
-  }, [])
+  }, [userCtx.selectedWallet])
 
 
   //for testing make this when the wallet button is clicked

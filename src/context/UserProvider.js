@@ -19,13 +19,22 @@ const availableChains = {
   ALL_AVAILABLE: 'all',
 }
 
+
+const getStartWallet = () => {
+  return initialUserState.wallets[0];
+}
+
+
 const initialUserState = {
-  wallets: ['0x1', '0x2'],
+  wallets: ['0xa9ac72E3BbD107eC40546Fc1C68c5e40fc7A9DD9', '0x2',],
   isModalShowing: false,
   selectedWallet: null,
   selectedChain: availableActions.POLYGON,
   isDataFetched: false,
 };
+
+
+
 
 const userReducer = (state, action) => {
   switch (action.type) {
