@@ -1,3 +1,5 @@
+
+import { useEffect } from "react";
 import classes from "./Navbar.module.css";
 import NavItem from "./NavItem";
 import WalletIcon from "../WalletIcon";

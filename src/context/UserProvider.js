@@ -19,13 +19,12 @@ const availableChains = {
 }
 
 const initialUserState = {
-  wallets: ['0xa9ac72E3BbD107eC40546Fc1C68c5e40fc7A9DD9', '0x2',],
+  wallets: ['0xa9ac72E3BbD107eC40546Fc1C68c5e40fc7A9DD9', '0x2','0x1','0x1A9EFC7507D3Bb3206cA5baBb4dF9e168Bd5cDEE'],
   isModalShowing: false,
   selectedWallet: null,
   selectedChain: availableActions.POLYGON,
   isDataFetched: false,
 };
-
 
 const userReducer = (state, action) => {
   switch (action.type) {
