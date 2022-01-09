@@ -12,7 +12,8 @@ const App = () => {
   const userCtx = useContext(UserContext);
 
   //get selected/active wallet address
-  const selectedWallet = userCtx.wallets[0];
+
+  const selectedWallet = '0xa9ac72E3BbD107eC40546Fc1C68c5e40fc7A9DD9';
 
   //constants for searches
   const CHAIN_NAMES = {
@@ -28,7 +29,6 @@ const App = () => {
   //ERC20
   const api_call_native = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.NATIVE_TOKEN}?chain=${CHAIN_NAMES.POLYGON}`
   const api_call_erc20 = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.ERC20}?chain=${CHAIN_NAMES.POLYGON}`
-
   const apiHeaders = {
     'accept': 'application/json',
     'X-API-Key': `${process.env.REACT_APP_X_API_KEY}`,
@@ -38,9 +38,6 @@ const App = () => {
   const [tokenData, setTokenData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
-
-  // console.log('main data fetched(1) = ', userCtx.isDataFetched)
 
   const fetchWalletDataHandler = useCallback(async (nativeData, erc20Data) => {
     setIsLoading(true);

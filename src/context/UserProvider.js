@@ -1,7 +1,6 @@
 import { useReducer } from "react";
 import UserContext from './UserContext';
 
-
 const availableActions = {
   DISPLAY: 'display',
   HIDE: 'hide',
@@ -19,12 +18,6 @@ const availableChains = {
   ALL_AVAILABLE: 'all',
 }
 
-
-const getStartWallet = () => {
-  return initialUserState.wallets[0];
-}
-
-
 const initialUserState = {
   wallets: ['0xa9ac72E3BbD107eC40546Fc1C68c5e40fc7A9DD9', '0x2',],
   isModalShowing: false,
@@ -32,8 +25,6 @@ const initialUserState = {
   selectedChain: availableActions.POLYGON,
   isDataFetched: false,
 };
-
-
 
 
 const userReducer = (state, action) => {

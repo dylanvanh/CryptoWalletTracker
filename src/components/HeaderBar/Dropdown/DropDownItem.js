@@ -15,7 +15,7 @@ const DropdownItem = (props) => {
   const activeWalletHandler = () => {
 
     const updatedSelectedWallet = props.name;
-    
+
     console.log(updatedSelectedWallet);
 
     //if selected wallet is the same as currently active
