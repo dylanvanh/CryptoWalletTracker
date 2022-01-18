@@ -36,30 +36,34 @@ const App = () => {
       ETHEREUM: 'eth',
       AVALANCHE: 'avalanche',
     }
+
     const TYPE = {
       NATIVE_TOKEN: 'balance',
       ERC20: 'erc20',
     }
 
-    //ERC20
-    const api_call_native = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.NATIVE_TOKEN}?chain=${CHAIN_NAMES.POLYGON}`
-    const api_call_erc20 = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.ERC20}?chain=${CHAIN_NAMES.POLYGON}`
-    const apiHeaders = {
+    const moralis_api_call_native = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.NATIVE_TOKEN}?chain=${CHAIN_NAMES.POLYGON}`
+    const moralis_api_call_erc20 = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.ERC20}?chain=${CHAIN_NAMES.POLYGON}`
+    const moralisApiHeader = {
       'accept': 'application/json',
       'X-API-Key': `${process.env.REACT_APP_X_API_KEY}`,
     }
+    const geckoApiHeader = {
+      'accept': 'application/json',
+    }
+
 
     setIsLoading(true);
     setError(null);
     console.log('fetchwalletdatahandler!')
 
     try {
-      const responseErc20 = await fetch(api_call_native, {
-        headers: apiHeaders,
+      const responseErc20 = await fetch(moralis_api_call_native, {
+        headers: moralisApiHeader,
       });
 
-      const responseNative = await fetch(api_call_erc20, {
-        headers: apiHeaders,
+      const responseNative = await fetch(moralis_api_call_erc20, {
+        headers: moralisApiHeader,
       });
 
       if (!responseErc20.ok) {
@@ -73,19 +77,33 @@ const App = () => {
       console.log('ue = ', erc20Data);
 
       const transformedTokenBalances = erc20Data.map((tokenData) => {
-        
-
         return {
           tokenAddress: tokenData.token_address,
           name: tokenData.name,
           balance: tokenData.balance,
           decimals: tokenData.decimals,
           symbol: tokenData.symbol,
+          price: null,
         };
       });
 
       setTokenData(transformedTokenBalances)
-      console.log('transformed data = ', transformedTokenBalances);
+
+
+      //handles fetching prices for the different balances fetched
+      //allows filtering out the spam tokens (ones without values)
+      const addresses = transformedTokenBalances.map(
+        token => token.tokenAddress
+      );
+      const combinedAddresses = addresses.join('%2C')
+      const api_prices = `https://api.coingecko.com/api/v3/simple/token_price/polygon-pos?contract_addresses=${combinedAddresses}&vs_currencies=usd&include_24hr_change=true`
+
+      const responsePrices = await fetch(api_prices, {
+        headers: geckoApiHeader,
+      });
+
+      const priceData = await responsePrices.json();
+      console.log(priceData)
 
     } catch (error) {
       setError(error.message);

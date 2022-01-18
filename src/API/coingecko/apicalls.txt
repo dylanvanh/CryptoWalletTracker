@@ -1,0 +1,7 @@
+ASSET_PLATFORMS:
+polygon-pos
+avalanche
+ethereum
+
+currencies:
+usd

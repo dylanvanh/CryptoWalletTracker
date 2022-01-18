@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import fetch from 'node-fetch'
 
-import UserContext from '../context/UserContext';
+import UserContext from '../../context/UserContext';
 
 const userCtx = useContext(UserContext);
 

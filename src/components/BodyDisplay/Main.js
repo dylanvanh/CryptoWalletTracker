@@ -6,9 +6,6 @@ import GasStats from "./GasStats/GasDisplay";
 
 //handles all the body components (BodyDisplay)
 const MainDisplay = (props) => {
-
-  console.log('main = ', props.tokenData);
-
   return (
     <main className={classes["main-container"]}>
       <div className={classes["transactions-display-container"]}>
