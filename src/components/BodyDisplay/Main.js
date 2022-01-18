@@ -11,7 +11,7 @@ const MainDisplay = (props) => {
 
   return (
     <main className={classes["main-container"]}>
-      <div className={classes["transactions-display-container"]}>
+      <div className={classes["transactions1-display-container"]}>
         <TransactionsDisplay />
       </div>
       <div className={classes["portfolio-display-container"]}>
