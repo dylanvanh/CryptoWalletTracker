@@ -14,7 +14,8 @@ const TokenList = (props) => {
           balance={token.balance}
           address={token.tokenAddress}
           symbol={token.symbol}
-          // price={token.price}
+          price={token.price}
+          dayChange={token.dayChange}
         />
       ))}
     </ul>

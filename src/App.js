@@ -76,7 +76,8 @@ const App = () => {
       console.log('ue = ', nativeData)
       console.log('ue = ', erc20Data);
 
-      const transformedTokenBalances = erc20Data.map((tokenData) => {
+      //converts fetched tokenData data into improved format
+      const transformedTokenData = erc20Data.map((tokenData) => {
         return {
           tokenAddress: tokenData.token_address,
           name: tokenData.name,
@@ -84,15 +85,13 @@ const App = () => {
           decimals: tokenData.decimals,
           symbol: tokenData.symbol,
           price: null,
+          dayChange: null,
         };
       });
 
-      setTokenData(transformedTokenBalances)
-
-
       //handles fetching prices for the different balances fetched
       //allows filtering out the spam tokens (ones without values)
-      const addresses = transformedTokenBalances.map(
+      const addresses = transformedTokenData.map(
         token => token.tokenAddress
       );
       const combinedAddresses = addresses.join('%2C')
@@ -103,7 +102,28 @@ const App = () => {
       });
 
       const priceData = await responsePrices.json();
-      console.log(priceData)
+      
+      //converts fetched price data into improved format
+      const convertedPrices = Object.entries(priceData)
+      const newPrices = convertedPrices.map((data) => {
+        return {
+          tokenAddress: data[0],
+          price: data[1]['usd'],
+          change: data[1]['usd_24h_change'],
+        }
+      })
+
+      //adds the price,24hourchange in price to data
+      transformedTokenData.forEach((tokenData) => {
+        let foundAddress = newPrices.find((priceData) => priceData.tokenAddress === tokenData.tokenAddress)
+        if (foundAddress != undefined) {
+          tokenData.price = foundAddress['price'];
+          tokenData.dayChange = foundAddress['change'];
+        }
+      });
+
+      //stores data into state variable
+      setTokenData(transformedTokenData)
 
     } catch (error) {
       setError(error.message);
