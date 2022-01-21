@@ -8,19 +8,19 @@ const Token = (props) => {
 
 
   //for rounding and correcting api returned value for balance
-  const formatBalance = (balance) => {
-    return ((balance / 1000000000000000000).toFixed(5));
-  }
-
+  // const formatBalance = (balance) => {
+  //   return ((balance / 1000000000000000000).toFixed(5));
+  // }
 
   return (
     <li className={classes.token}>
       <div className={classes.container}>
         <span className={classes.name}>{props.name}</span>
-        <span className={classes.balance}>{formatBalance(props.balance)}</span>
-        <span className={classes.price}>{formattedPrice}</span>
+        <span className={classes.balance}>total balance = {props.balance}</span>
+        <span className={classes.price}>price per = {formattedPrice}</span>
+        <span className={classes.value}>value = {props.value}</span>
         {/* <span className={classes.dayChange}>{props.dayChange}</span> */}
-    </div>
+      </div>
     </li >
   );
 };

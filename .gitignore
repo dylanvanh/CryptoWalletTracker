@@ -24,3 +24,4 @@ yarn-error.log*
 
 .env
 tempCodeRunnerFile.js
+test.js

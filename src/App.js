@@ -29,7 +29,7 @@ const App = () => {
     selectedWallet = userCtx.selectedWallet;
   }
 
-  const fetchWalletDataHandler = useCallback(async (nativeData, erc20Data) => {
+  const fetchWalletDataHandler = useCallback(async () => {
     //constants for searches
     const CHAIN_NAMES = {
       POLYGON: 'polygon',
@@ -44,14 +44,15 @@ const App = () => {
 
     const moralis_api_call_native = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.NATIVE_TOKEN}?chain=${CHAIN_NAMES.POLYGON}`
     const moralis_api_call_erc20 = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.ERC20}?chain=${CHAIN_NAMES.POLYGON}`
+    
     const moralisApiHeader = {
       'accept': 'application/json',
       'X-API-Key': `${process.env.REACT_APP_X_API_KEY}`,
     }
+    
     const geckoApiHeader = {
       'accept': 'application/json',
     }
-
 
     setIsLoading(true);
     setError(null);
@@ -86,6 +87,7 @@ const App = () => {
           symbol: tokenData.symbol,
           price: null,
           dayChange: null,
+          totalValue: null,
         };
       });
 
@@ -102,7 +104,7 @@ const App = () => {
       });
 
       const priceData = await responsePrices.json();
-      
+
       //converts fetched price data into improved format
       const convertedPrices = Object.entries(priceData)
       const newPrices = convertedPrices.map((data) => {
@@ -124,7 +126,7 @@ const App = () => {
 
       //stores data into state variable
       setTokenData(transformedTokenData)
-      console.log('ttd',transformedTokenData)
+      console.log('ttd', transformedTokenData)
 
     } catch (error) {
       setError(error.message);
