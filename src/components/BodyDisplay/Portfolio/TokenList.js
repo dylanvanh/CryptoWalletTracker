@@ -5,9 +5,14 @@ import Token from "./Token";
 //TODO 
 //-> SORT BY VALUE
 const TokenList = (props) => {
+
+  const tokensWithPrice = props.tokenData.filter(token => token.price != undefined);
+  
+  const tokensWithoutPrice = props.tokenData;
+
   return (
     <ul className={classes['token-data']}>
-      {props.tokenData.map((token) => (
+      {tokensWithPrice.map((token) => (
         <Token
           key={token.tokenAddress}
           name={token.name}

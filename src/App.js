@@ -124,6 +124,7 @@ const App = () => {
 
       //stores data into state variable
       setTokenData(transformedTokenData)
+      console.log('ttd',transformedTokenData)
 
     } catch (error) {
       setError(error.message);
