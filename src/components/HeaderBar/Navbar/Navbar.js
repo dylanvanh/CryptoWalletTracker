@@ -1,5 +1,4 @@
 
-import { useEffect } from "react";
 import classes from "./Navbar.module.css";
 import NavItem from "./NavItem";
 import WalletIcon from "../WalletIcon";
@@ -30,7 +29,7 @@ const Navbar = (props) => {
         </div>
       </div>
       <div className={classes["right-nav"]}>
-        <div onClick={props.fetchData} className={classes["btn"]}>
+        <div className={classes["btn"]}>
           <NavItem icon={<Ethereum />} />
         </div>
         <div>

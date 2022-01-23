@@ -2,10 +2,8 @@ import { useContext, useEffect, useState, useCallback } from 'react';
 import classes from './App.module.css';
 import Main from "./components/BodyDisplay/Main";
 import Navbar from "./components/HeaderBar/Navbar/Navbar";
-import Footer from "./components/FooterBar/Footer";
 import AddWalletModal from "./components/HeaderBar/AddWalletModal/AddWalletModal";
 import UserContext from './context/UserContext';
-import TokenList from './components/BodyDisplay/Portfolio/TokenList';
 import Card from './components/UI/Card';
 
 const App = () => {
@@ -163,7 +161,7 @@ const App = () => {
   return (
     <>
       {userCtx.isModalShowing && <AddWalletModal />}
-      <Navbar fetchData={fetchWalletDataHandler} />
+      <Navbar/>
       {content}
       {/* <Footer /> */}
     </>
