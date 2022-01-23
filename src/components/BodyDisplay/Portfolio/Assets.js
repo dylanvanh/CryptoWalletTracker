@@ -3,7 +3,7 @@ import Card from "../../UI/Card";
 import TokenList from "./TokenList";
 import PortfolioSummary from "./PortfolioSummary";
 
-const PortfolioDisplay = (props) => {
+const Assets = (props) => {
   return (
     <>
       <div>
@@ -21,4 +21,4 @@ const PortfolioDisplay = (props) => {
   );
 };
 
-export default PortfolioDisplay;
+export default Assets;
