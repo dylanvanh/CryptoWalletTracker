@@ -57,11 +57,11 @@ const App = () => {
     console.log('fetchwalletdatahandler!')
 
     try {
-      const responseErc20 = await fetch(moralis_api_call_native, {
+      const responseNative = await fetch(moralis_api_call_native, {
         headers: moralisApiHeader,
       });
 
-      const responseNative = await fetch(moralis_api_call_erc20, {
+      const responseErc20 = await fetch(moralis_api_call_erc20, {
         headers: moralisApiHeader,
       });
 
@@ -70,10 +70,10 @@ const App = () => {
       }
 
       //swap around the native and erc20 -> wrong (not changing now due to a different bug)
-      const nativeData = await responseErc20.json();
-      const erc20Data = await responseNative.json();
-      console.log('ue = ', nativeData)
+      const erc20Data = await responseErc20.json();
+      const nativeData = await responseNative.json();
       console.log('ue = ', erc20Data);
+      console.log('ue = ', nativeData)
 
       //converts fetched tokenData data into improved format
       const transformedTokenData = erc20Data.map((tokenData) => {

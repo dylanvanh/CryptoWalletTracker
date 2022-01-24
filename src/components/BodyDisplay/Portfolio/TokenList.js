@@ -1,30 +1,51 @@
 import classes from "./TokenList.module.css";
 import Token from "./Token";
+import { useCallback, useEffect, useState } from "react";
 
 
 //TODO 
 //-> SORT BY VALUE
 const TokenList = (props) => {
 
-  const tokensWithPrice = props.tokenData.filter(token => token.price != undefined);
+  const [tokenData, setTokenData] = useState([]);
+  const [porfolioValue,setPortfolioValue] = useState(0);
 
-  tokensWithPrice.forEach((token) => {
-    let decimalValue = ('0.' + '0'.repeat(token.decimals-1) + '1');
-    token.balance = (token.balance*decimalValue);
-    token.totalValue = (token.balance*token.price);
+  const handleTokens = useCallback(() => {
+    const tokensWithPrice = props.tokenData.filter(token => token.price != undefined);
 
-    console.log(token.name,'=',token.balance)
-  });
+    let total = 0;
+
+    tokensWithPrice.forEach((token) => {
+      let decimalValue = ('0.' + '0'.repeat(token.decimals - 1) + '1');
+      token.balance = (token.balance * decimalValue).toFixed(2);
+      token.totalValue = (token.balance * token.price).toFixed(2);
+      console.log(token.name, '=', token.balance)
+      total += token.totalValue;
+    });
+
+    //sort by value
+
+    tokensWithPrice.sort((a,b) => b.totalValue - a.totalValue)
+
+    setPortfolioValue(total);
+    setTokenData(tokensWithPrice);
+  }, [props.tokenData]);
+
+
+  useEffect(() => {
+    handleTokens();
+
+    //change first time load to false
+  }, [])
+
 
   //if the hide $0.00 assets checkbox is unchecked
   //to be implemented
   const tokensWithoutPrice = props.tokenData;
 
-  console.log(tokensWithPrice)
-
   return (
     <ul className={classes['token-data']}>
-      {tokensWithPrice.map((token) => (
+      {tokenData.map((token) => (
         <Token
           key={token.tokenAddress}
           name={token.name}
@@ -33,7 +54,7 @@ const TokenList = (props) => {
           symbol={token.symbol}
           price={token.price}
           dayChange={token.dayChange}
-          value={token.price*token.balance}
+          value={token.price * token.balance}
         />
       ))}
     </ul>

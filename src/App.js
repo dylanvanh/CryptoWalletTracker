@@ -16,8 +16,9 @@ const App = () => {
   const [error, setError] = useState(null);
   const [isFirstTimeLoad, setIsFirstTimeLoad] = useState(true);
 
+  // const selectedWallet = '0xa9ac72E3BbD107eC40546Fc1C68c5e40fc7A9DD9';
 
-  // displays the first wallet added as the default wallet on first load
+  //displays the first wallet added as the default wallet on first load
   var selectedWallet;
   if (isFirstTimeLoad) {
     selectedWallet = userCtx.wallets[0];
@@ -56,11 +57,11 @@ const App = () => {
     console.log('fetchwalletdatahandler!')
 
     try {
-      const responseErc20 = await fetch(moralis_api_call_erc20, {
+      const responseNative = await fetch(moralis_api_call_native, {
         headers: moralisApiHeader,
       });
 
-      const responseNative = await fetch(moralis_api_call_native, {
+      const responseErc20 = await fetch(moralis_api_call_erc20, {
         headers: moralisApiHeader,
       });
 
@@ -71,8 +72,8 @@ const App = () => {
       //swap around the native and erc20 -> wrong (not changing now due to a different bug)
       const erc20Data = await responseErc20.json();
       const nativeData = await responseNative.json();
-      console.log('ue = ', nativeData)
       console.log('ue = ', erc20Data);
+      console.log('ue = ', nativeData)
 
       //converts fetched tokenData data into improved format
       const transformedTokenData = erc20Data.map((tokenData) => {
@@ -135,7 +136,6 @@ const App = () => {
 
   //for testing make this when the wallet button is clicked
   useEffect(() => {
-    console.log('use effect running!')
     fetchWalletDataHandler();
 
     //change first time load to false
