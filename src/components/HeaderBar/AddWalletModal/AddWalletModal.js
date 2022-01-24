@@ -26,9 +26,17 @@ const AddWalletModal = (props) => {
     if (userCtx.wallets.includes(enteredWalletAddress)) {
       console.log('wallet already added!');
       return {
-      }
+      } 
     } else {
+    //   const walletAddresses = JSON.parse(walletAddresses)
+    //   localStorage.setItem('walletAddresses',JSON.stringify(walletAddresses))
+
+      // let walletAddresses = JSON.parse(localStorage.walletAddresses);
+      let walletAddresses = userCtx.wallets;
+      console.log('wallet Addresses = ',walletAddresses)
+      walletAddresses.push(enteredWalletAddress);
       userCtx.addWallet(enteredWalletAddress);
+      localStorage.setItem('walletAddresses',JSON.stringify(walletAddresses))
     }
   }
 

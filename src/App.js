@@ -152,6 +152,10 @@ const App = () => {
   if (error) {
     content = <h1>AN ERROR HAS OCCURED!</h1>
     console.log(error)
+
+    if(userCtx.wallets.length <= 0){
+      content = <h1>No added wallets</h1>
+    }
   } 
 
   if (isLoading) {
