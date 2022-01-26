@@ -181,7 +181,7 @@ const App = () => {
     <>
       {userCtx.isModalShowing && <AddWalletModal />}
       <Navbar />
-      {/* {content} */}
+      {content}
       {/* <Footer /> */}
     </>
   );

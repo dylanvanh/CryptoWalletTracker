@@ -24,9 +24,6 @@ const AddWalletModal = (props) => {
     if (enteredWalletAddress.trim().length === 0) {
       return
     }
-    //closes modal after walletid submitted
-
-    console.log(userCtx.wallets)
 
     if ((userCtx.wallets.includes(enteredWalletAddress)) || (userCtx.wallets == null)) {
       console.log('wallet already added!');
