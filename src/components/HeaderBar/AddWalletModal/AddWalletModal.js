@@ -10,6 +10,9 @@ import Modal from "./Modal";
 const AddWalletModal = (props) => {
   const userCtx = useContext(UserContext)
 
+
+  console.log('loading')
+
   const walletAddressRef = useRef();
 
   const addNewWalletAddressHandler = (event) => {
@@ -23,20 +26,17 @@ const AddWalletModal = (props) => {
     }
     //closes modal after walletid submitted
 
-    if (userCtx.wallets.includes(enteredWalletAddress)) {
-      console.log('wallet already added!');
-      return {
-      } 
-    } else {
-    //   const walletAddresses = JSON.parse(walletAddresses)
-    //   localStorage.setItem('walletAddresses',JSON.stringify(walletAddresses))
+    console.log(userCtx.wallets)
 
-      // let walletAddresses = JSON.parse(localStorage.walletAddresses);
+    if ((userCtx.wallets.includes(enteredWalletAddress)) || (userCtx.wallets == null)) {
+      console.log('wallet already added!');
+      return
+    } else {
       let walletAddresses = userCtx.wallets;
-      console.log('wallet Addresses = ',walletAddresses)
+      console.log('wallet Addresses = ', walletAddresses)
       walletAddresses.push(enteredWalletAddress);
       userCtx.addWallet(enteredWalletAddress);
-      localStorage.setItem('walletAddresses',JSON.stringify(walletAddresses))
+      localStorage.setItem('walletAddresses', JSON.stringify(userCtx.wallets));
     }
   }
 

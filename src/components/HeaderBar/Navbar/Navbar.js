@@ -16,12 +16,16 @@ const Navbar = (props) => {
 
   const selectedWallet = userCtx.selectedWallet;
 
+  const areWalletsEmtpy = userCtx.wallets == null; 
+
+  console.log(areWalletsEmtpy)
+
   return (
     <nav className={classes.navbar} >
       <div className={classes["left-nav"]}>
         <WalletIcon />
         <NavItem icon={<CaretIcon />}>
-          <DropdownMenu />
+          <DropdownMenu areWalletsEmtpy={areWalletsEmtpy} />
         </NavItem>
         <h2 className={classes["dropdown-title"]}>Wallet Details</h2>
         <div className={classes['wallet-name']}>

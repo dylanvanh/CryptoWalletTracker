@@ -18,11 +18,43 @@ const availableChains = {
   ALL_AVAILABLE: 'all',
 }
 
-const initialUserState = {
+const walletLength = () => {
+  /* in a try catch as firefox thorws an error  when localStorage doenst exist */
+  try {
+    //try to retrieve localStorage variable
+    const walletAddresses = JSON.parse(localStorage.getItem('walletAddresses'));
 
-  //fetch wallets from local storage
-  wallets: JSON.parse(localStorage.walletAddresses),
+    console.log(walletAddresses)
+
+    if (!walletAddresses) {
+      localStorage.setItem('walletAddresses', JSON.stringify([]));
+      return [];
+    }
+
+    //exists in local storage & has no saved addresses
+    if (walletAddresses && walletAddresses.length === 0) {
+      return [];
+    }
+
+    //exists in local s torage & has saved addresses
+    if (walletAddresses && walletAddresses.length > 0) {
+      //return all addresses in array
+      return [...walletAddresses];
+    }
+
+    //error caught -> localStorage doenst exist in firefox(during testing)
+  } catch (e) {
+    //create empty walletAddresses localStorage object
+    localStorage.setItem('walletAddresses', JSON.stringify([]));
+    return [];
+  }
+}
+
+// const walletLength = false;
+const initialUserState = {
   // wallets: ['0x9b863d76c11b7a74f63fcaa1632198b0bcad93f0','0xa9ac72E3BbD107eC40546Fc1C68c5e40fc7A9DD9', '0x2','0x1','0x1A9EFC7507D3Bb3206cA5baBb4dF9e168Bd5cDEE'],
+  //fetch wallets from local storage
+  wallets: walletLength(),
   isModalShowing: false,
   selectedWallet: null,
   selectedChain: availableActions.POLYGON,

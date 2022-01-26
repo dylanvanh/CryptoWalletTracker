@@ -19,12 +19,16 @@ const App = () => {
   // const selectedWallet = '0xa9ac72E3BbD107eC40546Fc1C68c5e40fc7A9DD9';
 
   //displays the first wallet added as the default wallet on first load
-  var selectedWallet;
-  if (isFirstTimeLoad) {
-    selectedWallet = userCtx.wallets[0];
-    userCtx.selectWallet(selectedWallet);
-  } else {
-    selectedWallet = userCtx.selectedWallet;
+
+  if (userCtx.wallets != null) {
+    var selectedWallet;
+    if (isFirstTimeLoad) {
+      selectedWallet = userCtx.wallets[0];
+      userCtx.selectWallet(selectedWallet);
+      setIsFirstTimeLoad(false);
+    } else {
+      selectedWallet = userCtx.selectedWallet;
+    }
   }
 
   const fetchWalletDataHandler = useCallback(async () => {
@@ -42,12 +46,12 @@ const App = () => {
 
     const moralis_api_call_native = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.NATIVE_TOKEN}?chain=${CHAIN_NAMES.POLYGON}`
     const moralis_api_call_erc20 = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.ERC20}?chain=${CHAIN_NAMES.POLYGON}`
-    
+
     const moralisApiHeader = {
       'accept': 'application/json',
       'X-API-Key': `${process.env.REACT_APP_X_API_KEY}`,
     }
-    
+
     const geckoApiHeader = {
       'accept': 'application/json',
     }
@@ -139,7 +143,6 @@ const App = () => {
     fetchWalletDataHandler();
 
     //change first time load to false
-    setIsFirstTimeLoad(false);
   }, [fetchWalletDataHandler])
 
   let content = <h1>NO DATA FOUND!</h1>
@@ -153,20 +156,32 @@ const App = () => {
     content = <h1>AN ERROR HAS OCCURED!</h1>
     console.log(error)
 
-    if(userCtx.wallets.length <= 0){
+    if (userCtx.wallets != null) {
       content = <h1>No added wallets</h1>
     }
-  } 
+  }
 
   if (isLoading) {
     content = <Card><h1 className={classes.loading}>Loading...</h1></Card>;
   }
 
+  let items = <h1>No wallets added</h1>
+
+  if (userCtx.wallets == null) {
+    console.log('wallets = null', userCtx.wallets == null)
+  }
+
+  if (userCtx.wallets != null) {
+    console.log('wallets != null', userCtx.wallets != null);
+  }
+
+
+
   return (
     <>
       {userCtx.isModalShowing && <AddWalletModal />}
-      <Navbar/>
-      {content}
+      <Navbar />
+      {/* {content} */}
       {/* <Footer /> */}
     </>
   );
