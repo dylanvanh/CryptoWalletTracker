@@ -107,6 +107,8 @@ const App = () => {
 
       const priceData = await responsePrices.json();
 
+      console.log('price data',priceData)
+
       //converts fetched price data into improved format
       const convertedPrices = Object.entries(priceData)
       const newPrices = convertedPrices.map((data) => {
@@ -131,6 +133,7 @@ const App = () => {
       console.log('ttd', transformedTokenData)
 
     } catch (error) {
+      console.log('error encountered')
       setError(error.message);
     }
     setIsLoading(false);
@@ -140,7 +143,11 @@ const App = () => {
 
   //for testing make this when the wallet button is clicked
   useEffect(() => {
-    fetchWalletDataHandler();
+
+    //prevent api calls when no wallets added
+    if (userCtx.wallets.length > 0) {
+      fetchWalletDataHandler();
+    }
 
     //change first time load to false
   }, [fetchWalletDataHandler])
@@ -164,8 +171,6 @@ const App = () => {
   if (isLoading) {
     content = <Card><h1 className={classes.loading}>Loading...</h1></Card>;
   }
-
-  let items = <h1>No wallets added</h1>
 
   if (userCtx.wallets == null) {
     console.log('wallets = null', userCtx.wallets == null)

@@ -134,6 +134,11 @@ const userReducer = (state, action) => {
         isDataFetched: updatedIsDataFetched,
       }
     }
+
+    default:
+      return {
+        ...state
+      };
   }
 }
 

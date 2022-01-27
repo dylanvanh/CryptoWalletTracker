@@ -8,27 +8,41 @@ import { useCallback, useEffect, useState } from "react";
 const TokenList = (props) => {
 
   const [tokenData, setTokenData] = useState([]);
-  const [porfolioValue,setPortfolioValue] = useState(0);
+  // const [porfolioValue, setPortfolioValue] = useState(0);
+
 
   const handleTokens = useCallback(() => {
+
     const tokensWithPrice = props.tokenData.filter(token => token.price != undefined);
 
-    let total = 0;
+    let portfolioTotal = 0;
 
     tokensWithPrice.forEach((token) => {
       let decimalValue = ('0.' + '0'.repeat(token.decimals - 1) + '1');
       token.balance = (token.balance * decimalValue).toFixed(2);
-      token.totalValue = (token.balance * token.price).toFixed(2);
-      console.log(token.name, '=', token.balance)
-      total += token.totalValue;
+      token.price = (token.price).toFixed(20);
+      token.totalValue = token.balance * token.price;
+
+      //further filter out spam coins
+      if (token.totalValue > 0.1) {
+        console.log('pv', +portfolioTotal)
+        portfolioTotal += token.totalValue;
+      }
+
+
     });
 
-    //sort by value
+    //only display tokens with substantial value
+    const finalTokensWithPrice = tokensWithPrice.filter(token => token.totalValue > 0.1)
 
-    tokensWithPrice.sort((a,b) => b.totalValue - a.totalValue)
+    //sort by highest value
+    finalTokensWithPrice.sort((a, b) => b.totalValue - a.totalValue)
 
-    setPortfolioValue(total);
-    setTokenData(tokensWithPrice);
+
+    console.log('upv = ', +portfolioTotal)
+    props.updateTotalValue(+portfolioTotal);
+
+    setTokenData(finalTokensWithPrice);
   }, [props.tokenData]);
 
 
@@ -54,7 +68,7 @@ const TokenList = (props) => {
           symbol={token.symbol}
           price={token.price}
           dayChange={token.dayChange}
-          value={token.price * token.balance}
+          value={(token.totalValue).toFixed(2)}
         />
       ))}
     </ul>

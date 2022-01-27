@@ -1,13 +1,10 @@
-import classes from "./PortfolioSummary.css";
 import Card from "../../UI/Card";
 
 const PortfolioSummary = (props) => {
-
-  const portfolioValue = props.portfolioValue
   
   return (
     <Card>
-      <h1>Total Value : {portfolioValue}</h1>
+      <h1>Total Value : ${props.totalValue.toFixed(2)}</h1>
     </Card>
   );
 };

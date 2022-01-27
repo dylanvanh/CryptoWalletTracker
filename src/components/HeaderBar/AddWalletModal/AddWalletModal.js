@@ -8,10 +8,10 @@ import Modal from "./Modal";
 //Wallet add allows you to search for a wallet location and click add 
 //Adds the wallet to list of drop down wallets
 const AddWalletModal = (props) => {
-  const userCtx = useContext(UserContext)
+  const userCtx = useContext(UserContext);
 
 
-  console.log('loading')
+  console.log('loading');
 
   const walletAddressRef = useRef();
 
