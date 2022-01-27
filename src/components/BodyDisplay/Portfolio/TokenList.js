@@ -20,7 +20,7 @@ const TokenList = (props) => {
     tokensWithPrice.forEach((token) => {
       let decimalValue = ('0.' + '0'.repeat(token.decimals - 1) + '1');
       token.balance = (token.balance * decimalValue).toFixed(2);
-      token.price = (token.price).toFixed(20);
+      token.price = (token.price).toFixed(6);
       token.totalValue = token.balance * token.price;
 
       //further filter out spam coins
@@ -28,8 +28,6 @@ const TokenList = (props) => {
         console.log('pv', +portfolioTotal)
         portfolioTotal += token.totalValue;
       }
-
-
     });
 
     //only display tokens with substantial value
@@ -57,18 +55,19 @@ const TokenList = (props) => {
   //to be implemented
   const tokensWithoutPrice = props.tokenData;
 
+  // const totalValue = (props.totalValue).toLocaleString('en-US')
   return (
     <ul className={classes['token-data']}>
       {tokenData.map((token) => (
         <Token
           key={token.tokenAddress}
           name={token.name}
-          balance={token.balance}
+          balance={(token.balance).toLocaleString('en-US')}
           address={token.tokenAddress}
           symbol={token.symbol}
-          price={token.price}
+          price={(token.price).toLocaleString('en-US')}
           dayChange={token.dayChange}
-          value={(token.totalValue).toFixed(2)}
+          value={(token.totalValue).toLocaleString('en-US')}
         />
       ))}
     </ul>
