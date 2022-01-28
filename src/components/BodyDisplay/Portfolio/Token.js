@@ -5,13 +5,6 @@ const Token = (props) => {
   const price = props.price;
   const formattedPrice = `$${price}`;
 
-
-
-  //for rounding and correcting api returned value for balance
-  // const formatBalance = (balance) => {
-  //   return ((balance / 1000000000000000000).toFixed(5));
-  // }
-
   return (
     <li className={classes.token}>
       <div className={classes.container}>

@@ -19,8 +19,8 @@ const TokenList = (props) => {
 
     tokensWithPrice.forEach((token) => {
       let decimalValue = ('0.' + '0'.repeat(token.decimals - 1) + '1');
-      token.balance = (token.balance * decimalValue).toFixed(2);
-      token.price = (token.price).toFixed(6);
+      token.balance = (token.balance * decimalValue);
+      token.price = (token.price);
       token.totalValue = token.balance * token.price;
 
       //further filter out spam coins
@@ -62,12 +62,12 @@ const TokenList = (props) => {
         <Token
           key={token.tokenAddress}
           name={token.name}
-          balance={(token.balance).toLocaleString('en-US')}
+          balance={(token.balance).toLocaleString('en-US',{maximumFractionDigits:2})}
           address={token.tokenAddress}
           symbol={token.symbol}
-          price={(token.price).toLocaleString('en-US')}
+          price={(token.price).toLocaleString('en-US',{maximumFractionDigits:6})}
           dayChange={token.dayChange}
-          value={(token.totalValue).toLocaleString('en-US')}
+          value={(token.totalValue).toLocaleString('en-US',{maximumFractionDigits:2})}
         />
       ))}
     </ul>
