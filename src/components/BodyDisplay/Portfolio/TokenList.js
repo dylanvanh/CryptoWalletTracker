@@ -1,31 +1,31 @@
+import { useCallback, useEffect, useState } from "react";
 import classes from "./TokenList.module.css";
 import Token from "./Token";
-import { useCallback, useEffect, useState } from "react";
 
-
-//TODO 
-//-> SORT BY VALUE
 const TokenList = (props) => {
 
-  const [tokenData, setTokenData] = useState([]);
-  // const [porfolioValue, setPortfolioValue] = useState(0);
+  const [tokenDataNotSpam, setTokenDataNotSpam] = useState([]);
+  const [tokenDataSpam, setTokenDataSpam] = useState([]);
 
 
-  const handleTokens = useCallback(() => {
+  const spamTokenCheckboxValue = props.checkBoxState;
+
+  const handleTokensWithPrices = () => {
+    //just show tokens with value
+    console.log('props', props.tokenData)
 
     const tokensWithPrice = props.tokenData.filter(token => token.price != undefined);
-
+    console.log('twp', tokensWithPrice)
     let portfolioTotal = 0;
 
     tokensWithPrice.forEach((token) => {
       let decimalValue = ('0.' + '0'.repeat(token.decimals - 1) + '1');
-      token.balance = (token.balance * decimalValue);
-      token.price = (token.price);
+      token.balance = (token.balance * decimalValue).toFixed(2);
+      token.price = (+token.price).toFixed(6);
       token.totalValue = token.balance * token.price;
 
       //further filter out spam coins
       if (token.totalValue > 0.1) {
-        console.log('pv', +portfolioTotal)
         portfolioTotal += token.totalValue;
       }
     });
@@ -40,40 +40,83 @@ const TokenList = (props) => {
     console.log('upv = ', +portfolioTotal)
     props.updateTotalValue(+portfolioTotal);
 
-    setTokenData(finalTokensWithPrice);
-  }, [props.tokenData]);
+    setTokenDataNotSpam(finalTokensWithPrice);
+  }
 
+
+  const handleTokensWithoutPrices = () => {
+    const tokensWithoutPrice = props.tokenData.filter(token => token.price == undefined);
+
+    tokensWithoutPrice.forEach((token) => {
+      if (+token.decimals > 0) {
+        let decimalValue = ('0.' + '0'.repeat(+token.decimals - 1) + '1');
+        token.balance = (token.balance * decimalValue);
+
+        if (token.price == null) {
+          token.price = 0;
+          token.totalValue = 0;
+        } else {
+          token.price = (+token.price).toFixed(6);
+          token.totalValue = token.balance * token.price;
+        }
+        //further filter out spam coins
+      } else {
+        token.price = 0;
+        token.totalValue = 0;
+      }
+    });
+
+    //sort by highest value
+    tokensWithoutPrice.sort((a, b) => b.balance - a.balance)
+    setTokenDataSpam(tokensWithoutPrice);
+  }
+
+  const handleTokens = () => {
+    handleTokensWithPrices();
+    handleTokensWithoutPrices();
+  };
 
   useEffect(() => {
-    handleTokens();
-
-    //change first time load to false
+    handleTokens()
   }, [])
 
-
-  //if the hide $0.00 assets checkbox is unchecked
-  //to be implemented
-  const tokensWithoutPrice = props.tokenData;
-
-  // const totalValue = (props.totalValue).toLocaleString('en-US')
   return (
-    <ul className={classes['token-data']}>
-      {tokenData.map((token) => (
-        <Token
-          key={token.tokenAddress}
-          name={token.name}
-          balance={(token.balance).toLocaleString('en-US',{maximumFractionDigits:2})}
-          address={token.tokenAddress}
-          symbol={token.symbol}
-          price={(token.price).toLocaleString('en-US',{maximumFractionDigits:6})}
-          dayChange={token.dayChange}
-          value={(token.totalValue).toLocaleString('en-US',{maximumFractionDigits:2})}
-        />
-      ))}
-    </ul>
+    <>
+      <div>
+        <h1>Tokens with price:</h1>
+      </div>
+      <ul className={classes['token-data']}>
+        {tokenDataNotSpam.map((token) => (
+          <Token
+            key={token.tokenAddress}
+            name={token.name}
+            balance={(token.balance).toLocaleString('en-US', { maximumFractionDigits: 2 })}
+            address={token.tokenAddress}
+            symbol={token.symbol}
+            price={(token.price).toLocaleString('en-US', { maximumFractionDigits: 6 })}
+            dayChange={token.dayChange}
+            value={(token.totalValue).toLocaleString('en-US', { maximumFractionDigits: 2 })}
+          />
+        ))}
+        {spamTokenCheckboxValue &&
+          <div>
+            <h1>Tokens without price:</h1>
+          </div>
+        }
+        {spamTokenCheckboxValue && tokenDataSpam.map((token) => (
+          <Token
+            key={token.tokenAddress}
+            name={token.name}
+            balance={(token.balance).toLocaleString('en-US', { maximumFractionDigits: 2 })}
+            address={token.tokenAddress}
+            symbol={token.symbol}
+            price={(token.price).toLocaleString('en-US', { maximumFractionDigits: 6 })}
+            dayChange={token.dayChange}
+            value={(token.totalValue).toLocaleString('en-US', { maximumFractionDigits: 2 })}
+          />
+        ))}
+      </ul>
+    </>
   )
-
-
-
 }
 export default TokenList;

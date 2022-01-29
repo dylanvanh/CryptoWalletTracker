@@ -3,24 +3,33 @@ import Card from "../../UI/Card";
 import TokenList from "./TokenList";
 import PortfolioSummary from "./PortfolioSummary";
 import { useState } from "react";
+import ViewAssettsCheckBox from "./ViewAssetsCheckbox";
+
 const Assets = (props) => {
 
   const [totalPortfolioValue, setTotalPortfolioValue] = useState(0);
+  const [spamCheckBoxValue, setSpamCheckBoxValue] = useState(false);
 
-  const updateTotalValue = (value) => {
+  const handleUpdateTotalValue = (value) => {
     setTotalPortfolioValue(value);
   }
-  
+
+  const handleCheckboxChange = () => {
+    setSpamCheckBoxValue(!spamCheckBoxValue);
+  }
+
   return (
     <>
       <div>
-        <PortfolioSummary totalValue={totalPortfolioValue} />
+        <PortfolioSummary
+          totalValue={totalPortfolioValue} />
       </div>
       <div className={classes.container}>
         <div className={classes.display}>
           <Card>
             <h2 className={classes.title}>Portfolio</h2>
-            <TokenList updateTotalValue={updateTotalValue} tokenData={props.tokenData} />
+            <ViewAssettsCheckBox handleCheckboxChange={handleCheckboxChange} checkboxState={spamCheckBoxValue} />
+            <TokenList tokenData={props.tokenData} updateTotalValue={handleUpdateTotalValue} checkBoxState={spamCheckBoxValue} />
           </Card>
         </div>
       </div>

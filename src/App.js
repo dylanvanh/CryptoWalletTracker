@@ -107,7 +107,7 @@ const App = () => {
 
       const priceData = await responsePrices.json();
 
-      console.log('price data',priceData)
+      console.log('price data', priceData)
 
       //converts fetched price data into improved format
       const convertedPrices = Object.entries(priceData)
@@ -155,6 +155,7 @@ const App = () => {
   let content = <h1>NO DATA FOUND!</h1>
 
   if (tokenData.length > 0) {
+    console.log('tokenData = ',tokenData)
     content = <Main tokenData={tokenData} />
   }
 
@@ -173,7 +174,7 @@ const App = () => {
   }
 
   if (userCtx.wallets == null) {
-    console.log('wallets = null', userCtx.wallets == null)
+    console.log('wallets == null', userCtx.wallets == null)
   }
 
   if (userCtx.wallets != null) {
