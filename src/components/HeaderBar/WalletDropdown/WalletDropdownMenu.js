@@ -4,10 +4,10 @@ import { useContext } from 'react';
 
 import UserContext from "../../../context/UserContext";
 
-import DropdownItem from "./DropDownItem";
+import WalletDropdownItem from "./WalletDropDownItem";
 
 
-const DropdownMenu = (props) => {
+const WalletDropdownMenu = (props) => {
   const userCtx = useContext(UserContext);
 
   const AddWalletButton = (props) => {
@@ -22,11 +22,11 @@ const DropdownMenu = (props) => {
   const dropDownItems = (
     <ul>
       {userCtx.wallets.map((walletAddress) => (
-        <DropdownItem className={classes['wallet-address']} key={walletAddress} name={walletAddress}>
+        <WalletDropdownItem className={classes['wallet-address']} key={walletAddress} name={walletAddress}>
           <h3>
             {walletAddress}
           </h3>
-        </DropdownItem>
+        </WalletDropdownItem>
       ))}
     </ul>
   )
@@ -43,4 +43,4 @@ const DropdownMenu = (props) => {
   );
 };
 
-export default DropdownMenu;
+export default WalletDropdownMenu;

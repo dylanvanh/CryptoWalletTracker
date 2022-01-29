@@ -7,8 +7,9 @@ import { ReactComponent as MetamaskIcon } from "../../../icons/metamask.svg";
 import { ReactComponent as Ethereum } from "../../../icons/ethereum.svg";
 import { useContext } from 'react';
 
-import DropdownMenu from "../Dropdown/DropdownMenu";
+import WalletDropdownMenu from "../WalletDropdown/WalletDropdownMenu";
 import UserContext from "../../../context/UserContext";
+
 
 const Navbar = () => {
 
@@ -22,7 +23,7 @@ const Navbar = () => {
       <div className={classes["left-nav"]}>
         <WalletIcon />
         <NavItem icon={<CaretIcon />}>
-          <DropdownMenu />
+          <WalletDropdownMenu />
         </NavItem>
         <h2 className={classes["dropdown-title"]}>Wallet Details</h2>
         <div className={classes['wallet-name']}>
@@ -31,7 +32,9 @@ const Navbar = () => {
       </div>
       <div className={classes["right-nav"]}>
         <div className={classes["btn"]}>
-          <NavItem icon={<Ethereum />} />
+          <NavItem icon={<Ethereum />}>
+
+          </NavItem>
         </div>
         <div>
           <NavItem icon={<MetamaskIcon />} />

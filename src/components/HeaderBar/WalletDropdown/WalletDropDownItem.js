@@ -2,7 +2,7 @@ import { useContext } from "react";
 import UserContext from "../../../context/UserContext";
 import classes from './DropDownItem.module.css';
 
-const DropdownItem = (props) => {
+const WalletDropdownItem = (props) => {
 
   //onclick should show the stats for the wallet selected
 
@@ -37,4 +37,4 @@ const DropdownItem = (props) => {
   );
 };
 
-export default DropdownItem;
+export default WalletDropdownItem;

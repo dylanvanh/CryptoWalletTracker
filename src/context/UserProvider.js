@@ -89,7 +89,6 @@ const userReducer = (state, action) => {
       const updatedWallets = state.wallets
       updatedWallets.push(action.walletAddress);
 
-
       //set new added wallet to be the selected wallet
       const updatedSelectedWallet = action.walletAddress;
       return {
@@ -187,6 +186,7 @@ const UserProvider = (props) => {
     hideModal: hideModalHandler,
     addWallet: addWalletHandler,
     selectWallet: selectedWalletHandler,
+    selectChain : selectChainHandler,
     changeDataRetrievedStatus: isDataFetchedHandler,
   }
 
