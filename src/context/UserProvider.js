@@ -18,6 +18,7 @@ const availableChains = {
   ALL_AVAILABLE: 'all',
 }
 
+// handles local storage for wallet addresses
 const walletLength = () => {
   /* in a try catch as firefox thorws an error  when localStorage doenst exist */
   try {
@@ -114,6 +115,7 @@ const userReducer = (state, action) => {
     case availableActions.SELECTCHAIN: {
       console.log('Select Chain');
       const updatedChain = action.chainName;
+      console.log('new CHAIN = ',action.chainName);
 
       return {
         ...state,

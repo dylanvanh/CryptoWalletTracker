@@ -10,6 +10,7 @@ const UserContext = createContext({
   hideModal: () => { },
   addWallet: (walletAddress) => { },
   selectWallet: () => { },
+  selectChain: () => { },
   changeDataRetrievedStatus: () => { },
 });
 

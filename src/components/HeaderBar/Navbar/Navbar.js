@@ -9,6 +9,7 @@ import { useContext } from 'react';
 
 import WalletDropdownMenu from "../WalletDropdown/WalletDropdownMenu";
 import UserContext from "../../../context/UserContext";
+import ChainDropdownMenu from "../ChainDropdown/ChainDropdownMenu"
 
 
 const Navbar = () => {
@@ -33,7 +34,7 @@ const Navbar = () => {
       <div className={classes["right-nav"]}>
         <div className={classes["btn"]}>
           <NavItem icon={<Ethereum />}>
-
+            <ChainDropdownMenu />
           </NavItem>
         </div>
         <div>

@@ -4,7 +4,7 @@ import { useContext } from 'react';
 
 import UserContext from "../../../context/UserContext";
 
-import WalletDropdownItem from "./WalletDropDownItem";
+import WalletDropdownItem from "./WalletDropdownItem";
 
 
 const WalletDropdownMenu = (props) => {
