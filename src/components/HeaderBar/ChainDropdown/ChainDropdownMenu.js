@@ -21,7 +21,7 @@ const ChainDropdownMenu = () => {
         <h3>Polygon</h3>
       </ChainDropdownItem>
       <ChainDropdownItem leftIcon={<Avalanche />} key={'avalanche'} name={'avalanche'}>
-        <h3>Avalance</h3>
+        <h3>Avalanche</h3>
       </ChainDropdownItem>
     </div>
   );

@@ -12,7 +12,7 @@ const availableActions = {
 }
 
 const availableChains = {
-  ETHEREUM: 'eth',
+  ETHEREUM: 'ethereum',
   POLYGON: 'polygon',
   AVALANCHE: 'avalanche',
   ALL_AVAILABLE: 'all',
@@ -58,7 +58,7 @@ const initialUserState = {
   wallets: walletLength(),
   isModalShowing: false,
   selectedWallet: null,
-  selectedChain: availableChains.POLYGON,
+  selectedChain: availableChains.ETHEREUM,
   isDataFetched: false,
 };
 

@@ -33,10 +33,16 @@ const App = () => {
 
   const fetchWalletDataHandler = useCallback(async () => {
     //constants for searches
-    const CHAIN_NAMES = {
+    const MORALIS_CHAIN_NAMES = {
       POLYGON: 'polygon',
       ETHEREUM: 'eth',
       AVALANCHE: 'avalanche',
+    }
+
+    const COINGECKO_CHAIN_NAMES = {
+      POLYGON: 'polygon-pos',
+      ETHEREUM: 'ethereum',
+      AVALANCHE: 'avalanche'
     }
 
     const TYPE = {
@@ -44,8 +50,21 @@ const App = () => {
       ERC20: 'erc20',
     }
 
-    const moralis_api_call_native = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.NATIVE_TOKEN}?chain=${userCtx.selectedChain}`
-    const moralis_api_call_erc20 = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.ERC20}?chain=${userCtx.selectedChain}`
+    var moralisSelectedChain = userCtx.selectedChain;
+    var coinGeckoSelectedChain = userCtx.selectedChain;
+
+    if (moralisSelectedChain === 'ethereum') {
+      moralisSelectedChain = MORALIS_CHAIN_NAMES.ETHEREUM;
+    };
+
+    if (coinGeckoSelectedChain === 'polygon') {
+      coinGeckoSelectedChain = COINGECKO_CHAIN_NAMES.POLYGON;
+    };
+
+
+
+    const moralis_api_call_native = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.NATIVE_TOKEN}?chain=${moralisSelectedChain}`
+    const moralis_api_call_erc20 = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.ERC20}?chain=${moralisSelectedChain}`
 
     const moralisApiHeader = {
       'accept': 'application/json',
@@ -99,7 +118,10 @@ const App = () => {
         token => token.tokenAddress
       );
       const combinedAddresses = addresses.join('%2C')
-      const api_prices = `https://api.coingecko.com/api/v3/simple/token_price/polygon-pos?contract_addresses=${combinedAddresses}&vs_currencies=usd&include_24hr_change=true`
+
+      const api_prices = `https://api.coingecko.com/api/v3/simple/token_price/${coinGeckoSelectedChain}?contract_addresses=${combinedAddresses}&vs_currencies=usd&include_24hr_change=true`
+      console.log('api_prices = ', api_prices)
+
 
       const responsePrices = await fetch(api_prices, {
         headers: geckoApiHeader,
@@ -138,7 +160,7 @@ const App = () => {
     }
     setIsLoading(false);
     userCtx.changeDataRetrievedStatus();
-  }, [userCtx.selectedWallet])
+  }, [userCtx.selectedWallet, userCtx.selectedChain])
 
 
   //for testing make this when the wallet button is clicked
@@ -155,7 +177,7 @@ const App = () => {
   let content = <h1>NO DATA FOUND!</h1>
 
   if (tokenData.length > 0) {
-    console.log('tokenData = ',tokenData)
+    console.log('tokenData = ', tokenData)
     content = <Main tokenData={tokenData} />
   }
 

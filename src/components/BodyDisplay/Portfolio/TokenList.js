@@ -7,7 +7,6 @@ const TokenList = (props) => {
   const [tokenDataNotSpam, setTokenDataNotSpam] = useState([]);
   const [tokenDataSpam, setTokenDataSpam] = useState([]);
 
-
   const spamTokenCheckboxValue = props.checkBoxState;
 
   const handleTokensWithPrices = () => {
@@ -31,16 +30,16 @@ const TokenList = (props) => {
     });
 
     //only display tokens with substantial value
-    const finalTokensWithPrice = tokensWithPrice.filter(token => token.totalValue > 0.1)
+    // const finalTokensWithPrice = tokensWithPrice.filter(token => token.totalValue > 0.1);
 
     //sort by highest value
-    finalTokensWithPrice.sort((a, b) => b.totalValue - a.totalValue)
+    tokensWithPrice.sort((a, b) => b.totalValue - a.totalValue);
 
-
-    console.log('upv = ', +portfolioTotal)
+    
+    console.log('upv = ', +portfolioTotal);
     props.updateTotalValue(+portfolioTotal);
 
-    setTokenDataNotSpam(finalTokensWithPrice);
+    setTokenDataNotSpam(tokensWithPrice);
   }
 
 
@@ -55,9 +54,6 @@ const TokenList = (props) => {
         if (token.price == null) {
           token.price = 0;
           token.totalValue = 0;
-        } else {
-          token.price = (+token.price).toFixed(6);
-          token.totalValue = token.balance * token.price;
         }
         //further filter out spam coins
       } else {
@@ -67,7 +63,8 @@ const TokenList = (props) => {
     });
 
     //sort by highest value
-    tokensWithoutPrice.sort((a, b) => b.balance - a.balance)
+    tokensWithoutPrice.sort((a, b) => b.balance - a.balance);
+
     setTokenDataSpam(tokensWithoutPrice);
   }
 
