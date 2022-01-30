@@ -141,7 +141,7 @@ const App = () => {
       //adds the price,24hourchange in price to data
       transformedTokenData.forEach((tokenData) => {
         let foundAddress = newPrices.find((priceData) => priceData.tokenAddress === tokenData.tokenAddress)
-        if (foundAddress != undefined) {
+        if (foundAddress !== undefined) {
           tokenData.price = foundAddress['price'];
           tokenData.dayChange = foundAddress['change'];
         }
@@ -155,7 +155,7 @@ const App = () => {
     }
     setIsLoading(false);
     userCtx.changeDataRetrievedStatus();
-  }, [userCtx.selectedWallet, userCtx.selectedChain])
+  }, [userCtx.selectedChain,userCtx.selectedWallet])
 
 
 
