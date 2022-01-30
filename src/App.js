@@ -61,7 +61,9 @@ const App = () => {
       coinGeckoSelectedChain = COINGECKO_CHAIN_NAMES.POLYGON;
     };
 
-
+    if (coinGeckoSelectedChain === 'eth') {
+      coinGeckoSelectedChain = COINGECKO_CHAIN_NAMES.ETHEREUM;
+    };
 
     const moralis_api_call_native = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.NATIVE_TOKEN}?chain=${moralisSelectedChain}`
     const moralis_api_call_erc20 = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.ERC20}?chain=${moralisSelectedChain}`
@@ -163,7 +165,7 @@ const App = () => {
   }, [userCtx.selectedWallet, userCtx.selectedChain])
 
 
-  //for testing make this when the wallet button is clicked
+
   useEffect(() => {
 
     //prevent api calls when no wallets added
@@ -171,7 +173,6 @@ const App = () => {
       fetchWalletDataHandler();
     }
 
-    //change first time load to false
   }, [fetchWalletDataHandler])
 
   let content = <h1>NO DATA FOUND!</h1>
@@ -210,7 +211,6 @@ const App = () => {
       {userCtx.isModalShowing && <AddWalletModal />}
       <Navbar />
       {content}
-      {/* <Footer /> */}
     </>
   );
 

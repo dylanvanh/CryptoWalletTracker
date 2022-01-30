@@ -9,6 +9,8 @@ const TokenList = (props) => {
 
   const spamTokenCheckboxValue = props.checkBoxState;
 
+  var finalTokensMinorPrice;
+
   const handleTokensWithPrices = () => {
     //just show tokens with value
     console.log('props', props.tokenData)
@@ -30,21 +32,26 @@ const TokenList = (props) => {
     });
 
     //only display tokens with substantial value
-    // const finalTokensWithPrice = tokensWithPrice.filter(token => token.totalValue > 0.1);
+    const finalTokensWithPrice = tokensWithPrice.filter(token => token.totalValue > 0.1);
+    finalTokensMinorPrice = tokensWithPrice.filter(token => token.totalValue <= 0.1);
 
     //sort by highest value
-    tokensWithPrice.sort((a, b) => b.totalValue - a.totalValue);
+    finalTokensWithPrice.sort((a, b) => b.totalValue - a.totalValue);
 
-    
-    console.log('upv = ', +portfolioTotal);
+
     props.updateTotalValue(+portfolioTotal);
 
-    setTokenDataNotSpam(tokensWithPrice);
+    setTokenDataNotSpam(finalTokensWithPrice);
   }
 
 
   const handleTokensWithoutPrices = () => {
     const tokensWithoutPrice = props.tokenData.filter(token => token.price == undefined);
+
+    Array.prototype.push.apply(tokensWithoutPrice, finalTokensMinorPrice);
+
+    console.log(finalTokensMinorPrice)
+    console.log(tokensWithoutPrice);
 
     tokensWithoutPrice.forEach((token) => {
       if (+token.decimals > 0) {
@@ -63,6 +70,8 @@ const TokenList = (props) => {
     });
 
     //sort by highest value
+
+
     tokensWithoutPrice.sort((a, b) => b.balance - a.balance);
 
     setTokenDataSpam(tokensWithoutPrice);
