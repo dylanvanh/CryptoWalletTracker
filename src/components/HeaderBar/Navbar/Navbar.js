@@ -18,6 +18,11 @@ const Navbar = () => {
 
   const selectedWallet = userCtx.selectedWallet;
 
+  const handleClick = (event) => {
+    event.preventDefault();
+    console.log(userCtx)
+  }
+
 
   return (
     <nav className={classes.navbar} >
@@ -40,6 +45,7 @@ const Navbar = () => {
         <div>
           <NavItem icon={<MetamaskIcon />} />
         </div>
+        <button onClick={handleClick}>userCtx</button>
       </div>
     </nav >
   );

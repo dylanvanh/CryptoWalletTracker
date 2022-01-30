@@ -22,7 +22,7 @@ const WalletDropdownMenu = (props) => {
   const dropDownItems = (
     <ul>
       {userCtx.wallets.map((walletAddress) => (
-        <WalletDropdownItem className={classes['wallet-address']} key={walletAddress} name={walletAddress}>
+        <WalletDropdownItem key={walletAddress} name={walletAddress}>
           <h3>
             {walletAddress}
           </h3>

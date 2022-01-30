@@ -11,16 +11,3 @@
   transition: height var(--speed) ease;
 }
 
-a {
-  color: var(--text-color);
-  text-decoration: none;
-  display:flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-top:0.5rem;
-}
-
-a>h3{
-  padding-left:0.5rem;
-}
-

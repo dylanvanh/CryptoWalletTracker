@@ -9,18 +9,12 @@ import { ReactComponent as Avalanche } from "../../../icons/avalanche.svg";
 
 const ChainDropdownMenu = () => {
 
-  /*
-  const availableChains = {
-  ETHEREUM: 'eth',
-  POLYGON: 'polygon',
-  AVALANCHE: 'avalanche',
-  ALL_AVAILABLE: 'all',
-}
-*/
 
+  //leftIcons causing error iwth clickable area 
+  //->to fix
   return (
     <div className={classes.dropdown}>
-      <ChainDropdownItem leftIcon={<Ethereum />} key={'eth'} name={'ethereum'}>
+      <ChainDropdownItem leftIcon={<Ethereum />} key={'eth'} name={'eth'}>
         <h3>Ethereum</h3>
       </ChainDropdownItem>
       <ChainDropdownItem leftIcon={<Polygon />} key={'polygon'} name={'polygon'}>
