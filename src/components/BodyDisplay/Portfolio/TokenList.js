@@ -13,10 +13,8 @@ const TokenList = (props) => {
 
   const handleTokensWithPrices = () => {
     //just show tokens with value
-    console.log('props', props.tokenData)
 
     const tokensWithPrice = props.tokenData.filter(token => token.price != undefined);
-    console.log('twp', tokensWithPrice)
     let portfolioTotal = 0;
 
     tokensWithPrice.forEach((token) => {
@@ -49,9 +47,6 @@ const TokenList = (props) => {
     const tokensWithoutPrice = props.tokenData.filter(token => token.price == undefined);
 
     Array.prototype.push.apply(tokensWithoutPrice, finalTokensMinorPrice);
-
-    console.log(finalTokensMinorPrice)
-    console.log(tokensWithoutPrice);
 
     tokensWithoutPrice.forEach((token) => {
       if (+token.decimals > 0) {

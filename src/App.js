@@ -7,7 +7,6 @@ import UserContext from './context/UserContext';
 import Card from './components/UI/Card';
 
 const App = () => {
-  console.log('app loading')
   const userCtx = useContext(UserContext);
 
   //fetches token balances
@@ -79,7 +78,6 @@ const App = () => {
 
     setIsLoading(true);
     setError(null);
-    console.log('fetchwalletdatahandler!')
 
     try {
       const responseNative = await fetch(moralis_api_call_native, {
@@ -97,8 +95,7 @@ const App = () => {
       //swap around the native and erc20 -> wrong (not changing now due to a different bug)
       const erc20Data = await responseErc20.json();
       const nativeData = await responseNative.json();
-      console.log('ue = ', erc20Data);
-      console.log('ue = ', nativeData)
+
 
       //converts fetched tokenData data into improved format
       const transformedTokenData = erc20Data.map((tokenData) => {
@@ -122,7 +119,6 @@ const App = () => {
       const combinedAddresses = addresses.join('%2C')
 
       const api_prices = `https://api.coingecko.com/api/v3/simple/token_price/${coinGeckoSelectedChain}?contract_addresses=${combinedAddresses}&vs_currencies=usd&include_24hr_change=true`
-      console.log('api_prices = ', api_prices)
 
 
       const responsePrices = await fetch(api_prices, {
@@ -131,7 +127,6 @@ const App = () => {
 
       const priceData = await responsePrices.json();
 
-      console.log('price data', priceData)
 
       //converts fetched price data into improved format
       const convertedPrices = Object.entries(priceData)
@@ -154,10 +149,8 @@ const App = () => {
 
       //stores data into state variable
       setTokenData(transformedTokenData)
-      console.log('ttd', transformedTokenData)
 
     } catch (error) {
-      console.log('error encountered')
       setError(error.message);
     }
     setIsLoading(false);
@@ -178,14 +171,12 @@ const App = () => {
   let content = <h1>NO DATA FOUND!</h1>
 
   if (tokenData.length > 0) {
-    console.log('tokenData = ', tokenData)
     content = <Main tokenData={tokenData} />
   }
 
 
   if (error) {
     content = <h1>AN ERROR HAS OCCURED!</h1>
-    console.log(error)
 
     if (userCtx.wallets != null) {
       content = <h1>No added wallets</h1>
@@ -195,16 +186,6 @@ const App = () => {
   if (isLoading) {
     content = <Card><h1 className={classes.loading}>Loading...</h1></Card>;
   }
-
-  if (userCtx.wallets == null) {
-    console.log('wallets == null', userCtx.wallets == null)
-  }
-
-  if (userCtx.wallets != null) {
-    console.log('wallets != null', userCtx.wallets != null);
-  }
-
-
 
   return (
     <>
