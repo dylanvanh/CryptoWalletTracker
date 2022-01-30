@@ -1,4 +1,4 @@
-import classes from "./DropdownMenu.module.css";
+import classes from "./WalletDropdownMenu.module.css";
 import { ReactComponent as PlusIcon } from "../../../icons/plus.svg";
 import { useContext } from 'react';
 
