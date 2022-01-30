@@ -58,13 +58,12 @@ const initialUserState = {
   wallets: walletLength(),
   isModalShowing: false,
   selectedWallet: null,
-  selectedChain: availableActions.POLYGON,
+  selectedChain: availableChains.POLYGON,
   isDataFetched: false,
 };
 
 const userReducer = (state, action) => {
   switch (action.type) {
-
     case availableActions.DISPLAY: {
       console.log('display!')
       return {
@@ -115,7 +114,7 @@ const userReducer = (state, action) => {
     case availableActions.SELECTCHAIN: {
       console.log('Select Chain');
       const updatedChain = action.chainName;
-      console.log('new CHAIN = ',action.chainName);
+      console.log('new CHAIN = ', action.chainName);
 
       return {
         ...state,
@@ -179,16 +178,18 @@ const UserProvider = (props) => {
   //   dispatchUserAction({ type: 'ADD', walletAddress: walletAddress })
   // }
 
+
   const userContext = {
     wallets: userState.wallets,
     isModalShowing: userState.isModalShowing,
     selectedWallet: userState.selectedWallet,
+    selectedChain: userState.selectedChain,
     isDataFetched: userState.isDataFetched,
     showModal: showModalHandler,
     hideModal: hideModalHandler,
     addWallet: addWalletHandler,
     selectWallet: selectedWalletHandler,
-    selectChain : selectChainHandler,
+    selectChain: selectChainHandler,
     changeDataRetrievedStatus: isDataFetchedHandler,
   }
 
