@@ -10,7 +10,8 @@ const App = () => {
   const userCtx = useContext(UserContext);
 
   //fetches token balances
-  const [tokenData, setTokenData] = useState([]);
+  const [erc20TokenData, setErc20TokenData] = useState([]);
+  const [nativeTokenData,setNativeTokenData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isFirstTimeLoad, setIsFirstTimeLoad] = useState(true);
@@ -96,6 +97,7 @@ const App = () => {
       const erc20Data = await responseErc20.json();
       const nativeData = await responseNative.json();
 
+      setNativeTokenData(nativeData);
 
       //converts fetched tokenData data into improved format
       const transformedTokenData = erc20Data.map((tokenData) => {
@@ -119,7 +121,6 @@ const App = () => {
       const combinedAddresses = addresses.join('%2C')
 
       const api_prices = `https://api.coingecko.com/api/v3/simple/token_price/${coinGeckoSelectedChain}?contract_addresses=${combinedAddresses}&vs_currencies=usd&include_24hr_change=true`
-
 
       const responsePrices = await fetch(api_prices, {
         headers: geckoApiHeader,
@@ -148,7 +149,7 @@ const App = () => {
       });
 
       //stores data into state variable
-      setTokenData(transformedTokenData)
+      setErc20TokenData(transformedTokenData)
 
     } catch (error) {
       setError(error.message);
@@ -170,8 +171,8 @@ const App = () => {
 
   let content = <h1>NO DATA FOUND!</h1>
 
-  if (tokenData.length > 0) {
-    content = <Main tokenData={tokenData} />
+  if (erc20TokenData.length > 0) {
+    content = <Main erc20TokenData={erc20TokenData} nativeTokenData={nativeTokenData} />
   }
 
 

@@ -14,7 +14,7 @@ const TokenList = (props) => {
   const handleTokensWithPrices = () => {
     //just show tokens with value
 
-    const tokensWithPrice = props.tokenData.filter(token => token.price != undefined);
+    const tokensWithPrice = props.erc20TokenData.filter(token => token.price != undefined);
     let portfolioTotal = 0;
 
     tokensWithPrice.forEach((token) => {
@@ -44,7 +44,7 @@ const TokenList = (props) => {
 
 
   const handleTokensWithoutPrices = () => {
-    const tokensWithoutPrice = props.tokenData.filter(token => token.price == undefined);
+    const tokensWithoutPrice = props.erc20TokenData.filter(token => token.price == undefined);
 
     Array.prototype.push.apply(tokensWithoutPrice, finalTokensMinorPrice);
 
