@@ -1,16 +1,19 @@
 import { useState, useContext, useEffect } from "react";
 import UserContext from "../context/UserContext";
 
-const useFetch = (selectedWallet, selectedChain) => {
+const useFetch = () => {
 
   const [erc20TokenData, setErc20TokenData] = useState([]);
   const [nativeTokenData, setNativeTokenData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isFirstTimeLoad, setIsFirstTimeLoad] = useState(true);
+  const [error, setError] = useState(false)
 
   const userCtx = useContext(UserContext);
 
   const fetchWalletDataHandler = async () => {
+
+
     //constants for searches
     const MORALIS_CHAIN_NAMES = {
       POLYGON: 'polygon',
@@ -44,8 +47,8 @@ const useFetch = (selectedWallet, selectedChain) => {
       coinGeckoSelectedChain = COINGECKO_CHAIN_NAMES.ETHEREUM;
     };
 
-    const moralis_api_call_native = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.NATIVE_TOKEN}?chain=${moralisSelectedChain}`
-    const moralis_api_call_erc20 = `https://deep-index.moralis.io/api/v2/${selectedWallet}/${TYPE.ERC20}?chain=${moralisSelectedChain}`
+    const moralis_api_call_native = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.NATIVE_TOKEN}?chain=${moralisSelectedChain}`
+    const moralis_api_call_erc20 = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.ERC20}?chain=${moralisSelectedChain}`
 
     const moralisApiHeader = {
       'accept': 'application/json',
@@ -57,6 +60,7 @@ const useFetch = (selectedWallet, selectedChain) => {
     }
 
     setIsLoading(true);
+    setError(false);
     try {
       const responseNative = await fetch(moralis_api_call_native, {
         headers: moralisApiHeader,
@@ -136,9 +140,9 @@ const useFetch = (selectedWallet, selectedChain) => {
 
     } catch (err) {
       console.log('err = ', err)
+      setError(true);
     }
     setIsLoading(false);
-    userCtx.changeDataRetrievedStatus();
   }
 
 
@@ -149,6 +153,8 @@ const useFetch = (selectedWallet, selectedChain) => {
   return {
     erc20TokenData: erc20TokenData,
     nativeTokenData: nativeTokenData,
+    isLoading: isLoading,
+
   }
 
 }
