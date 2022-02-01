@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import useFetch from "../hooks/useFetch";
 import UserContext from './UserContext';
 
 const availableActions = {
@@ -18,8 +19,8 @@ const availableChains = {
   ALL_AVAILABLE: 'all',
 }
 
-// handles local storage for wallet addresses
-const walletLength = () => {
+// handles local storage for wallet addresses on app launch
+const walletStorageHandler = () => {
   /* in a try catch as firefox thorws an error  when localStorage doenst exist */
   try {
     //try to retrieve localStorage variable
@@ -37,7 +38,7 @@ const walletLength = () => {
       return [];
     }
 
-    //exists in local s torage & has saved addresses
+    //exists in locals torage & has saved addresses
     if (walletAddresses && walletAddresses.length > 0) {
       //return all addresses in array
       return [...walletAddresses];
@@ -51,13 +52,42 @@ const walletLength = () => {
   }
 }
 
+const initalSelectedWalletHandler = (wallets) => {
+
+  const walletAddresses = JSON.parse(localStorage.getItem('walletAddresses'));
+
+  try {
+    const selectedWallet = JSON.parse(localStorage.getItem('selectedWallet'));
+
+    if (!selectedWallet) {
+      if (!walletAddresses) {
+        localStorage.setItem('selectedWallet', JSON.stringify(''));
+        return null;
+      }
+
+      localStorage.setItem('selectedWallet', JSON.stringify(walletAddresses[0]));
+      return walletAddresses[0];
+    }
+
+    if (selectedWallet && selectedWallet !== '') {
+      return selectedWallet
+    } else {
+      return walletAddresses[0]
+    }
+  } catch (e) {
+    localStorage.setItem('selectedWallet', JSON.stringify(''));
+    return null;
+  }
+}
+
+
 // const walletLength = false;
 const initialUserState = {
   // wallets: ['0x9b863d76c11b7a74f63fcaa1632198b0bcad93f0','0xa9ac72E3BbD107eC40546Fc1C68c5e40fc7A9DD9', '0x2','0x1','0x1A9EFC7507D3Bb3206cA5baBb4dF9e168Bd5cDEE'],
   //fetch wallets from local storage
-  wallets: walletLength(),
+  wallets: walletStorageHandler(),
   isModalShowing: false,
-  selectedWallet: null,
+  selectedWallet: initalSelectedWalletHandler(),
   selectedChain: availableChains.ETHEREUM,
   isDataFetched: false,
 };
@@ -102,6 +132,8 @@ const userReducer = (state, action) => {
     case availableActions.SELECTWALLET: {
       console.log('Select wallet');
       const updatedSelectedWallet = action.walletAddress;
+
+      localStorage.setItem('selectedWallet', JSON.stringify(updatedSelectedWallet));
 
       return {
         ...state,
