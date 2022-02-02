@@ -135,7 +135,9 @@ const userReducer = (state, action) => {
       }
 
       currentWallets.push(newWalletAddress);
+      localStorage.setItem('walletAddresses',JSON.stringify(currentWallets));
       localStorage.setItem('selectedWallet', JSON.stringify(newWalletAddress));
+
 
       return {
         wallets: currentWallets,
