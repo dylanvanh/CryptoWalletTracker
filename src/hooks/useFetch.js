@@ -49,6 +49,7 @@ const useFetch = () => {
 
     const moralis_api_call_native = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.NATIVE_TOKEN}?chain=${moralisSelectedChain}`
     const moralis_api_call_erc20 = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.ERC20}?chain=${moralisSelectedChain}`
+    const coingecko_api_native_prices = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum%2Cavalanche-2%2Cmatic-network&per_page=100&page=1&sparkline=false&price_change_percentage=24h'
 
     const moralisApiHeader = {
       'accept': 'application/json',
@@ -62,7 +63,7 @@ const useFetch = () => {
     setIsLoading(true);
     setError(false);
     try {
-      const responseNative = await fetch(moralis_api_call_native, {
+      const responseNativeBalance = await fetch(moralis_api_call_native, {
         headers: moralisApiHeader,
       });
 
@@ -70,19 +71,22 @@ const useFetch = () => {
         headers: moralisApiHeader,
       });
 
+      const responseNativePrice = await fetch(coingecko_api_native_prices, {
+        headers: geckoApiHeader,
+      })
+
       if (!responseErc20.ok) {
         throw new Error('Error fetching token data')
       }
 
       //swap around the native and erc20 -> wrong (not changing now due to a different bug)
       const erc20Data = await responseErc20.json();
-      const nativeData = await responseNative.json();
+      const nativeBalanceData = await responseNativeBalance.json();
+      const api_native_prices = await responseNativePrice.json();
 
+      console.log(api_native_prices);
 
-      console.log(erc20Data)
-
-
-      setNativeTokenData(nativeData);
+      setNativeTokenData(nativeBalanceData);
 
       //converts fetched tokenData data into improved format
       const transformedTokenData = erc20Data.map((tokenData) => {
@@ -95,8 +99,11 @@ const useFetch = () => {
           price: null,
           dayChange: null,
           totalValue: null,
+          chain: userCtx.selectedChain,
         };
       });
+
+      console.log(transformedTokenData)
 
       //handles fetching prices for the different balances fetched
       //allows filtering out the spam tokens (ones without values)
