@@ -17,24 +17,8 @@ const AddWalletModal = (props) => {
 
   const addNewWalletAddressHandler = (event) => {
     event.preventDefault();
-    const enteredWalletAddress = walletAddressRef.current.value;
-    console.log('entered wallet address =', enteredWalletAddress);
-
-    //if blank input field
-    if (enteredWalletAddress.trim().length === 0) {
-      return
-    }
-
-    if ((userCtx.wallets.includes(enteredWalletAddress)) || (userCtx.wallets == null)) {
-      console.log('wallet already added!');
-      return
-    } else {
-      let walletAddresses = userCtx.wallets;
-      console.log('wallet Addresses = ', walletAddresses)
-      walletAddresses.push(enteredWalletAddress);
-      userCtx.addWallet(enteredWalletAddress);
-      localStorage.setItem('walletAddresses', JSON.stringify(userCtx.wallets));
-    }
+    const enteredWalletAddress = (walletAddressRef.current.value).trim();
+    userCtx.addWallet(enteredWalletAddress);
   }
 
   const walletsSavedHandler = () => {

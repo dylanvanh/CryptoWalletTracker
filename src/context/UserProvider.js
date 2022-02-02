@@ -115,16 +115,32 @@ const userReducer = (state, action) => {
     }
 
     case availableActions.ADD: {
-      console.log('add!')
-      const updatedWallets = state.wallets
-      updatedWallets.push(action.walletAddress);
 
-      //set new added wallet to be the selected wallet
-      const updatedSelectedWallet = action.walletAddress;
+      const currentWallets = state.wallets;
+      const newWalletAddress = action.walletAddress;
+
+      // //if blank input field
+      if (newWalletAddress.length === 0) {
+        console.log('blank address entered')
+        return {
+          ...state,
+        }
+      }
+
+      if (currentWallets.includes(action.walletAddress)) {
+        console.log('wallet already added')
+        return {
+          ...state,
+        }
+      }
+
+      currentWallets.push(newWalletAddress);
+      localStorage.setItem('selectedWallet', JSON.stringify(newWalletAddress));
+
       return {
-        wallets: updatedWallets,
+        wallets: currentWallets,
         isModalShowing: state.isModalShowing,
-        selectedWallet: updatedSelectedWallet,
+        selectedWallet: newWalletAddress,
         selectedChain: state.selectedChain,
       }
     }
@@ -141,7 +157,6 @@ const userReducer = (state, action) => {
         selectedChain: state.selectedChain,
       }
     }
-
 
     case availableActions.SELECTCHAIN: {
       console.log('Select Chain');

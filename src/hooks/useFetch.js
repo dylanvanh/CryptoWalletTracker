@@ -151,10 +151,10 @@ const useFetch = () => {
   }, [userCtx.selectedWallet, userCtx.selectedChain])
 
   return {
-    erc20TokenData: erc20TokenData,
-    nativeTokenData: nativeTokenData,
-    isLoading: isLoading,
-
+    erc20TokenData,
+    nativeTokenData,
+    isLoading,
+    error
   }
 
 }
