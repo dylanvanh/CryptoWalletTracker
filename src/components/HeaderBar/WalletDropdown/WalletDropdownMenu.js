@@ -33,6 +33,7 @@ const WalletDropdownMenu = (props) => {
 
   return (
     <div className={classes.dropdown}>
+      <p>Available Wallets</p>
       <div>
         {dropDownItems}
       </div>
