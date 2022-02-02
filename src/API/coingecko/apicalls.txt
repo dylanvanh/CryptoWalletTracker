@@ -5,3 +5,70 @@ ethereum
 
 currencies:
 usd
+
+
+
+3 chain native price call
+
+curl -X 'GET' \
+  'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ethereum%2Cavalanche-2%2Cmatic-network&per_page=100&page=1&sparkline=false&price_change_percentage=24h' \
+  -H 'accept: application/json'
+
+
+  const nativeData = {
+  "balance": "80855012722086024"
+}
+
+const erc20Data = [
+  {
+    "tokenAddress": "0x8798249c2e607446efb7ad49ec89dd1865ff4272",
+    "name": "SushiBar",
+    "balance": "20.01",
+    "decimals": "18",
+    "symbol": "xSUSHI",
+    "price": "5.430000",
+    "dayChange": 1.042704201245155,
+    "totalValue": 108.6543
+  },
+  {
+    "tokenAddress": "0x0ab87046fbb341d058f17cbc4c1133f25a20a52f",
+    "name": "Governance OHM",
+    "balance": "0.27",
+    "decimals": "18",
+    "symbol": "gOHM",
+    "price": "5146.170000",
+    "dayChange": 4.252835527086915,
+    "totalValue": 1389.4659000000001
+  }
+]
+
+
+const COINGECKO_CHAIN_NAMES = {
+  POLYGON: 'polygon-pos',
+  ETHEREUM: 'ethereum',
+  AVALANCHE: 'avalanche'
+}
+
+
+const convertNativeData = (nativeData) => {
+
+  const updatedNativeData = {}
+
+  updatedNativeData.token_address = null;
+  updatedNativeData.name = COINGECKO_CHAIN_NAMES.ETHEREUM;
+  updatedNativeData.balance = nativeData.balance;
+  updatedNativeData.decimals = 18;
+  updatedNativeData.symbol = COINGECKO_CHAIN_NAMES.ETHEREUM;
+  updatedNativeData.price = null;
+  updatedNativeData.totalValue = null;
+
+  return updatedNativeData
+}
+
+const convertedNativeData = convertNativeData(nativeData);
+
+// erc20Data.unshift(convertedNativeData);
+
+erc20Data.unshift(convertedNativeData);
+
+console.log(erc20Data);
