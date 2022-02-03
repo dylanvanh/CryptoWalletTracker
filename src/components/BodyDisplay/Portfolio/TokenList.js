@@ -15,6 +15,7 @@ const TokenList = (props) => {
     //just show tokens with value
 
     const tokensWithPrice = props.erc20TokenData.filter(token => token.price != undefined);
+    console.log('tokensWithPrice = ',tokensWithPrice);
     let portfolioTotal = 0;
 
     tokensWithPrice.forEach((token) => {
@@ -23,6 +24,8 @@ const TokenList = (props) => {
       token.price = (+token.price).toFixed(6);
       token.totalValue = token.balance * token.price;
 
+      // console.log(token.name)
+      // console.log(token.totalValue);
       //further filter out spam coins
       if (token.totalValue > 0.1) {
         portfolioTotal += token.totalValue;
@@ -35,7 +38,6 @@ const TokenList = (props) => {
 
     //sort by highest value
     finalTokensWithPrice.sort((a, b) => b.totalValue - a.totalValue);
-
 
     props.updateTotalValue(+portfolioTotal);
 

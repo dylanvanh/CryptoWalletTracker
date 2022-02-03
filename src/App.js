@@ -12,7 +12,7 @@ const App = () => {
   
   //SELECTED WALLET IS GIVING NULL!
   const { erc20TokenData, nativeTokenData, isLoading, error } = useFetch();
-  console.log(erc20TokenData)
+
   return (
     <>
       {userCtx.isModalShowing && <AddWalletModal />}
