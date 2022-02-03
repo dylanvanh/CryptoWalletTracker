@@ -14,7 +14,7 @@ const ChainDropdownMenu = () => {
   //->to fix
   return (
     <div className={classes.dropdown}>
-      <ChainDropdownItem leftIcon={<Ethereum />} key={'eth'} name={'eth'}>
+      <ChainDropdownItem leftIcon={<Ethereum />} key={'ethereum'} name={'ethereum'}>
         <h3>Ethereum</h3>
       </ChainDropdownItem>
       <ChainDropdownItem leftIcon={<Polygon />} key={'polygon'} name={'polygon'}>
