@@ -41,18 +41,9 @@ const useFetch = () => {
       ERC20: 'erc20',
     }
 
-
-    console.log(userCtx);
-
     const moralis_api_call_native = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.NATIVE_TOKEN}?chain=${MORALIS_CHAIN_NAMES[userCtx.selectedChain]}`
     const moralis_api_call_erc20 = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.ERC20}?chain=${MORALIS_CHAIN_NAMES[userCtx.selectedChain]}`
     const coingecko_api_native_prices = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${COINGECKO_NATIVE_CHAIN_NAMES[userCtx.selectedChain]}%2C&per_page=100&page=1&sparkline=false&price_change_percentage=24h`
-
-    console.log(moralis_api_call_native)
-    console.log(moralis_api_call_erc20)
-    console.log(coingecko_api_native_prices)
-
-
 
     const moralisApiHeader = {
       'accept': 'application/json',
@@ -70,8 +61,6 @@ const useFetch = () => {
         headers: moralisApiHeader,
       });
 
-      console.log(moralis_api_call_native, moralisApiHeader)
-
       const responseErc20 = await fetch(moralis_api_call_erc20, {
         headers: moralisApiHeader,
       });
@@ -88,9 +77,6 @@ const useFetch = () => {
       const erc20Data = await responseErc20.json();
       const nativeBalanceData = await responseNativeBalance.json();
       const nativePrices = await responseNativePrice.json();
-
-      console.log(nativeBalanceData)
-      console.log(nativePrices[0]);
 
       //converts fetched tokenData data into improved format
       const transformedErc20TokenData = erc20Data.map((tokenData) => {
@@ -154,9 +140,7 @@ const useFetch = () => {
         updatedNativeData.symbol = userCtx.selectedChain;
         updatedNativeData.price = nativePrices.current_price;
         updatedNativeData.totalValue = null;
-        updatedNativeData.chainName = userCtx.selectedChain;
-
-        console.log(nativePrices.current_price)
+        updatedNativeData.chain = userCtx.selectedChain;
 
         return updatedNativeData
       }
@@ -171,7 +155,6 @@ const useFetch = () => {
       //stores data into state variable
       setTokenData(transformedErc20TokenData)
     } catch (err) {
-      console.log('err = ', err)
       setError(true);
     }
     setIsLoading(false);
@@ -179,7 +162,7 @@ const useFetch = () => {
 
 
   useEffect(() => {
-    fetchWalletDataHandler()
+    fetchWalletDataHandler();
   }, [userCtx.selectedWallet, userCtx.selectedChain])
 
   return {

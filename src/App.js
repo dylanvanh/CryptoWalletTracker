@@ -12,7 +12,6 @@ const App = () => {
   
   //SELECTED WALLET IS GIVING NULL!
   const { tokenData, isLoading, error } = useFetch();
-  console.log(tokenData)
   
   return (
     <>
