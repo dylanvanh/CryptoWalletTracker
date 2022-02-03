@@ -13,7 +13,7 @@ const MainDisplay = (props) => {
         <TransactionsDisplay />
       </div>
       <div className={classes["Assets-container"]}>
-        <Assets erc20TokenData={props.erc20TokenData} nativeTokenData={props.nativeTokenData} />
+        <Assets tokenData={props.tokenData} />
       </div>
       <div className={classes["gas-stats-container"]}>
         <GasStats />

@@ -11,8 +11,9 @@ const App = () => {
   const userCtx = useContext(UserContext);
   
   //SELECTED WALLET IS GIVING NULL!
-  const { erc20TokenData, nativeTokenData, isLoading, error } = useFetch();
-
+  const { tokenData, isLoading, error } = useFetch();
+  console.log(tokenData)
+  
   return (
     <>
       {userCtx.isModalShowing && <AddWalletModal />}
@@ -21,7 +22,7 @@ const App = () => {
       {userCtx.selectedWallet && <div>
         {isLoading && <Card><h1 className={classes.loading}>Loading...</h1></Card>}
         {error && <h1>Error encountered</h1>}
-        {!isLoading && <Main erc20TokenData={erc20TokenData} nativeTokenData={nativeTokenData} />}
+        {!isLoading && <Main tokenData={tokenData} />}
       </div>}
     </>
   );

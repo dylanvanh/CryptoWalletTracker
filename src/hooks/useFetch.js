@@ -3,8 +3,7 @@ import UserContext from "../context/UserContext";
 
 const useFetch = () => {
 
-  const [finalTokendata, setFinalTokenData] = useState([]);
-  const [nativeTokenData, setNativeTokenData] = useState([]);
+  const [tokenData, setTokenData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false)
 
@@ -116,9 +115,6 @@ const useFetch = () => {
       console.log(nativeBalanceData)
       console.log(nativePrices[0]);
 
-
-      setNativeTokenData(nativeBalanceData);
-
       //converts fetched tokenData data into improved format
       const transformedErc20TokenData = erc20Data.map((tokenData) => {
         return {
@@ -135,8 +131,8 @@ const useFetch = () => {
       });
 
 
-      //handles fetching prices for the different balances fetched
-      //allows filtering out the spam tokens (ones without values)
+      //handles fetching prices for the different tokens fetched
+      //allows filtering out the spam tokens (ones without prices)
       const addresses = transformedErc20TokenData.map(
         token => token.tokenAddress
       );
@@ -194,7 +190,7 @@ const useFetch = () => {
       transformedErc20TokenData.unshift(convertedNativeData);
 
       //stores data into state variable
-      setFinalTokenData(transformedErc20TokenData)
+      setTokenData(transformedErc20TokenData)
     } catch (err) {
       console.log('err = ', err)
       setError(true);
@@ -208,10 +204,9 @@ const useFetch = () => {
   }, [userCtx.selectedWallet, userCtx.selectedChain])
 
   return {
-    erc20TokenData: finalTokendata,
-    nativeTokenData,
+    tokenData,
     isLoading,
-    error
+    error,
   }
 
 }

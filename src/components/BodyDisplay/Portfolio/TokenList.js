@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./TokenList.module.css";
 import Token from "./Token";
 
@@ -14,7 +14,7 @@ const TokenList = (props) => {
   const handleTokensWithPrices = () => {
     //just show tokens with value
 
-    const tokensWithPrice = props.erc20TokenData.filter(token => token.price != undefined);
+    const tokensWithPrice = props.tokenData.filter(token => token.price != undefined);
     console.log('tokensWithPrice = ',tokensWithPrice);
     let portfolioTotal = 0;
 
@@ -46,7 +46,7 @@ const TokenList = (props) => {
 
 
   const handleTokensWithoutPrices = () => {
-    const tokensWithoutPrice = props.erc20TokenData.filter(token => token.price == undefined);
+    const tokensWithoutPrice = props.tokenData.filter(token => token.price == undefined);
 
     Array.prototype.push.apply(tokensWithoutPrice, finalTokensMinorPrice);
 
