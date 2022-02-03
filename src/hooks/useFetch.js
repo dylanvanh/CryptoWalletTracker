@@ -12,26 +12,11 @@ const useFetch = () => {
   const fetchWalletDataHandler = async () => {
     //constants for searches
 
-    // const userCtxChains = {
-    //   ETHEREUM: 'ethereum',
-    //   POLYGON: 'polygon',
-    //   AVALANCHE: 'avalanche',
-    //   ALL_AVAILABLE: 'all',
-    // }
-
-
-
     const MORALIS_CHAIN_NAMES = {
       'ethereum': 'eth',
       'polygon': 'polygon',
       'avalanche': 'avalanche',
     }
-
-    // const MORALIS_CHAIN_NAMES = {
-    //   ETHEREUM: 'eth',
-    //   POLYGON: 'polygon',
-    //   AVALANCHE: 'avalanche',
-    // }
 
     const COINGECKO_ERC20_CHAIN_NAMES = {
       'ethereum': 'ethereum',
@@ -39,23 +24,11 @@ const useFetch = () => {
       'avalanche': 'avalanche',
     }
 
-    // const COINGECKO_ERC20_CHAIN_NAMES = {
-    //   ETHEREUM: 'ethereum',
-    //   POLYGON: 'polygon-pos',
-    //   AVALANCHE: 'avalanche'
-    // }
-
     const COINGECKO_NATIVE_CHAIN_NAMES = {
       'ethereum': 'ethereum',
       'polygon': 'matic-network',
       'avalanche': 'avalanche-2',
     }
-
-    // const COINGECKO_NATIVE_CHAIN_NAMES = {
-    //   ETHEREUM: 'ethereum',
-    //   POLYGON: 'matic-network',
-    //   AVALANCHE: 'avalanche-2'
-    // }
 
     const NATIVE_TOKEN_NAMES = {
       'ethereum': 'Ethereum',
@@ -63,46 +36,11 @@ const useFetch = () => {
       'avalanche': 'Avax'
     }
 
-    // const NATIVE_TOKEN_NAMES = {
-    //   ETHEREUM: 'Ethereum',
-    //   POLYGON: 'Matic',
-    //   AVALANCHE: 'Avax',
-    // }
-
     const TYPE = {
       NATIVE_TOKEN: 'balance',
       ERC20: 'erc20',
     }
 
-    // var moralisSelectedChainName = userCtx.selectedChain;
-    // var coinGeckoErc20ChainName = userCtx.selectedChain;
-    // var coinGeckoNativeChainName = userCtx.selectedChain;
-    // var nativeTokenName = null;
-
-    // if (moralisSelectedChainName === 'ethereum') {
-    //   moralisSelectedChainName = MORALIS_CHAIN_NAMES.ETHEREUM;
-    //   nativeTokenName = NATIVE_TOKEN_NAMES.ETHEREUM;
-    // };
-
-    // if (coinGeckoErc20ChainName === 'polygon') {
-    //   coinGeckoErc20ChainName = COINGECKO_ERC20_CHAIN_NAMES.POLYGON;
-    //   coinGeckoNativeChainName = COINGECKO_NATIVE_CHAIN_NAMES.POLYGON;
-    //   nativeTokenName = NATIVE_TOKEN_NAMES.POLYGON;
-    // };
-
-    // if (coinGeckoErc20ChainName === 'eth') {
-    //   coinGeckoErc20ChainName = COINGECKO_ERC20_CHAIN_NAMES.ETHEREUM;
-    //   coinGeckoNativeChainName = COINGECKO_NATIVE_CHAIN_NAMES.ETHEREUM;
-    // };
-
-    // if (coinGeckoErc20ChainName === 'avalanche') {
-    //   coinGeckoNativeChainName = COINGECKO_NATIVE_CHAIN_NAMES.AVALANCHE;
-    //   nativeTokenName = NATIVE_TOKEN_NAMES.AVALANCHE;
-    // };
-
-    // if (coinGeckoErc20ChainName === 'ethereum') {
-    //   nativeTokenName = NATIVE_TOKEN_NAMES.ETHEREUM;
-    // };
 
     console.log(userCtx);
 
@@ -168,8 +106,6 @@ const useFetch = () => {
           chain: userCtx.selectedChain,
         };
       });
-
-
 
       //handles fetching prices for the different tokens fetched
       //allows filtering out the spam tokens (ones without prices)
