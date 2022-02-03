@@ -3,10 +3,9 @@ import UserContext from "../context/UserContext";
 
 const useFetch = () => {
 
-  const [erc20TokenData, setErc20TokenData] = useState([]);
+  const [finalTokendata, setFinalTokenData] = useState([]);
   const [nativeTokenData, setNativeTokenData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isFirstTimeLoad, setIsFirstTimeLoad] = useState(true);
   const [error, setError] = useState(false)
 
   const userCtx = useContext(UserContext);
@@ -172,7 +171,7 @@ const useFetch = () => {
         }
       });
 
-      //combine the native price and balance data
+      //combine the native price and balance data into 1 object
       const convertNativeData = (nativePrices, nativeBalanceData) => {
         const updatedNativeData = {}
 
@@ -189,19 +188,13 @@ const useFetch = () => {
         return updatedNativeData
       }
 
+      //put the native token object at the beginning of array of objects 
       const convertedNativeData = convertNativeData(nativePrices[0], nativeBalanceData);
-
-      console.log('cnd', convertedNativeData)
-
       //add the native data to the final combined data
       transformedErc20TokenData.unshift(convertedNativeData);
 
-
-
       //stores data into state variable
-      setErc20TokenData(transformedErc20TokenData)
-
-
+      setFinalTokenData(transformedErc20TokenData)
     } catch (err) {
       console.log('err = ', err)
       setError(true);
@@ -215,7 +208,7 @@ const useFetch = () => {
   }, [userCtx.selectedWallet, userCtx.selectedChain])
 
   return {
-    erc20TokenData,
+    erc20TokenData: finalTokendata,
     nativeTokenData,
     isLoading,
     error
