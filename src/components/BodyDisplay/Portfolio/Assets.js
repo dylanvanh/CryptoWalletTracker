@@ -29,7 +29,7 @@ const Assets = (props) => {
           <Card>
             <h2 className={classes.title}>Portfolio</h2>
             <ViewAssettsCheckBox handleCheckboxChange={handleCheckboxChange} checkboxState={spamCheckBoxValue} />
-            <TokenList tokenData={props.tokenData} updateTotalValue={handleUpdateTotalValue} checkBoxState={spamCheckBoxValue} />
+            <TokenList tokenData={props.tokenData} portfolioValue={totalPortfolioValue} updateTotalValue={handleUpdateTotalValue} checkBoxState={spamCheckBoxValue} />
           </Card>
         </div>
       </div>
