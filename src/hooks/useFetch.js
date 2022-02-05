@@ -52,7 +52,7 @@ const useFetch = () => {
   const fetchSingleChainDataHandler = async () => {
     const moralis_api_call_native = `https://deep-index.moralis.io/api/v2/${
       userCtx.selectedWallet
-    }/${TYPE.NATIVE_TOKEN}?chain=${MORALIS_CHAIN_NAMES[userCtx.selectedChain]}`;
+    }/${TYPE.native_token}?chain=${MORALIS_CHAIN_NAMES[userCtx.selectedChain]}`;
 
     const moralis_api_call_erc20 = `https://deep-index.moralis.io/api/v2/${
       userCtx.selectedWallet
@@ -61,8 +61,6 @@ const useFetch = () => {
     const coingecko_api_native_prices = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${
       COINGECKO_NATIVE_CHAIN_NAMES[userCtx.selectedChain]
     }%2C&per_page=100&page=1&sparkline=false&price_change_percentage=24h`;
-
-    console.log(COINGECKO_NATIVE_CHAIN_NAMES);
 
     setIsLoading(true);
     setError(false);
@@ -87,9 +85,6 @@ const useFetch = () => {
       const erc20Data = await responseErc20.json();
       const nativeBalanceData = await responseNativeBalance.json();
       const nativePrices = await responseNativePrice.json();
-
-      console.log("nb", nativeBalanceData);
-      console.log("np", nativePrices);
 
       //converts fetched tokenData data into improved format
       const transformedErc20TokenData = erc20Data.map((tokenData) => {
@@ -180,11 +175,11 @@ const useFetch = () => {
     console.log("multiChain function called");
 
     //NATIVE Calls -> balance of native token per chain
-    const eth_native = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.NATIVE_TOKEN}?chain=${MORALIS_CHAIN_NAMES.ethereum}`;
+    const eth_native = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.native_token}?chain=${MORALIS_CHAIN_NAMES.ethereum}`;
 
-    const polygon_native = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.NATIVE_TOKEN}?chain=${MORALIS_CHAIN_NAMES.polygon}`;
+    const polygon_native = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.native_token}?chain=${MORALIS_CHAIN_NAMES.polygon}`;
 
-    const avalanche_native = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.NATIVE_TOKEN}?chain=${MORALIS_CHAIN_NAMES.avalanche}`;
+    const avalanche_native = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.native_token}?chain=${MORALIS_CHAIN_NAMES.avalanche}`;
 
     //gets current prices of all chains native token
     const coingecko_api_native_prices = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=
@@ -236,11 +231,14 @@ const useFetch = () => {
         throw new Error("Error fetching token data");
       }
 
+      //balance quantity
       const ethNativeBalanceData = await responseEthNativeBalace.json();
       const polygonNativeBalanceData = await responsePolygonNativeBalace.json();
-      const avalancheNativeBalanceData = await responseAvalancheNativeBalace.json();
+      const avalancheNativeBalanceData =
+        await responseAvalancheNativeBalace.json();
 
-      const nativePrices = await responseNativePrices.json();
+      //all chain current balances for wallet
+      const combinedNativePriceData = await responseNativePrices.json();
 
       const ethErc20Data = await responseEthErc20.json();
       const polygonErc20Data = await responsePolygonErc20.json();
@@ -327,8 +325,6 @@ const useFetch = () => {
       const polygonErc20PriceData = await responsePolygonPrices.json();
       const avalancheErc20PriceData = await responseAvalanchePrices.json();
 
-      console.log(ethErc20PriceData);
-
       //converts fetched price data into improved format
       const ethErc20ConvertedPrices = Object.entries(ethErc20PriceData);
       const ethErc20NewPrices = ethErc20ConvertedPrices.map((data) => {
@@ -338,7 +334,6 @@ const useFetch = () => {
           change: data[1]["usd_24h_change"],
         };
       });
-      console.log(ethErc20NewPrices);
 
       const polygonErc20ConvertedPrices = Object.entries(polygonErc20PriceData);
       const polygonErc20NewPrices = polygonErc20ConvertedPrices.map((data) => {
@@ -348,7 +343,6 @@ const useFetch = () => {
           change: data[1]["usd_24h_change"],
         };
       });
-      console.log(polygonErc20NewPrices);
 
       const avalancheErc20ConvertedPrices = Object.entries(
         avalancheErc20PriceData
@@ -362,7 +356,8 @@ const useFetch = () => {
           };
         }
       );
-      console.log(avalancheErc20NewPrices);
+
+      console.log("357");
 
       //adds the price,24hourchange in price to data
       transformedEthErc20TokenData.forEach((tokenData) => {
@@ -396,13 +391,60 @@ const useFetch = () => {
           tokenData.dayChange = foundAddress["change"];
         }
 
-      console.log(transformedEthErc20TokenData);
-      console.log(transformedPolygonErc20TokenData);
-      console.log(transformedAvalancheErc20TokenData);
+        const convertNativeData = (nativePrices, nativeBalanceData,chainName) => {
+          const updatedNativeData = {};
+          updatedNativeData.token_address = "NATIVE_TOKEN";
+          updatedNativeData.name = NATIVE_TOKEN_NAMES[chainName];
+          updatedNativeData.balance = nativeBalanceData.balance;
+          updatedNativeData.decimals = 18;
+          updatedNativeData.symbol = userCtx.selectedChain;
+          updatedNativeData.price = nativePrices.current_price;
+          updatedNativeData.totalValue = null;
+          updatedNativeData.chain = chainName;
+
+          return updatedNativeData;
+        };
+
+        const combinedFinalData = [
+          ...transformedEthErc20TokenData,
+          ...transformedPolygonErc20TokenData,
+          ...transformedAvalancheErc20TokenData,
+        ];
+
+        if (ethNativeBalanceData.balance != 0) {
+          const ethConvertedNativeData = convertNativeData(
+            combinedNativePriceData[0],
+            ethNativeBalanceData,
+            USERCONTEXT_AVAILABLE_CHAINS.ethereum,
+          );
+          console.log(ethConvertedNativeData);
+          combinedFinalData.push(ethConvertedNativeData);
+        }
+
+        if (polygonNativeBalanceData.balance != 0) {
+          const polygonConvertedNativeData = convertNativeData(
+            combinedNativePriceData[1],
+            polygonNativeBalanceData,
+            USERCONTEXT_AVAILABLE_CHAINS.polygon,
+          );
+          combinedFinalData.push(polygonConvertedNativeData);
+        }
+
+        if (avalancheNativeBalanceData.balance != 0) {
+          const avalancheConvertedNativeData = convertNativeData(
+            combinedNativePriceData[2],
+            avalancheNativeBalanceData,
+            USERCONTEXT_AVAILABLE_CHAINS.avalanche,
+          );
+          combinedFinalData.push(avalancheConvertedNativeData);
+        }
+
+        console.log(combinedFinalData);
+        setTokenData(combinedFinalData);
       });
     } catch (e) {
       setError(e);
-      console.log("error caught");
+      console.log(e);
     }
   };
 
