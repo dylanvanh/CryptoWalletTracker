@@ -23,6 +23,9 @@ const ChainDropdownMenu = () => {
       <ChainDropdownItem leftIcon={<Avalanche />} key={'avalanche'} name={'avalanche'}>
         <h3>Avalanche</h3>
       </ChainDropdownItem>
+      <ChainDropdownItem key={'all'} name={'all'}>
+        <h3>All</h3>
+      </ChainDropdownItem>
     </div>
   );
 
