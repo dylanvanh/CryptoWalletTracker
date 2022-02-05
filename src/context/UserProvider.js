@@ -52,6 +52,7 @@ const walletStorageHandler = () => {
   }
 }
 
+
 const initalSelectedWalletHandler = (wallets) => {
 
   const walletAddresses = JSON.parse(localStorage.getItem('walletAddresses'));
@@ -81,6 +82,21 @@ const initalSelectedWalletHandler = (wallets) => {
 }
 
 
+const initialSelectedChainHandler = () => {
+  try{
+    const selectedChain = JSON.parse(localStorage.getItem('selectedChain'));
+
+    if(!selectedChain){
+      localStorage.setItem('selectedChain',JSON.stringify(availableChains.ETHEREUM))
+      return availableChains.ETHEREUM;
+    }
+    return selectedChain;
+  }catch(e){
+    localStorage.setItem('selectedChain',JSON.stringify(availableChains.ETHEREUM))
+    return availableChains.ETHEREUM
+  }
+}
+
 // const walletLength = false;
 const initialUserState = {
   // wallets: ['0x9b863d76c11b7a74f63fcaa1632198b0bcad93f0','0xa9ac72E3BbD107eC40546Fc1C68c5e40fc7A9DD9', '0x2','0x1','0x1A9EFC7507D3Bb3206cA5baBb4dF9e168Bd5cDEE'],
@@ -88,7 +104,7 @@ const initialUserState = {
   wallets: walletStorageHandler(),
   isModalShowing: false,
   selectedWallet: initalSelectedWalletHandler(),
-  selectedChain: availableChains.ETHEREUM,
+  selectedChain: initialSelectedChainHandler(),
   isDataFetched: false,
 };
 
@@ -164,6 +180,8 @@ const userReducer = (state, action) => {
       console.log('Select Chain');
       const updatedChain = action.chainName;
       console.log('new CHAIN = ', action.chainName);
+
+      localStorage.setItem('selectedChain', JSON.stringify(updatedChain));
 
       return {
         ...state,
