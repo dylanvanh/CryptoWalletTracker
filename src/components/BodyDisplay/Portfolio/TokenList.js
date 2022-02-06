@@ -4,16 +4,22 @@ import Token from "./Token";
 import UserContext from "../../../context/UserContext";
 
 const TokenList = (props) => {
+
   const [tokenDataNotSpam, setTokenDataNotSpam] = useState([]);
   const [tokenDataSpam, setTokenDataSpam] = useState([]);
 
-  const [ethTokenData, setEthTokenData] = useState([]);
+  const [ethTokenDataNotSpam, setEthTokenDataNotSpam] = useState([]);
+  const [ethTokenDataSpam, setEthTokenDataSpam] = useState([]);
   const [ethTotalValue, setEthTotalValue] = useState(0);
 
-  const [polygonTokenData, setPolygonTokenData] = useState([]);
+  const [polygonTokenDataNotSpam, setPolygonTokenDataNotSpam] = useState([]);
+  const [polygonTokenDataSpam, setPolygonTokenDataSpam] = useState([]);
   const [polygonTotalValue, setPolygonTotalValue] = useState(0);
 
-  const [avalancheTokenData, setAvalancheTokenData] = useState([]);
+  const [avalancheTokenDataNotSpam, setAvalancheTokenDataNotSpam] = useState(
+    []
+  );
+  const [avalancheTokenDataSpam, setAvalancheTokenDataSpam] = useState([]);
   const [avalancheTotalValue, setAvalancheTotalValue] = useState(0);
 
   const spamTokenCheckboxValue = props.checkBoxState;
@@ -30,7 +36,6 @@ const TokenList = (props) => {
 
   const handleTokensWithPrices = (chainName) => {
     //just show tokens with value
-
     let chainTotalValue = 0;
 
     //will filter out the provided combined chain data(includes native chain and erc20 data)
@@ -70,21 +75,35 @@ const TokenList = (props) => {
 
     props.updateTotalValue(+portfolioTotal);
 
+    console.log('function running',chainName)
+
     if (userCtx.selectedChain !== AVAILABLE_CHAINS.ALL_AVAILABLE) {
+      console.log('single chain')
+      console.log(finalTokensWithPrice)
       setTokenDataNotSpam(finalTokensWithPrice);
     } else {
-      if (userCtx.selectedChain === AVAILABLE_CHAINS.ETHEREUM) {
-        setEthTokenData(finalTokensWithPrice);
-        setEthTotalValue(chainTotalValue);
-      }
-
-      if (userCtx.selectedChain === AVAILABLE_CHAINS.POLYGON) {
-        setPolygonTokenData(finalTokensWithPrice);
+      console.log('multichain')
+      console.log(chainName)
+      // if (AVAILABLE_CHAINS[chainName] === AVAILABLE_CHAINS.ETHEREUM) {
+        console.log('chain eth')
+        setEthTokenDataNotSpam(finalTokensWithPrice);
+        setEthTotalValue(chainTotalValue);  
+        console.log(finalTokensWithPrice);
+        console.log(ethTotalValue);
+      // }
+      if (chainName === AVAILABLE_CHAINS.POLYGON) {
+        console.log('chain polygon')
+        setPolygonTokenDataNotSpam(finalTokensWithPrice);
         setPolygonTotalValue(chainTotalValue);
+        console.log(finalTokensWithPrice)
+        console.log(polygonTotalValue);
       }
-      if (userCtx.selectedChain === AVAILABLE_CHAINS.AVALANCHE) {
-        setAvalancheTokenData(finalTokensWithPrice);
+      if (chainName === AVAILABLE_CHAINS.AVALANCHE) {
+        console.log('chain avalanche')
+        setAvalancheTokenDataNotSpam(finalTokensWithPrice);
         setAvalancheTotalValue(chainTotalValue);
+        console.log(finalTokensWithPrice);
+        console.log(avalancheTotalValue);
       }
     }
   };
@@ -113,20 +132,29 @@ const TokenList = (props) => {
     });
 
     //sort by highest value
-
     tokensWithoutPrice.sort((a, b) => b.balance - a.balance);
-
-    setTokenDataSpam(tokensWithoutPrice);
+    
+    if (userCtx.selectedChain !== AVAILABLE_CHAINS.ALL_AVAILABLE) {
+      setTokenDataSpam(tokensWithoutPrice);
+    } else {
+      if (chainName === AVAILABLE_CHAINS.ETHEREUM) {
+        setEthTokenDataSpam(tokensWithoutPrice);
+      }
+      if (chainName === AVAILABLE_CHAINS.POLYGON) {
+        setPolygonTokenDataSpam(tokensWithoutPrice);
+      }
+      if (chainName === AVAILABLE_CHAINS.AVALANCHE) {
+        setAvalancheTokenDataSpam(tokensWithoutPrice);
+      }
+    }
   };
 
   const handleTokens = () => {
-    if (userCtx.selectChain === AVAILABLE_CHAINS.ALL_AVAILABLE) {
+    if (userCtx.selectedChain === AVAILABLE_CHAINS.ALL_AVAILABLE) {
       //handle all avaialble chain data
-
       //eth
       handleTokensWithPrices(AVAILABLE_CHAINS.ETHEREUM);
       handleTokensWithoutPrices(AVAILABLE_CHAINS.ETHEREUM);
-
       //polygon
       handleTokensWithPrices(AVAILABLE_CHAINS.POLYGON);
       handleTokensWithoutPrices(AVAILABLE_CHAINS.POLYGON);
@@ -139,9 +167,11 @@ const TokenList = (props) => {
       handleTokensWithPrices(userCtx.selectedChain);
       handleTokensWithoutPrices(userCtx.selectedChain);
     }
+
   };
 
   useEffect(() => {
+    console.log('props data = ', props.tokenData)
     handleTokens();
   }, []);
 
@@ -150,32 +180,9 @@ const TokenList = (props) => {
       <div>
         <h1>Tokens with price:</h1>
       </div>
-      <ul className={classes["token-data"]}>
-        {tokenDataNotSpam.map((token) => (
-          <Token
-            key={token.tokenAddress}
-            name={token.name}
-            balance={token.balance.toLocaleString("en-US", {
-              maximumFractionDigits: 2,
-            })}
-            address={token.tokenAddress}
-            symbol={token.symbol}
-            price={token.price.toLocaleString("en-US", {
-              maximumFractionDigits: 6,
-            })}
-            dayChange={token.dayChange}
-            value={token.totalValue.toLocaleString("en-US", {
-              maximumFractionDigits: 2,
-            })}
-          />
-        ))}
-        {spamTokenCheckboxValue && (
-          <div>
-            <h1>Tokens without price:</h1>
-          </div>
-        )}
-        {spamTokenCheckboxValue &&
-          tokenDataSpam.map((token) => (
+      {userCtx.selectedChain != AVAILABLE_CHAINS.ALL_AVAILABLE && (
+        <ul className={classes["token-data"]}>
+          {tokenDataNotSpam.map((token) => (
             <Token
               key={token.tokenAddress}
               name={token.name}
@@ -193,7 +200,92 @@ const TokenList = (props) => {
               })}
             />
           ))}
-      </ul>
+          {spamTokenCheckboxValue && (
+            <div>
+              <h1>Tokens without price:</h1>
+            </div>
+          )}
+          {spamTokenCheckboxValue &&
+            tokenDataSpam.map((token) => (
+              <Token
+                key={token.tokenAddress}
+                name={token.name}
+                balance={token.balance.toLocaleString("en-US", {
+                  maximumFractionDigits: 2,
+                })}
+                address={token.tokenAddress}
+                symbol={token.symbol}
+                price={token.price.toLocaleString("en-US", {
+                  maximumFractionDigits: 6,
+                })}
+                dayChange={token.dayChange}
+                value={token.totalValue.toLocaleString("en-US", {
+                  maximumFractionDigits: 2,
+                })}
+              />
+            ))}
+        </ul>
+      )}
+      {/* <h1>Ethereum</h1>
+      {ethTokenDataNotSpam &&
+        tokenDataSpam.map((token) => (
+          <Token
+            key={token.tokenAddress}
+            name={token.name}
+            balance={token.balance.toLocaleString("en-US", {
+              maximumFractionDigits: 2,
+            })}
+            address={token.tokenAddress}
+            symbol={token.symbol}
+            price={token.price.toLocaleString("en-US", {
+              maximumFractionDigits: 6,
+            })}
+            dayChange={token.dayChange}
+            value={token.totalValue.toLocaleString("en-US", {
+              maximumFractionDigits: 2,
+            })}
+          />
+        ))}
+        <h1>Polygon</h1>
+      {polygonTokenDataNotSpam &&
+        tokenDataSpam.map((token) => (
+          <Token
+            key={token.tokenAddress}
+            name={token.name}
+            balance={token.balance.toLocaleString("en-US", {
+              maximumFractionDigits: 2,
+            })}
+            address={token.tokenAddress}
+            symbol={token.symbol}
+            price={token.price.toLocaleString("en-US", {
+              maximumFractionDigits: 6,
+            })}
+            dayChange={token.dayChange}
+            value={token.totalValue.toLocaleString("en-US", {
+              maximumFractionDigits: 2,
+            })}
+          />
+        ))}
+        <h1>Avalanche</h1>
+      {avalancheTokenDataNotSpam &&
+        tokenDataSpam.map((token) => (
+          <Token
+            key={token.tokenAddress}
+            name={token.name}
+            balance={token.balance.toLocaleString("en-US", {
+              maximumFractionDigits: 2,
+            })}
+            address={token.tokenAddress}
+            symbol={token.symbol}
+            price={token.price.toLocaleString("en-US", {
+              maximumFractionDigits: 6,
+            })}
+            dayChange={token.dayChange}
+            value={token.totalValue.toLocaleString("en-US", {
+              maximumFractionDigits: 2,
+            })}
+          />
+        ))} */}
     </>
   );
 };

@@ -195,6 +195,8 @@ const useFetch = () => {
 
     const avalanche_erc20 = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.erc20}?chain=${MORALIS_CHAIN_NAMES.avalanche}`;
 
+    setIsLoading(true);
+
     try {
       //balances
       const responseEthNativeBalace = await fetch(eth_native, {
@@ -269,7 +271,7 @@ const useFetch = () => {
             price: null,
             dayChange: null,
             totalValue: null,
-            chain: userCtx.selectedChain,
+            chain: USERCONTEXT_AVAILABLE_CHAINS.polygon,
           };
         }
       );
@@ -285,7 +287,7 @@ const useFetch = () => {
             price: null,
             dayChange: null,
             totalValue: null,
-            chain: userCtx.selectedChain,
+            chain: USERCONTEXT_AVAILABLE_CHAINS.avalanche,
           };
         }
       );
@@ -356,9 +358,7 @@ const useFetch = () => {
           };
         }
       );
-
-      console.log("357");
-
+      
       //adds the price,24hourchange in price to data
       transformedEthErc20TokenData.forEach((tokenData) => {
         let foundAddress = ethErc20NewPrices.find(
@@ -417,7 +417,6 @@ const useFetch = () => {
             ethNativeBalanceData,
             USERCONTEXT_AVAILABLE_CHAINS.ethereum,
           );
-          console.log(ethConvertedNativeData);
           combinedFinalData.push(ethConvertedNativeData);
         }
 
@@ -446,6 +445,7 @@ const useFetch = () => {
       setError(e);
       console.log(e);
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
