@@ -172,8 +172,6 @@ const useFetch = () => {
   };
 
   const fetchMultiChainDataHandler = async () => {
-    console.log("multiChain function called");
-
     //NATIVE Calls -> balance of native token per chain
     const eth_native = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.native_token}?chain=${MORALIS_CHAIN_NAMES.ethereum}`;
 
@@ -437,8 +435,6 @@ const useFetch = () => {
           );
           combinedFinalData.push(avalancheConvertedNativeData);
         }
-
-        console.log(combinedFinalData);
         setTokenData(combinedFinalData);
       });
     } catch (e) {
