@@ -4,6 +4,7 @@ import ChainDropdownItem from './ChainDropdownItem';
 import { ReactComponent as Ethereum } from "../../../icons/ethereum.svg";
 import { ReactComponent as Polygon } from "../../../icons/polygon.svg";
 import { ReactComponent as Avalanche } from "../../../icons/avalanche.svg";
+import { ReactComponent as Asterisk } from "../../../icons/asterisk.svg";
 
 
 
@@ -23,7 +24,7 @@ const ChainDropdownMenu = () => {
       <ChainDropdownItem leftIcon={<Avalanche />} key={'avalanche'} name={'avalanche'}>
         <h3>Avalanche</h3>
       </ChainDropdownItem>
-      <ChainDropdownItem key={'all'} name={'all'}>
+      <ChainDropdownItem leftIcon={<Asterisk/>} key={'all'} name={'all'}>
         <h3>All</h3>
       </ChainDropdownItem>
     </div>
