@@ -22,16 +22,7 @@ const TokenList = (props) => {
     ALL_AVAILABLE: "all",
   };
 
-  const handleTokensWithPrices = (chainName) => {
-    //just show tokens with value
-    // let chainTotalValue = 0;
-
-    //will filter out the provided combined chain data(includes native chain and erc20 data)
-    //if only 1 chain is selected , the filter will just return everything
-
-    // const filteredChainData = props.tokenData.filter(
-    //   (token) => token.chain == chainName
-    // );
+  const handleTokensWithPrices = () => {
 
     const tokensWithPrice = props.tokenData.filter(
       (token) => token.price != undefined && token.price > 0 && token.decimals >= 1
@@ -51,6 +42,8 @@ const TokenList = (props) => {
       }
     });
 
+
+
     //only display tokens with substantial value
     const finalTokensWithPrice = tokensWithPrice.filter(
       (token) => token.totalValue > 0.1
@@ -69,25 +62,20 @@ const TokenList = (props) => {
 
   };
 
-  const handleTokensWithoutPrices = (chainName) => {
-
-    const filteredChainData = props.tokenData.filter(
-      (token) => token.chain == chainName
-    );
-
-    const tokensWithoutPrice = filteredChainData.filter(
+  const handleTokensWithoutPrices = () => {
+    
+    const tokensWithoutPrice = props.tokenData.filter(
       (token) => token.price == undefined || token.price == 0 || token.decimals < 1
     );
 
     //add the coins with under 0.1 value in portfolio -> likely spam coins
     Array.prototype.push.apply(tokensWithoutPrice, finalTokensMinorPrice);
-
     tokensWithoutPrice.forEach((token) => {
       if (+token.decimals > 0) {
         let decimalValue = "0." + "0".repeat(+token.decimals - 1) + "1";
         token.balance = token.balance * decimalValue;
 
-        if (token.price == null) {
+        if (token.price == null || token.price === undefined || token.price == 0) {
           token.price = 0;
           token.totalValue = 0;
         }
