@@ -50,17 +50,14 @@ const useFetch = () => {
   };
 
   const fetchSingleChainDataHandler = async () => {
-    const moralis_api_call_native = `https://deep-index.moralis.io/api/v2/${
-      userCtx.selectedWallet
-    }/${TYPE.native_token}?chain=${MORALIS_CHAIN_NAMES[userCtx.selectedChain]}`;
+    const moralis_api_call_native = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet
+      }/${TYPE.native_token}?chain=${MORALIS_CHAIN_NAMES[userCtx.selectedChain]}`;
 
-    const moralis_api_call_erc20 = `https://deep-index.moralis.io/api/v2/${
-      userCtx.selectedWallet
-    }/${TYPE.erc20}?chain=${MORALIS_CHAIN_NAMES[userCtx.selectedChain]}`;
+    const moralis_api_call_erc20 = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet
+      }/${TYPE.erc20}?chain=${MORALIS_CHAIN_NAMES[userCtx.selectedChain]}`;
 
-    const coingecko_api_native_prices = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${
-      COINGECKO_NATIVE_CHAIN_NAMES[userCtx.selectedChain]
-    }%2C&per_page=100&page=1&sparkline=false&price_change_percentage=24h`;
+    const coingecko_api_native_prices = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${COINGECKO_NATIVE_CHAIN_NAMES[userCtx.selectedChain]
+      }%2C&per_page=100&page=1&sparkline=false&price_change_percentage=24h`;
 
     setIsLoading(true);
     setError(false);
@@ -108,9 +105,8 @@ const useFetch = () => {
       );
       const combinedAddresses = addresses.join("%2C");
 
-      const api_prices = `https://api.coingecko.com/api/v3/simple/token_price/${
-        COINGECKO_ERC20_CHAIN_NAMES[userCtx.selectedChain]
-      }?contract_addresses=${combinedAddresses}&vs_currencies=usd&include_24hr_change=true`;
+      const api_prices = `https://api.coingecko.com/api/v3/simple/token_price/${COINGECKO_ERC20_CHAIN_NAMES[userCtx.selectedChain]
+        }?contract_addresses=${combinedAddresses}&vs_currencies=usd&include_24hr_change=true`;
 
       const responsePrices = await fetch(api_prices, {
         headers: COINGECKO_API_HEADER,
@@ -356,7 +352,7 @@ const useFetch = () => {
           };
         }
       );
-      
+
       //adds the price,24hourchange in price to data
       transformedEthErc20TokenData.forEach((tokenData) => {
         let foundAddress = ethErc20NewPrices.find(
@@ -389,7 +385,7 @@ const useFetch = () => {
           tokenData.dayChange = foundAddress["change"];
         }
 
-        const convertNativeData = (nativePrices, nativeBalanceData,chainName) => {
+        const convertNativeData = (nativePrices, nativeBalanceData, chainName) => {
           const updatedNativeData = {};
           updatedNativeData.token_address = "NATIVE_TOKEN";
           updatedNativeData.name = NATIVE_TOKEN_NAMES[chainName];
@@ -420,16 +416,15 @@ const useFetch = () => {
 
         if (polygonNativeBalanceData.balance != 0) {
           const polygonConvertedNativeData = convertNativeData(
-            combinedNativePriceData[1],
+            combinedNativePriceData[2],
             polygonNativeBalanceData,
             USERCONTEXT_AVAILABLE_CHAINS.polygon,
           );
           combinedFinalData.push(polygonConvertedNativeData);
         }
-
         if (avalancheNativeBalanceData.balance != 0) {
           const avalancheConvertedNativeData = convertNativeData(
-            combinedNativePriceData[2],
+            combinedNativePriceData[1],
             avalancheNativeBalanceData,
             USERCONTEXT_AVAILABLE_CHAINS.avalanche,
           );
