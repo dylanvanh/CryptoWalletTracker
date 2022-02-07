@@ -24,7 +24,7 @@ const WalletDropdownMenu = (props) => {
       {userCtx.wallets.map((walletAddress) => (
         <WalletDropdownItem key={walletAddress} name={walletAddress}>
           <h3>
-            {walletAddress}
+            {walletAddress.slice(0, 3)}{'...'}{walletAddress.slice(-3)}
           </h3>
         </WalletDropdownItem>
       ))}
