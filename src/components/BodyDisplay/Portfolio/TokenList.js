@@ -46,8 +46,6 @@ const TokenList = (props) => {
       }
     });
 
-
-
     //only display tokens with substantial value
     const finalTokensWithPrice = tokensWithPrice.filter(
       (token) => token.totalValue > 0.1
@@ -60,23 +58,17 @@ const TokenList = (props) => {
     finalTokensWithPrice.sort((a, b) => b.totalValue - a.totalValue);
 
 
+    const calculateChainValue = (chainName) => {
+      let tempValue = (finalTokensWithPrice.filter((token) => token.chain == chainName)).reduce((total, token) => {
+        return token.totalValue + total
+      }, 0);
+      return tempValue
+    }
+
+    setEthTotalValue(calculateChainValue(AVAILABLE_CHAINS.ETHEREUM));
+    setPolygonTotalValue(calculateChainValue(AVAILABLE_CHAINS.POLYGON));
+    setAvalancheTotalValue(calculateChainValue(AVAILABLE_CHAINS.AVALANCHE));
     props.updateTotalValue(portfolioTotal);
-
-    let ethValue = (finalTokensWithPrice.filter((token) => token.chain == AVAILABLE_CHAINS.ETHEREUM)).reduce((total, token) => {
-      return token.totalValue + total
-    }, 0);
-
-    let polygonValue = (finalTokensWithPrice.filter((token) => token.chain == AVAILABLE_CHAINS.POLYGON)).reduce((total, token) => {
-      return token.totalValue + total
-    }, 0);
-
-    let avalancheValue = (finalTokensWithPrice.filter((token) => token.chain == AVAILABLE_CHAINS.AVALANCHE)).reduce((total, token) => {
-      return token.totalValue + total
-    }, 0);
-
-    setEthTotalValue(ethValue);
-    setPolygonTotalValue(polygonValue);
-    setAvalancheTotalValue(avalancheValue);
     setTokenDataNotSpam(finalTokensWithPrice);
   };
 
