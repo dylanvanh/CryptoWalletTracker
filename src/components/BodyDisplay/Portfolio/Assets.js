@@ -36,8 +36,6 @@ const Assets = (props) => {
     ALL_AVAILABLE: "all",
   };
 
-
-
   return (
     <>
       <div>
