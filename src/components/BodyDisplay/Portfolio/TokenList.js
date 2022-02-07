@@ -314,56 +314,6 @@ const TokenList = (props) => {
           </ul>
         </div>
       }
-
-      {userCtx.selectedChain != AVAILABLE_CHAINS.ALL_AVAILABLE &&
-        <div>
-          <h1>{userCtx.selectedChain} Tokens</h1>
-          <ul className={classes["token-data"]}>
-            {tokenDataNotSpam.filter((token) => token.chain == userCtx.selectedChain).map((token) => (
-              <Token
-                key={token.tokenAddress}
-                name={token.name}
-                balance={token.balance.toLocaleString("en-US", {
-                  maximumFractionDigits: 2,
-                })}
-                address={token.tokenAddress}
-                symbol={token.symbol}
-                price={token.price.toLocaleString("en-US", {
-                  maximumFractionDigits: 6,
-                })}
-                dayChange={token.dayChange}
-                value={token.totalValue.toLocaleString("en-US", {
-                  maximumFractionDigits: 2,
-                })}
-              />
-            ))}
-            {spamTokenCheckboxValue && (
-              <div>
-                <h1>{userCtx.selectedChain} Tokens without price: </h1>
-              </div>
-            )}
-            {spamTokenCheckboxValue &&
-              tokenDataSpam.filter((token) => token.chain == userCtx.selectedChain).map((token) => (
-                <Token
-                  key={token.tokenAddress}
-                  name={token.name}
-                  balance={token.balance.toLocaleString("en-US", {
-                    maximumFractionDigits: 2,
-                  })}
-                  address={token.tokenAddress}
-                  symbol={token.symbol}
-                  price={token.price.toLocaleString("en-US", {
-                    maximumFractionDigits: 6,
-                  })}
-                  dayChange={token.dayChange}
-                  value={token.totalValue.toLocaleString("en-US", {
-                    maximumFractionDigits: 2,
-                  })}
-                />
-              ))}
-          </ul>
-        </div>
-      }
     </>
   );
 };
