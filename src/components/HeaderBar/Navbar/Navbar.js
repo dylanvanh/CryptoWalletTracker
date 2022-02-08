@@ -3,13 +3,13 @@ import classes from "./Navbar.module.css";
 import NavItem from "./NavItem";
 import WalletIcon from "../WalletIcon";
 import { ReactComponent as CaretIcon } from "../../../icons/caret.svg";
-import { ReactComponent as MetamaskIcon } from "../../../icons/metamask.svg";
 import { ReactComponent as Ethereum } from "../../../icons/ethereum.svg";
 import { useContext } from 'react';
 
 import WalletDropdownMenu from "../WalletDropdown/WalletDropdownMenu";
 import UserContext from "../../../context/UserContext";
 import ChainDropdownMenu from "../ChainDropdown/ChainDropdownMenu"
+import MetaMaskButton from "./MetaMaskButton";
 
 
 const Navbar = () => {
@@ -22,7 +22,6 @@ const Navbar = () => {
     event.preventDefault();
     console.log(userCtx)
   }
-
 
   return (
     <nav className={classes.navbar} >
@@ -43,7 +42,7 @@ const Navbar = () => {
           </NavItem>
         </div>
         <div>
-          <NavItem icon={<MetamaskIcon />} />
+          <MetaMaskButton />
         </div>
         <button onClick={handleClick}>userCtx</button>
       </div>
