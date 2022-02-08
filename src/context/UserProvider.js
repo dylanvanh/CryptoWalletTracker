@@ -105,7 +105,6 @@ const initialUserState = {
   isModalShowing: false,
   selectedWallet: initalSelectedWalletHandler(),
   selectedChain: initialSelectedChainHandler(),
-  isDataFetched: false,
 };
 
 const userReducer = (state, action) => {
@@ -131,7 +130,7 @@ const userReducer = (state, action) => {
     }
 
     case availableActions.ADD: {
-
+      
       const currentWallets = state.wallets;
       const newWalletAddress = action.walletAddress;
 
@@ -159,11 +158,51 @@ const userReducer = (state, action) => {
       localStorage.setItem('walletAddresses', JSON.stringify(currentWallets));
       localStorage.setItem('selectedWallet', JSON.stringify(newWalletAddress));
 
-
       return {
         wallets: currentWallets,
         isModalShowing: state.isModalShowing,
         selectedWallet: newWalletAddress,
+        selectedChain: state.selectedChain,
+      }
+    }
+
+    case availableActions.REMOVE: {
+      console.log('Remove')
+      const walletAddresses = state.wallets;
+      const updatedWallets = walletAddresses.filter((wallet) => wallet != action.walletAddress)
+
+      console.log(updatedWallets);
+      localStorage.setItem('walletAddresses', JSON.stringify(updatedWallets));
+
+      //check if clicked wallet is currently active wallet
+
+      if (action.walletAddress == state.selectedWallet) {
+        if (updatedWallets.length == 0) {
+          console.log('empty wallet')
+          localStorage.setItem('selectedWallet', JSON.stringify(''));
+
+          return {
+            wallets: updatedWallets,
+            isModalShowing: state.isModalShowing,
+            selectedWallet: '',
+            selectedChain: state.selectedChain,
+          }
+        }
+        const firstWallet = () => {
+          return state.wallets[0]
+        }
+        return {
+          wallets: updatedWallets,
+          isModalShowing: state.isModalShowing,
+          selectedWallet: firstWallet(),
+          selectedChain: state.selectedChain,
+        }
+      }
+
+      return {
+        wallets: updatedWallets,
+        isModalShowing: state.isModalShowing,
+        selectedWallet: state.selectedWallet,
         selectedChain: state.selectedChain,
       }
     }
@@ -191,19 +230,6 @@ const userReducer = (state, action) => {
       return {
         ...state,
         selectedChain: updatedChain,
-      }
-    }
-
-
-    case availableActions.ISDATAFETCHED: {
-      console.log('Is Data Fetched')
-
-      //all fetch requests are complete -> true
-      const updatedIsDataFetched = true;
-
-      return {
-        ...state,
-        isDataFetched: updatedIsDataFetched,
       }
     }
 
@@ -246,23 +272,21 @@ const UserProvider = (props) => {
     dispatchUserAction({ type: availableActions.ISDATAFETCHED });
   }
 
-  // const removeWalletHandler = (walletAddress) => {
-  //   dispatchUserAction({ type: 'ADD', walletAddress: walletAddress })
-  // }
-
+  const removeWalletHandler = (walletAddress) => {
+    dispatchUserAction({ type: availableActions.REMOVE, walletAddress: walletAddress })
+  }
 
   const userContext = {
     wallets: userState.wallets,
     isModalShowing: userState.isModalShowing,
     selectedWallet: userState.selectedWallet,
     selectedChain: userState.selectedChain,
-    isDataFetched: userState.isDataFetched,
     showModal: showModalHandler,
     hideModal: hideModalHandler,
     addWallet: addWalletHandler,
+    removeWallet: removeWalletHandler,
     selectWallet: selectedWalletHandler,
     selectChain: selectChainHandler,
-    changeDataRetrievedStatus: isDataFetchedHandler,
   }
 
   return (

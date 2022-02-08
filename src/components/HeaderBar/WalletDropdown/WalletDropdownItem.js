@@ -1,14 +1,10 @@
 import { useContext } from "react";
 import UserContext from "../../../context/UserContext";
 import classes from './WalletDropdownItem.module.css';
+import { ReactComponent as Delete } from "../../../icons/delete.svg";
+
 
 const WalletDropdownItem = (props) => {
-
-  //onclick should show the stats for the wallet selected
-
-  //potentially just show the walet in the context set to active?
-  //-> just change the active to the clicked wallet address
-
   const userCtx = useContext(UserContext);
 
   //set the clicked on wallet button to be the globally selcted wallet for displaying
@@ -25,15 +21,28 @@ const WalletDropdownItem = (props) => {
     userCtx.selectWallet(updatedSelectedWallet);
   }
 
+  const deleteWalletHandler = () => {
+    const walletToDelete = props.name;
+
+    console.log(walletToDelete);
+
+    userCtx.removeWallet(walletToDelete);
+  }
+
   return (
-    <a
-      href="#"
-      onClick={activeWalletHandler}
-      className={classes["menu-item"]}
-    >
-      <span className={classes["icon-button"]}>{props.leftIcon}</span>
-      {props.children}
-    </a>
+    <div className={classes.container}>
+      <a
+        href="#"
+        onClick={activeWalletHandler}
+        className={classes["menu-item"]}
+      >
+        <span className={classes["icon-button"]}>{props.leftIcon}</span>
+        {props.children}
+      </a>
+      <a className={classes.delete} onClick={deleteWalletHandler}>
+        {<Delete />}
+      </a>
+    </div>
   );
 };
 

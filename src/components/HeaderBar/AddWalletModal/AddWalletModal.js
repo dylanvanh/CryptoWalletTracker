@@ -24,15 +24,8 @@ const AddWalletModal = (props) => {
     userCtx.addWallet(enteredWalletAddress);
   }
 
-  const walletsSavedHandler = () => {
-    console.log(userCtx)
-    console.log('active wallet address =', userCtx.selectedWallet)
-  }
-
-
   const addMetaMaskWallet = (walletAddress) => {
     userCtx.addWallet(walletAddress);
-
   }
 
 

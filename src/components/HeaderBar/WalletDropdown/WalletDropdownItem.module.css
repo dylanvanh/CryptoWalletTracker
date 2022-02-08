@@ -15,3 +15,17 @@
 .icon-button:hover {
   background-color: #5a5e66;
 }
+
+.delete {
+  color: red;
+  width: 2rem;
+  height: 2rem;
+}
+
+.delete:hover {
+  background-color: #5a5e66;
+}
+
+.container {
+  display: flex;
+}
