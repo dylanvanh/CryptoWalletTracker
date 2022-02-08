@@ -83,16 +83,16 @@ const initalSelectedWalletHandler = (wallets) => {
 
 
 const initialSelectedChainHandler = () => {
-  try{
+  try {
     const selectedChain = JSON.parse(localStorage.getItem('selectedChain'));
 
-    if(!selectedChain){
-      localStorage.setItem('selectedChain',JSON.stringify(availableChains.ETHEREUM))
+    if (!selectedChain) {
+      localStorage.setItem('selectedChain', JSON.stringify(availableChains.ETHEREUM))
       return availableChains.ETHEREUM;
     }
     return selectedChain;
-  }catch(e){
-    localStorage.setItem('selectedChain',JSON.stringify(availableChains.ETHEREUM))
+  } catch (e) {
+    localStorage.setItem('selectedChain', JSON.stringify(availableChains.ETHEREUM))
     return availableChains.ETHEREUM
   }
 }
@@ -143,15 +143,20 @@ const userReducer = (state, action) => {
         }
       }
 
-      if (currentWallets.includes(action.walletAddress)) {
+      const lowerCaseWalletAddresses = currentWallets.map(address => address.toLowerCase());
+
+      if (lowerCaseWalletAddresses.includes((action.walletAddress).toLowerCase())) {
         console.log('wallet already added')
+        //switch to the already added wallet
+        // availableActions.selectWallet(action.walletAddress)
         return {
           ...state,
+          selectedWallet: newWalletAddress,
         }
       }
 
       currentWallets.push(newWalletAddress);
-      localStorage.setItem('walletAddresses',JSON.stringify(currentWallets));
+      localStorage.setItem('walletAddresses', JSON.stringify(currentWallets));
       localStorage.setItem('selectedWallet', JSON.stringify(newWalletAddress));
 
 

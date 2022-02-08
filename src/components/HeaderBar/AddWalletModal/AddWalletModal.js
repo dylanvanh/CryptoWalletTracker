@@ -1,6 +1,7 @@
 
 import { useContext, useRef } from "react";
 import UserContext from "../../../context/UserContext";
+import MetaMaskButton from "../Navbar/MetaMaskButton";
 import classes from "./AddWalletModal.module.css";
 import Modal from "./Modal";
 
@@ -9,6 +10,8 @@ import Modal from "./Modal";
 //Adds the wallet to list of drop down wallets
 const AddWalletModal = (props) => {
   const userCtx = useContext(UserContext);
+
+
 
 
   console.log('loading');
@@ -26,6 +29,13 @@ const AddWalletModal = (props) => {
     console.log('active wallet address =', userCtx.selectedWallet)
   }
 
+
+  const addMetaMaskWallet = (walletAddress) => {
+    userCtx.addWallet(walletAddress);
+
+  }
+
+
   return (
     <Modal>
       <form onSubmit={addNewWalletAddressHandler} className={classes.container}>
@@ -33,7 +43,7 @@ const AddWalletModal = (props) => {
         <input type='text' ref={walletAddressRef} ></input>
         <button type="submit">Submit</button>
         <button onClick={userCtx.hideModal}>Close</button>
-        <button onClick={walletsSavedHandler}>Show Saved Wallets</button>
+        <MetaMaskButton addWallet={addMetaMaskWallet}/>
       </form>
     </Modal>
   )

@@ -41,9 +41,6 @@ const Navbar = () => {
             <ChainDropdownMenu />
           </NavItem>
         </div>
-        <div>
-          <MetaMaskButton />
-        </div>
         <button onClick={handleClick}>userCtx</button>
       </div>
     </nav >

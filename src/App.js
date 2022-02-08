@@ -8,15 +8,31 @@ import Card from './components/UI/Card';
 import useFetch from './hooks/useFetch';
 
 const App = () => {
-  const userCtx = useContext(UserContext);
-  
-  //SELECTED WALLET IS GIVING NULL!
+
+  const [isMetaMaskInstalled, setisMetaMaskInstalled] = useState(false);
+
   const { tokenData, isLoading, error } = useFetch();
-  
+
+  const userCtx = useContext(UserContext);
+
+
+  useEffect(() => {
+    const checkForMetaMask = () => {
+      if (typeof window.ethereum !== 'undefined') {
+        console.log('MetaMask is installed!');
+        setisMetaMaskInstalled(true);
+      } else {
+        console.log('MetaMask is not installed!');
+      }
+    }
+
+    checkForMetaMask()
+  })
+
   return (
     <>
       {userCtx.isModalShowing && <AddWalletModal />}
-      <Navbar />
+      <Navbar metaMaskStatus={isMetaMaskInstalled} />
       {!userCtx.selectedWallet && <Card><h1>NO WALLET SELECTED</h1></Card>}
       {userCtx.selectedWallet && <div>
         {isLoading && <Card><h1 className={classes.loading}>Loading...</h1></Card>}
