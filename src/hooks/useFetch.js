@@ -440,11 +440,13 @@ const useFetch = () => {
   };
 
   useEffect(() => {
+    if(userCtx.wallets.length > 0){
     if (userCtx.selectedChain !== USERCONTEXT_AVAILABLE_CHAINS.all_available) {
       fetchSingleChainDataHandler();
     } else {
       fetchMultiChainDataHandler();
     }
+  }
   }, [userCtx.selectedWallet, userCtx.selectedChain]);
 
   return {
