@@ -20,10 +20,10 @@ const TokenList = (props) => {
   var finalTokensMinorPrice;
 
   const AVAILABLE_CHAINS = {
-    ETHEREUM: "ethereum",
-    POLYGON: "polygon",
-    AVALANCHE: "avalanche",
-    ALL_AVAILABLE: "all",
+    ethereum: "ethereum",
+    polygon: "polygon",
+    avalanche: "avalanche",
+    all_available: "all",
   };
 
   const handleTokensWithPrices = () => {
@@ -39,7 +39,6 @@ const TokenList = (props) => {
       token.balance = (token.balance * decimalValue).toFixed(2);
       token.price = (+token.price).toFixed(6);
       token.totalValue = token.balance * token.price;
-
       //further filter out spam coins
       if (token.totalValue > 0.1) {
         portfolioTotal += token.totalValue;
@@ -57,7 +56,6 @@ const TokenList = (props) => {
     //sort by highest value
     finalTokensWithPrice.sort((a, b) => b.totalValue - a.totalValue);
 
-
     const calculateChainValue = (chainName) => {
       let tempValue = (finalTokensWithPrice.filter((token) => token.chain == chainName)).reduce((total, token) => {
         return token.totalValue + total
@@ -65,15 +63,14 @@ const TokenList = (props) => {
       return tempValue
     }
 
-    setEthTotalValue(calculateChainValue(AVAILABLE_CHAINS.ETHEREUM));
-    setPolygonTotalValue(calculateChainValue(AVAILABLE_CHAINS.POLYGON));
-    setAvalancheTotalValue(calculateChainValue(AVAILABLE_CHAINS.AVALANCHE));
+    setEthTotalValue(calculateChainValue(AVAILABLE_CHAINS.ethereum));
+    setPolygonTotalValue(calculateChainValue(AVAILABLE_CHAINS.polygon));
+    setAvalancheTotalValue(calculateChainValue(AVAILABLE_CHAINS.avalanche));
     props.updateTotalValue(portfolioTotal);
     setTokenDataNotSpam(finalTokensWithPrice);
   };
 
   const handleTokensWithoutPrices = () => {
-
     const tokensWithoutPrice = props.tokenData.filter(
       (token) => token.price == undefined || token.price == 0 || token.decimals < 1
     );
@@ -116,11 +113,11 @@ const TokenList = (props) => {
     <>
       {arrangeChainCheckBoxValue &&
         <div>
-          {userCtx.selectedChain == AVAILABLE_CHAINS.ALL_AVAILABLE &&
+          {userCtx.selectedChain == AVAILABLE_CHAINS.all_available &&
             <div>
               <h1>Ethereum: {ethTotalValue} </h1>
               <ul className={classes["token-data"]}>
-                {tokenDataNotSpam.filter((token) => token.chain == AVAILABLE_CHAINS.ETHEREUM).map((token) => (
+                {tokenDataNotSpam.filter((token) => token.chain == AVAILABLE_CHAINS.ethereum).map((token) => (
                   <Token
                     key={token.tokenAddress}
                     name={token.name}
@@ -144,7 +141,7 @@ const TokenList = (props) => {
                   </div>
                 )}
                 {spamTokenCheckboxValue &&
-                  tokenDataSpam.filter((token) => token.chain == AVAILABLE_CHAINS.ETHEREUM).map((token) => (
+                  tokenDataSpam.filter((token) => token.chain == AVAILABLE_CHAINS.ethereum).map((token) => (
                     <Token
                       key={token.tokenAddress}
                       name={token.name}
@@ -165,11 +162,11 @@ const TokenList = (props) => {
               </ul>
             </div>
           }
-          {userCtx.selectedChain == AVAILABLE_CHAINS.ALL_AVAILABLE &&
+          {userCtx.selectedChain == AVAILABLE_CHAINS.all_available &&
             <div>
               <h1>Polygon: {polygonTotalValue}</h1>
               <ul className={classes["token-data"]}>
-                {tokenDataNotSpam.filter((token) => token.chain == AVAILABLE_CHAINS.POLYGON).map((token) => (
+                {tokenDataNotSpam.filter((token) => token.chain == AVAILABLE_CHAINS.polygon).map((token) => (
                   <Token
                     key={token.tokenAddress}
                     name={token.name}
@@ -193,7 +190,7 @@ const TokenList = (props) => {
                   </div>
                 )}
                 {spamTokenCheckboxValue &&
-                  tokenDataSpam.filter((token) => token.chain == AVAILABLE_CHAINS.POLYGON).map((token) => (
+                  tokenDataSpam.filter((token) => token.chain == AVAILABLE_CHAINS.polygon).map((token) => (
                     <Token
                       key={token.tokenAddress}
                       name={token.name}
@@ -214,11 +211,11 @@ const TokenList = (props) => {
               </ul>
             </div>
           }
-          {userCtx.selectedChain == AVAILABLE_CHAINS.ALL_AVAILABLE &&
+          {userCtx.selectedChain == AVAILABLE_CHAINS.all_available &&
             <div>
               <h1>Avalanche: {avalancheTotalValue}</h1>
               <ul className={classes["token-data"]}>
-                {tokenDataNotSpam.filter((token) => token.chain == AVAILABLE_CHAINS.AVALANCHE).map((token) => (
+                {tokenDataNotSpam.filter((token) => token.chain == AVAILABLE_CHAINS.avalanche).map((token) => (
                   <Token
                     key={token.tokenAddress}
                     name={token.name}
@@ -242,7 +239,7 @@ const TokenList = (props) => {
                   </div>
                 )}
                 {spamTokenCheckboxValue &&
-                  tokenDataSpam.filter((token) => token.chain == AVAILABLE_CHAINS.AVALANCHE).map((token) => (
+                  tokenDataSpam.filter((token) => token.chain == AVAILABLE_CHAINS.avalanche).map((token) => (
                     <Token
                       key={token.tokenAddress}
                       name={token.name}

@@ -116,6 +116,7 @@ const useFetch = () => {
 
       //converts fetched price data into improved format
       const erc20ConvertedPrices = Object.entries(erc20PriceData);
+
       const erc20NewPrices = erc20ConvertedPrices.map((data) => {
         return {
           tokenAddress: data[0],
@@ -124,7 +125,7 @@ const useFetch = () => {
         };
       });
 
-      //adds the price,24hourchange in price to data
+      //adds the price, 24hourchange in price to data
       transformedErc20TokenData.forEach((tokenData) => {
         let foundAddress = erc20NewPrices.find(
           (priceData) => priceData.tokenAddress === tokenData.tokenAddress
@@ -138,7 +139,6 @@ const useFetch = () => {
       //combine the native price and balance data into 1 object
       const convertNativeData = (nativePrices, nativeBalanceData) => {
         const updatedNativeData = {};
-
         updatedNativeData.token_address = "NATIVE_TOKEN";
         updatedNativeData.name = NATIVE_TOKEN_NAMES[userCtx.selectedChain];
         updatedNativeData.balance = nativeBalanceData.balance;
@@ -147,7 +147,6 @@ const useFetch = () => {
         updatedNativeData.price = nativePrices.current_price;
         updatedNativeData.totalValue = null;
         updatedNativeData.chain = userCtx.selectedChain;
-
         return updatedNativeData;
       };
 
@@ -172,9 +171,7 @@ const useFetch = () => {
   const fetchMultiChainDataHandler = async () => {
     //NATIVE Calls -> balance of native token per chain
     const eth_native = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.native_token}?chain=${MORALIS_CHAIN_NAMES.ethereum}`;
-
     const polygon_native = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.native_token}?chain=${MORALIS_CHAIN_NAMES.polygon}`;
-
     const avalanche_native = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.native_token}?chain=${MORALIS_CHAIN_NAMES.avalanche}`;
 
     //gets current prices of all chains native token
@@ -265,15 +262,12 @@ const useFetch = () => {
       const ethAddresses = transformedEthErc20TokenData.map(
         (token) => token.tokenAddress
       );
-
       const avalancheAddresses = transformedAvalancheErc20TokenData.map(
         (token) => token.tokenAddress
       );
-
       const polygonAddresses = transformedPolygonErc20TokenData.map(
         (token) => token.tokenAddress
       );
-
 
       const ethCombinedAddresses = ethAddresses.join("%2C");
       const avalancheCombinedAddresses = avalancheAddresses.join("%2C");
