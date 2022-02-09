@@ -168,8 +168,8 @@ const useFetch = () => {
     setIsLoading(false);
   };
 
+  //all chains
   const fetchMultiChainDataHandler = async () => {
-    console.log('fetchMultiChainDataHandler()')
     //NATIVE Calls -> balance of native token per chain
     const eth_native = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.native_token}?chain=${MORALIS_CHAIN_NAMES.ethereum}`;
 
@@ -193,7 +193,6 @@ const useFetch = () => {
 
     setIsLoading(true);
 
-    console.log('before try')
     try {
       //balances
       const responseEthNativeBalace = await fetch(eth_native, {
@@ -222,7 +221,6 @@ const useFetch = () => {
         headers: MORALIS_API_HEADER,
       });
 
-      console.log('b response ok')
       if (
         !responseEthErc20.ok ||
         !responsePolygonErc20.ok ||
@@ -233,41 +231,18 @@ const useFetch = () => {
 
       //balance quantity
       const ethNativeBalanceData = await responseEthNativeBalace.json();
-      const avalancheNativeBalanceData =
-        await responseAvalancheNativeBalace.json();
+      const avalancheNativeBalanceData = await responseAvalancheNativeBalace.json();
       const polygonNativeBalanceData = await responsePolygonNativeBalace.json();
 
       //all chain current balances for wallet
       const combinedNativePriceData = await responseNativePrices.json();
-      console.log('combined native price data', combinedNativePriceData)
 
       const ethErc20Data = await responseEthErc20.json();
       const avalancheErc20Data = await responseAvalancheErc20.json();
       const polygonErc20Data = await responsePolygonErc20.json();
 
-      console.log('raw eth', ethErc20Data);
-      console.log('raw avalanche', avalancheErc20Data);
-      console.log('raw polygon', polygonErc20Data);
-
-
-      const transformedEthErc20TokenData = ethErc20Data.map((tokenData) => {
-        return {
-          tokenAddress: tokenData.token_address,
-          name: tokenData.name,
-          balance: tokenData.balance,
-          decimals: tokenData.decimals,
-          symbol: tokenData.symbol,
-          price: null,
-          dayChange: null,
-          totalValue: null,
-          chain: USERCONTEXT_AVAILABLE_CHAINS.ethereum,
-        };
-      });
-
-      console.log('transformed eth', transformedEthErc20TokenData)
-
-      const transformedAvalancheErc20TokenData = avalancheErc20Data.map(
-        (tokenData) => {
+      const transformTokenData = (chainErc20Data, chainName) => {
+        const transformedChainErc20Data = chainErc20Data.map((tokenData) => {
           return {
             tokenAddress: tokenData.token_address,
             name: tokenData.name,
@@ -277,49 +252,32 @@ const useFetch = () => {
             price: null,
             dayChange: null,
             totalValue: null,
-            chain: USERCONTEXT_AVAILABLE_CHAINS.avalanche,
-          };
-        }
-      );
+            chain: chainName,
+          }
+        });
+        return transformedChainErc20Data;
+      };
 
-      console.log('transformed avalanche', transformedAvalancheErc20TokenData)
-
-
-      const transformedPolygonErc20TokenData = polygonErc20Data.map(
-        (tokenData) => {
-          return {
-            tokenAddress: tokenData.token_address,
-            name: tokenData.name,
-            balance: tokenData.balance,
-            decimals: tokenData.decimals,
-            symbol: tokenData.symbol,
-            price: null,
-            dayChange: null,
-            totalValue: null,
-            chain: USERCONTEXT_AVAILABLE_CHAINS.polygon,
-          };
-        }
-      );
-
-      console.log('transformed polygon', transformedPolygonErc20TokenData)
+      const transformedEthErc20TokenData = transformTokenData(ethErc20Data, USERCONTEXT_AVAILABLE_CHAINS.ethereum);
+      const transformedAvalancheErc20TokenData = transformTokenData(avalancheErc20Data, USERCONTEXT_AVAILABLE_CHAINS.avalanche)
+      const transformedPolygonErc20TokenData = transformTokenData(polygonErc20Data, USERCONTEXT_AVAILABLE_CHAINS.polygon)
 
       const ethAddresses = transformedEthErc20TokenData.map(
         (token) => token.tokenAddress
       );
 
-      const avalancheAddress = transformedAvalancheErc20TokenData.map(
+      const avalancheAddresses = transformedAvalancheErc20TokenData.map(
         (token) => token.tokenAddress
       );
 
-      const polygonAddress = transformedPolygonErc20TokenData.map(
+      const polygonAddresses = transformedPolygonErc20TokenData.map(
         (token) => token.tokenAddress
       );
-
 
 
       const ethCombinedAddresses = ethAddresses.join("%2C");
-      const avalancheCombinedAddresses = avalancheAddress.join("%2C");
-      const polygonCombinedAddresses = polygonAddress.join("%2C");
+      const avalancheCombinedAddresses = avalancheAddresses.join("%2C");
+      const polygonCombinedAddresses = polygonAddresses.join("%2C");
 
       const eth_api_prices = `https://api.coingecko.com/api/v3/simple/token_price/${COINGECKO_ERC20_CHAIN_NAMES.ethereum}?contract_addresses=${ethCombinedAddresses}&vs_currencies=usd&include_24hr_change=true`;
       const avalanche_api_prices = `https://api.coingecko.com/api/v3/simple/token_price/${COINGECKO_ERC20_CHAIN_NAMES.avalanche}?contract_addresses=${avalancheCombinedAddresses}&vs_currencies=usd&include_24hr_change=true`;
@@ -340,90 +298,41 @@ const useFetch = () => {
       const avalancheErc20PriceData = await responseAvalanchePrices.json();
       const polygonErc20PriceData = await responsePolygonPrices.json();
 
-      console.log('etherc20 prices', ethErc20PriceData)
-      console.log('polygon prices', polygonErc20PriceData);
-
       //converts fetched price data into improved format
-      const ethErc20ConvertedPrices = Object.entries(ethErc20PriceData);
 
-      console.log('ethErc20ConvertedPrices', ethErc20ConvertedPrices)
+      const addPricesToTokens = (chainErc20PriceData) => {
+        const chainErc20ConvertedPrices = Object.entries(chainErc20PriceData);
 
-      const ethErc20NewPrices = ethErc20ConvertedPrices.map((data) => {
-        return {
-          tokenAddress: data[0],
-          price: data[1]["usd"],
-          change: data[1]["usd_24h_change"],
-        };
-      });
-
-      console.log('ethErc20NewPrices', ethErc20NewPrices);
-
-
-
-      const avalancheErc20ConvertedPrices = Object.entries(
-        avalancheErc20PriceData
-      );
-      const avalancheErc20NewPrices = avalancheErc20ConvertedPrices.map(
-        (data) => {
+        const chainErc20NewPrices = chainErc20ConvertedPrices.map((data) => {
           return {
             tokenAddress: data[0],
             price: data[1]["usd"],
             change: data[1]["usd_24h_change"],
           };
-        }
-      );
+        })
+        return chainErc20NewPrices;
+      }
 
-      const polygonErc20ConvertedPrices = Object.entries(polygonErc20PriceData);
+      const ethErc20NewPrices = addPricesToTokens(ethErc20PriceData);
+      const avalancheErc20NewPrices = addPricesToTokens(avalancheErc20PriceData);
+      const polygonErc20NewPrices = addPricesToTokens(polygonErc20PriceData);
 
-      console.log('polygonErc20ConvertedPrices', polygonErc20ConvertedPrices);
+      //adds the price and 24hrchange data
+      const addPriceData = (transfomedChainErc20Data, chainNewPrices) => {
+        transfomedChainErc20Data.forEach((tokenData) => {
+          let foundAddress = chainNewPrices.find(
+            (priceData) => priceData.tokenAddress === tokenData.tokenAddress
+          );
+          if (foundAddress !== undefined) {
+            tokenData.price = foundAddress["price"];
+            tokenData.dayChange = foundAddress["change"];
+          }
+        })
+      };
 
-      const polygonErc20NewPrices = polygonErc20ConvertedPrices.map((data) => {
-        return {
-          tokenAddress: data[0],
-          price: data[1]["usd"],
-          change: data[1]["usd_24h_change"],
-        };
-      });
-
-      console.log('polygonErc20NewPrices', polygonErc20NewPrices);
-
-      //adds the price,24hourchange in price to data
-      transformedEthErc20TokenData.forEach((tokenData) => {
-        let foundAddress = ethErc20NewPrices.find(
-          (priceData) => priceData.tokenAddress === tokenData.tokenAddress
-        );
-        if (foundAddress !== undefined) {
-          tokenData.price = foundAddress["price"];
-          tokenData.dayChange = foundAddress["change"];
-        }
-      });
-
-      console.log('transformedEthErc20TokenData');
-
-
-      //adds the price,24hourchange in price to data
-      transformedAvalancheErc20TokenData.forEach((tokenData) => {
-        let foundAddress = avalancheErc20NewPrices.find(
-          (priceData) => priceData.tokenAddress === tokenData.tokenAddress
-        );
-        if (foundAddress !== undefined) {
-          tokenData.price = foundAddress["price"];
-          tokenData.dayChange = foundAddress["change"];
-        }
-      });
-
-      //adds the price,24hourchange in price to data
-      transformedPolygonErc20TokenData.forEach((tokenData) => {
-        let foundAddress = polygonErc20NewPrices.find(
-          (priceData) => priceData.tokenAddress === tokenData.tokenAddress
-        );
-        if (foundAddress !== undefined) {
-          tokenData.price = foundAddress["price"];
-          tokenData.dayChange = foundAddress["change"];
-        }
-      });
-
-      console.log('transformedPolygonErc20TokenData', transformedPolygonErc20TokenData)
+      addPriceData(transformedEthErc20TokenData, ethErc20NewPrices);
+      addPriceData(transformedAvalancheErc20TokenData, avalancheErc20NewPrices);
+      addPriceData(transformedPolygonErc20TokenData, polygonErc20NewPrices);
 
       const convertNativeData = (nativePrices, nativeBalanceData, chainName) => {
         const updatedNativeData = {};
@@ -439,14 +348,13 @@ const useFetch = () => {
         return updatedNativeData;
       };
 
-
-
       const combinedFinalData = [
         ...transformedEthErc20TokenData,
         ...transformedPolygonErc20TokenData,
         ...transformedAvalancheErc20TokenData,
       ];
 
+      //add eth native token balance (Ethereum)
       if (ethNativeBalanceData.balance != 0) {
         const ethConvertedNativeData = convertNativeData(
           combinedNativePriceData[0],
@@ -456,6 +364,7 @@ const useFetch = () => {
         combinedFinalData.push(ethConvertedNativeData);
       }
 
+      //add avalanche native token balance (Avax)
       if (avalancheNativeBalanceData.balance != 0) {
         const avalancheConvertedNativeData = convertNativeData(
           combinedNativePriceData[1],
@@ -465,6 +374,7 @@ const useFetch = () => {
         combinedFinalData.push(avalancheConvertedNativeData);
       }
 
+      //add polygon native token balance (Matic)
       if (polygonNativeBalanceData.balance != 0) {
         const polygonConvertedNativeData = convertNativeData(
           combinedNativePriceData[2],
@@ -474,13 +384,9 @@ const useFetch = () => {
         combinedFinalData.push(polygonConvertedNativeData);
       }
 
-      console.log(combinedFinalData);
-
       setTokenData(combinedFinalData);
-
     } catch (e) {
       setError(e);
-      console.log(e);
     }
     setIsLoading(false);
   };

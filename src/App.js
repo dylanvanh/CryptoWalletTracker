@@ -18,13 +18,11 @@ const App = () => {
   useEffect(() => {
     const checkForMetaMask = () => {
       if (typeof window.ethereum !== 'undefined') {
-        console.log('MetaMask is installed!');
         setisMetaMaskInstalled(true);
       } else {
         console.log('MetaMask is not installed!');
       }
     }
-
     checkForMetaMask()
   })
 
