@@ -331,6 +331,7 @@ const useFetch = () => {
       const convertNativeData = (nativePrices, nativeBalanceData, chainName) => {
         const updatedNativeData = {};
         updatedNativeData.token_address = "NATIVE_TOKEN";
+        updatedNativeData.dayChange = nativePrices.price_change_24h;
         updatedNativeData.name = NATIVE_TOKEN_NAMES[chainName];
         updatedNativeData.balance = nativeBalanceData.balance;
         updatedNativeData.decimals = 18;
