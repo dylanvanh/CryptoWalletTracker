@@ -1,7 +1,7 @@
 import classes from './ChainDropdownMenu.module.css';
 import ChainDropdownItem from './ChainDropdownItem';
 
-import { ReactComponent as Ethereum } from "../../../icons/ethereum.svg";
+import { ReactComponent as Ethereum } from "../../../icons/ethereumcolour.svg";
 import { ReactComponent as Polygon } from "../../../icons/polygon.svg";
 import { ReactComponent as Avalanche } from "../../../icons/avalanche.svg";
 import { ReactComponent as Asterisk } from "../../../icons/asterisk.svg";
@@ -9,7 +9,6 @@ import { ReactComponent as Asterisk } from "../../../icons/asterisk.svg";
 
 
 const ChainDropdownMenu = () => {
-
 
   //leftIcons causing error iwth clickable area 
   //->to fix

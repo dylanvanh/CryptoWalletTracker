@@ -1,6 +1,4 @@
 import classes from "./Main.module.css";
-
-import TransactionsDisplay from "./Transactions/TransactionsDisplay";
 import Assets from "./Portfolio/Assets";
 import GasStats from "./GasStats/GasDisplay";
 
@@ -9,9 +7,7 @@ const MainDisplay = (props) => {
 
   return (
     <main className={classes["main-container"]}>
-      <div className={classes["transactions-display-container"]}>
-        <TransactionsDisplay />
-      </div>
+
       <div className={classes["Assets-container"]}>
         <Assets tokenData={props.tokenData} />
       </div>
