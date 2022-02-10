@@ -335,11 +335,10 @@ const useFetch = () => {
         updatedNativeData.name = NATIVE_TOKEN_NAMES[chainName];
         updatedNativeData.balance = nativeBalanceData.balance;
         updatedNativeData.decimals = 18;
-        updatedNativeData.symbol = userCtx.selectedChain;
+        updatedNativeData.symbol = nativePrices.symbol;
         updatedNativeData.price = nativePrices.current_price;
         updatedNativeData.totalValue = null;
         updatedNativeData.chain = chainName;
-
         return updatedNativeData;
       };
 
