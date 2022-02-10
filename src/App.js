@@ -14,7 +14,7 @@ const App = () => {
   const { tokenData, isLoading, error } = useFetch();
 
   const userCtx = useContext(UserContext);
-
+  
   useEffect(() => {
     const checkForMetaMask = () => {
       if (typeof window.ethereum !== 'undefined') {
