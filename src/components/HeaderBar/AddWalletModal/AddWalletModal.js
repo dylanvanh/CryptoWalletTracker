@@ -11,11 +11,6 @@ import Modal from "./Modal";
 const AddWalletModal = (props) => {
   const userCtx = useContext(UserContext);
 
-
-
-
-  console.log('loading');
-
   const walletAddressRef = useRef();
 
   const addNewWalletAddressHandler = (event) => {
@@ -27,7 +22,6 @@ const AddWalletModal = (props) => {
   const addMetaMaskWallet = (walletAddress) => {
     userCtx.addWallet(walletAddress);
   }
-
 
   return (
     <Modal>

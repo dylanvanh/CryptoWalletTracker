@@ -2,8 +2,8 @@
 import classes from "./Navbar.module.css";
 import NavItem from "./NavItem";
 import WalletIcon from "../WalletIcon";
-import { ReactComponent as CaretIcon } from "../../../icons/caret.svg";
-import { ReactComponent as Ethereum } from "../../../icons/ethereumcolour.svg";
+import { ReactComponent as CaretIcon } from "../../../icons/navbar/caret.svg";
+import { ReactComponent as Network } from "../../../icons/navbar/network.svg";
 import { useContext } from 'react';
 
 import WalletDropdownMenu from "../WalletDropdown/WalletDropdownMenu";
@@ -35,7 +35,7 @@ const Navbar = () => {
       </div>
       <div className={classes["right-nav"]}>
         <div className={classes["btn"]}>
-          <NavItem icon={<Ethereum />}>
+          <NavItem icon={<Network />}>
             <ChainDropdownMenu />
           </NavItem>
         </div>

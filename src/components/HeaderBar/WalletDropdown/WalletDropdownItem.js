@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import UserContext from "../../../context/UserContext";
 import classes from './WalletDropdownItem.module.css';
-import { ReactComponent as Delete } from "../../../icons/trash.svg";
+import { ReactComponent as Delete } from "../../../icons/walletdropdown/trash.svg";
 
 
 const WalletDropdownItem = (props) => {

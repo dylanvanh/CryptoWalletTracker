@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import classes from "./MetaMaskButton.module.css";
-import { ReactComponent as MetaMaskIcon } from "../../../icons/metamask.svg";
+import { ReactComponent as MetaMaskIcon } from "../../../icons/modal/metamask.svg";
 
 const MetaMaskButton = (props) => {
 
