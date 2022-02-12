@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState, useCallback } from 'react';
 import classes from './App.module.css';
 import Main from "./components/BodyDisplay/Main";
-import Navbar from "./components/HeaderBar/Navbar/Header";
+import Header from "./components/HeaderBar/Header/Header.js";
 import AddWalletModal from "./components/HeaderBar/AddWalletModal/AddWalletModal";
 import UserContext from './context/UserContext';
 import Card from './components/UI/Card';
@@ -32,7 +32,7 @@ const App = () => {
   return (
     <>
       {userCtx.isModalShowing && <AddWalletModal />}
-      <Navbar metaMaskStatus={isMetaMaskInstalled} />
+      <Header metaMaskStatus={isMetaMaskInstalled} />
       {!userCtx.selectedWallet && <Card><h1>NO WALLET SELECTED</h1></Card>}
       {userCtx.selectedWallet && <div>
         {/* {isLoading && <Card><h1 className={classes.loading}>Loading...</h1></Card>}

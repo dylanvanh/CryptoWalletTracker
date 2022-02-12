@@ -1,7 +1,7 @@
 
 import { useContext, useRef } from "react";
 import UserContext from "../../../context/UserContext";
-import MetaMaskButton from "../Navbar/MetaMaskButton";
+import MetaMaskButton from "../Header/MetaMaskButton";
 import classes from "./AddWalletModal.module.css";
 import Modal from "./Modal";
 

@@ -2,8 +2,8 @@
 import classes from "./Header.module.css";
 import HeaderItem from "./HeaderItem";
 import WalletIcon from "../WalletIcon";
-import { ReactComponent as CaretIcon } from "../../../icons/navbar/caret.svg";
-import { ReactComponent as Network } from "../../../icons/navbar/network.svg";
+import { ReactComponent as CaretIcon } from "../../../icons/headerbar/caret.svg";
+import { ReactComponent as Network } from "../../../icons/headerbar/network.svg";
 import { ReactComponent as Currency } from "../../../icons/currencies/currency.svg";
 
 import { useContext } from 'react';
