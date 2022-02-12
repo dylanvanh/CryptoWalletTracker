@@ -1,0 +1,9 @@
+.gas-stats{
+  width:20rem;
+  height:20rem;
+  background: red;;
+}
+
+.gas-stats > h2 {
+  color : white;
+}

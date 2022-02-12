@@ -1,0 +1,22 @@
+/* .chain-gas-item {
+  border-radius: 50%;
+  padding: 5px;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+.chain-icon {
+  width: 5rem;
+  height: 5rem;
+}
+
+.gwei{
+  color:white;
+}
+
+.speed-icon {
+  width: 5rem;
+  height: 5rem;
+}
