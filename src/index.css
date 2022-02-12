@@ -1,11 +1,13 @@
-html, body {
+html,
+body {
   padding: 0;
   margin: 0;
   height: 100%;
   /* overflow: hidden; prevents scrolling  */
   background-color: #242526;
+  max-width: 100%;
+  overflow-x: hidden;
 }
-
 
 body {
   /* background-image: linear-gradient(-130deg, #2b5876 0%, #4e4376 100%); */

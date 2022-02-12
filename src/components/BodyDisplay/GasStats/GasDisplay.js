@@ -1,12 +1,9 @@
 import classes from "./GasDisplay.module.css";
-import Card from "../../UI/Card";
 
 const GasDisplay = () => {
   return (
-    <div className={classes.container}>
-      <Card>
+    <div className={classes['container']}>
         <h2 className={classes.title}>Gas Stats</h2>
-      </Card>
     </div>
   );
 };

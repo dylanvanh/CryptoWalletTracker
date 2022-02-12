@@ -1,16 +1,9 @@
 .container {
-  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.title{
+.total-value {
   text-align: center;
-}
-
-.searchbar{
-  
-}
-
-
-.display{
-
+  margin-bottom: 2rem;
 }

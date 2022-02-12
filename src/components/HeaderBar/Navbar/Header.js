@@ -1,16 +1,18 @@
 
-import classes from "./Navbar.module.css";
-import NavItem from "./NavItem";
+import classes from "./Header.module.css";
+import HeaderItem from "./HeaderItem";
 import WalletIcon from "../WalletIcon";
 import { ReactComponent as CaretIcon } from "../../../icons/navbar/caret.svg";
 import { ReactComponent as Network } from "../../../icons/navbar/network.svg";
+import { ReactComponent as Currency } from "../../../icons/currencies/currency.svg";
+
 import { useContext } from 'react';
 
 import WalletDropdownMenu from "../WalletDropdown/WalletDropdownMenu";
 import UserContext from "../../../context/UserContext";
 import ChainDropdownMenu from "../ChainDropdown/ChainDropdownMenu"
 
-const Navbar = () => {
+const Header = () => {
 
   const userCtx = useContext(UserContext);
 
@@ -22,26 +24,26 @@ const Navbar = () => {
   }
 
   return (
-    <nav className={classes.navbar} >
-      <div className={classes["left-nav"]}>
+    <nav className={classes.header} >
+      <div className={classes['wallet-div']}>
         <WalletIcon />
-        <NavItem icon={<CaretIcon />}>
+        <HeaderItem icon={<CaretIcon />}>
           <WalletDropdownMenu />
-        </NavItem>
-        <h2 className={classes["dropdown-title"]}>Wallet Details</h2>
-        <div className={classes['wallet-name']}>
-          <h2>{selectedWallet}</h2>
-        </div>
+        </HeaderItem>
+        <h2>Wallets</h2>
       </div>
-      <div className={classes["right-nav"]}>
-        <div className={classes["btn"]}>
-          <NavItem icon={<Network />}>
-            <ChainDropdownMenu />
-          </NavItem>
-        </div>
+      <h2 className={classes['wallet-address']}>{selectedWallet}</h2>
+      <div className={classes['end-dropdowns']}>
+        <h3>Networks</h3>
+        <HeaderItem icon={<Network />}>
+          <ChainDropdownMenu />
+        </HeaderItem>
+        <h3>Currencies</h3>
+        <HeaderItem icon={<Currency />}>
+        </HeaderItem>
       </div>
     </nav >
   );
 };
 
-export default Navbar;
+export default Header;

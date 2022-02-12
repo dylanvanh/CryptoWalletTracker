@@ -38,19 +38,22 @@ const Assets = (props) => {
 
   return (
     <>
-      <div>
-        <PortfolioSummary
-          totalValue={totalPortfolioValue} />
-      </div>
       <div className={classes.container}>
-        <div className={classes.display}>
-          <Card>
-            <h2 className={classes.title}>Portfolio</h2>
-            <ViewAssettsCheckBox handleCheckboxChange={handleSpamAssetsCheckboxChange} checkboxState={spamCheckBoxValue} text={textShowSpamAssets} />
-            {userCtx.selectedChain == AVAILABLE_CHAINS.ALL_AVAILABLE &&
-              <ViewAssettsCheckBox handleCheckboxChange={handleArrangedChainDisplay} checkboxState={arrangeChainCheckBoxValue} text={textArrangeByChain} />}
-            <TokenList tokenData={props.tokenData} portfolioValue={totalPortfolioValue} updateTotalValue={handleUpdateTotalValue} spamCheckBoxValue={spamCheckBoxValue} arrangeChainCheckBoxValue={arrangeChainCheckBoxValue} />
-          </Card>
+        <div className={classes['total-value']}>
+          <PortfolioSummary
+            totalValue={totalPortfolioValue} />
+        </div>
+        <div className={classes.container}>
+          <div className={classes.display}>
+            <Card>
+              <div className={classes['checkbox-container']}>
+                <ViewAssettsCheckBox handleCheckboxChange={handleSpamAssetsCheckboxChange} checkboxState={spamCheckBoxValue} text={textShowSpamAssets} />
+              </div>
+              {userCtx.selectedChain == AVAILABLE_CHAINS.ALL_AVAILABLE &&
+                <ViewAssettsCheckBox handleCheckboxChange={handleArrangedChainDisplay} checkboxState={arrangeChainCheckBoxValue} text={textArrangeByChain} />}
+              <TokenList tokenData={props.tokenData} portfolioValue={totalPortfolioValue} updateTotalValue={handleUpdateTotalValue} spamCheckBoxValue={spamCheckBoxValue} arrangeChainCheckBoxValue={arrangeChainCheckBoxValue} />
+            </Card>
+          </div>
         </div>
       </div>
     </>

@@ -1,9 +1,9 @@
 
-import classes from "./NavItem.module.css";
+import classes from "./HeaderItem.module.css";
 
 import { useState } from "react";
 
-const NavItem = (props) => {
+const HeaderItem = (props) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -16,4 +16,4 @@ const NavItem = (props) => {
   );
 }
 
-export default NavItem;
+export default HeaderItem;
