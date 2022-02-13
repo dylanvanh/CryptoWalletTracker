@@ -3,10 +3,10 @@
   justify-content: center;
   align-items: flex-end;
   width:100%;
-  height:118;
+  height:118px;
 }
 
 .footer > img {
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
 }

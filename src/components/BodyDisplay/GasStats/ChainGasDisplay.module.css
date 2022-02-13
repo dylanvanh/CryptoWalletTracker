@@ -1,9 +1,15 @@
-.gas-stats{
-  width:20rem;
-  height:20rem;
-  background: red;;
+.gas-stats {
+  display:flex;
+  flex-direction: column;
+  width: 383px;
+  height: 250px;
+  padding:1rem;
+}
+
+.title{
 }
 
 .gas-stats > h2 {
-  color : white;
+  color: white;
+  align-self: center;
 }
