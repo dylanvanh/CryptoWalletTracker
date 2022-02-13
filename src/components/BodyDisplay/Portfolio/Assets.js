@@ -39,10 +39,6 @@ const Assets = (props) => {
   return (
     <>
       <div className={classes.container}>
-        <div className={classes['total-value']}>
-          <PortfolioSummary
-            totalValue={totalPortfolioValue} />
-        </div>
         <div className={classes.container}>
           <div className={classes.display}>
             <Card>

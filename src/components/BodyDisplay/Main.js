@@ -1,5 +1,6 @@
 import classes from "./Main.module.css";
 import Assets from "./Portfolio/Assets";
+import PortfolioSummary from "./Portfolio/PortfolioSummary";
 import ChainGasDisplay from "./GasStats/ChainGasDisplay";
 import Footer from "../FooterBar/Footer";
 import Vault from "../../icons/vault.svg";
@@ -15,15 +16,16 @@ const MainDisplay = (props) => {
           <h1 className={classes['portfolio-title']}>Portfolio</h1>
         </div>
         <div className={classes['portfolio-summary']}>
+          <PortfolioSummary />
         </div>
         <div className={classes['gas-stats']}>
           <ChainGasDisplay />
         </div>
       </section>
       <section className={classes['centre']} >
-        {/* <section className={classes["Assets-container"]}>
+        <section className={classes["Assets-container"]}>
         <Assets tokenData={props.tokenData} />
-      </section> */}
+      </section>
       </section>
       <Footer />
     </main>

@@ -8,11 +8,13 @@
   height: 411px;
   display:flex;
   justify-content: space-evenly;
+  align-items: center;
 }
 
 .vault-header{
   display:flex;
   align-items: center;
+  margin-top:18rem;
 }
 
 .vault-header > img{
@@ -26,8 +28,7 @@
   padding:0.5rem;
 }
 
-
 .centre {
   height: 1346px;
-  background: grey;
 }
+

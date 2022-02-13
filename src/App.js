@@ -11,10 +11,10 @@ const App = () => {
 
   const [isMetaMaskInstalled, setisMetaMaskInstalled] = useState(false);
 
-  // const { tokenData, isLoading, error } = useFetch();
+  const { tokenData, isLoading, error } = useFetch();
 
-  //DELETE
-  const tokenData = [];
+  // //DELETE
+  // const tokenData = [];
 
   const userCtx = useContext(UserContext);
 
@@ -35,10 +35,9 @@ const App = () => {
       <Header metaMaskStatus={isMetaMaskInstalled} />
       {!userCtx.selectedWallet && <Card><h1>NO WALLET SELECTED</h1></Card>}
       {userCtx.selectedWallet && <div>
-        {/* {isLoading && <Card><h1 className={classes.loading}>Loading...</h1></Card>}
+        {isLoading && <Card><h1 className={classes.loading}>Loading...</h1></Card>}
         {error && <h1>Error encountered</h1>}
-        {!isLoading && <Main tokenData={tokenData} />} */}
-        {<Main tokenData={tokenData} />}
+        {!isLoading && <Main tokenData={tokenData} />}
       </div>}
     </>
   );
