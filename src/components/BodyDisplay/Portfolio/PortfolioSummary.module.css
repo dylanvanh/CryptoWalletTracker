@@ -6,9 +6,24 @@
   border-radius: 25px;
 }
 
+.chain {
+  float: right;
+}
+
+.top-area {
+  padding-left: 2rem;
+}
+
 .top-row {
-  padding-top:2.5rem;
-  padding-left:2rem;
+  display: flex;
+  align-items: center;
+  margin-bottom:-1rem;
+}
+
+.top-row > img{
+  padding-left:17rem;;
+  height:60px;
+  width:60px;
 }
 
 .row-2-container {
@@ -78,7 +93,7 @@
 
 .bottom-row {
   display: flex;
-  padding-left:2rem;
+  padding-left: 2rem;
   justify-content: space-between;
 }
 
@@ -88,7 +103,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right:2rem;
+  margin-right: 2rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
 }
