@@ -20,9 +20,9 @@ const ChainGasDisplay = () => {
   return (
     <div className={classes['gas-stats']}>
       <h2 className={classes.title}>Gas Stats</h2>
-      <ChainGasItem chainIcon={<Ethereum />} gwei={eth} speedIcon={<Tortoise />} />
+      {/* <ChainGasItem chainIcon={<Ethereum />} gwei={eth} speedIcon={<Tortoise />} />
       <ChainGasItem chainIcon={<Polygon />} gwei={poly} speedIcon={<Rabbit />} />
-      <ChainGasItem chainIcon={<Avalanche />} gwei={avax} speedIcon={<Bird />} />
+      <ChainGasItem chainIcon={<Avalanche />} gwei={avax} speedIcon={<Bird />} /> */}
     </div>
   );
 };
