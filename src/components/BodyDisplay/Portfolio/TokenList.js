@@ -26,24 +26,40 @@ const TokenList = (props) => {
     all_available: "all",
   };
 
-  const handleTokensWithPrices = () => {
+  console.log(props.tokenData)
 
+  const handleTokensWithPrices = () => {
     const tokensWithPrice = props.tokenData.filter(
-      (token) => token.price != undefined && token.price > 0 && token.decimals >= 1
+      (token) => token.price != undefined && token.price > 0 && token.decimals >= 1 && token.dayChange != null
     );
 
     let portfolioTotal = props.portfolioValue;
 
-    const calcPriceChange = () => {
+    const calcPriceChange = (currentDayTotalValue, dayChange) => {
 
+      let previousDayTotalValue;
+      let profitLossValue;
+      //profit
+      if (dayChange >= 0) {
+        previousDayTotalValue = ((1 - (dayChange / 100)) * currentDayTotalValue);
+        profitLossValue = previousDayTotalValue - currentDayTotalValue;
+      }
+      //loss
+      if (dayChange < 0) {
+        //determine the price before decrease
+        previousDayTotalValue = (currentDayTotalValue / (1 - (dayChange / 100)));
+        profitLossValue = previousDayTotalValue - currentDayTotalValue;
+      }
+      //round to two decimal places
+      return profitLossValue;
     }
-
 
     tokensWithPrice.forEach((token) => {
       let decimalValue = "0." + "0".repeat(token.decimals - 1) + "1";
       token.balance = (token.balance * decimalValue).toFixed(2);
       token.price = (+token.price).toFixed(6);
       token.totalValue = token.balance * token.price;
+      token.profitLoss = calcPriceChange(token.totalValue, token.dayChange);
       //further filter out spam coins
       if (token.totalValue > 0.1) {
         portfolioTotal += token.totalValue;
@@ -77,12 +93,13 @@ const TokenList = (props) => {
 
   const handleTokensWithoutPrices = () => {
     const tokensWithoutPrice = props.tokenData.filter(
-      (token) => token.price == undefined || token.price == 0 || token.decimals < 1
+      (token) => token.price == undefined || token.price == 0 || token.decimals < 1 && token.dayChange != null
     );
 
     //add the coins with under 0.1 value in portfolio -> likely spam coins
     Array.prototype.push.apply(tokensWithoutPrice, finalTokensMinorPrice);
     tokensWithoutPrice.forEach((token) => {
+      token.profitLoss = null;
       if (+token.decimals > 0) {
         let decimalValue = "0." + "0".repeat(+token.decimals - 1) + "1";
         token.balance = token.balance * decimalValue;
@@ -283,8 +300,11 @@ const TokenList = (props) => {
                 price={token.price.toLocaleString("en-US", {
                   maximumFractionDigits: 6,
                 })}
-                dayChange={token.dayChange}
+                dayChange={token.dayChange} 
                 value={token.totalValue.toLocaleString("en-US", {
+                  maximumFractionDigits: 2,
+                })}
+                profitLoss={token.profitLoss.toLocaleString("en-US", {
                   maximumFractionDigits: 2,
                 })}
               />
