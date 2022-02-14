@@ -26,14 +26,13 @@ const TokenList = (props) => {
     all_available: "all",
   };
 
-  console.log(props.tokenData)
-
   const handleTokensWithPrices = () => {
     const tokensWithPrice = props.tokenData.filter(
       (token) => token.price != undefined && token.price > 0 && token.decimals >= 1 && token.dayChange != null
     );
 
     let portfolioTotal = props.portfolioValue;
+    let dailyProfitLoss = props.dailyProfitLoss;
 
     const calcPriceChange = (currentDayTotalValue, dayChange) => {
 
@@ -60,9 +59,11 @@ const TokenList = (props) => {
       token.price = (+token.price).toFixed(6);
       token.totalValue = token.balance * token.price;
       token.profitLoss = calcPriceChange(token.totalValue, token.dayChange);
+
       //further filter out spam coins
       if (token.totalValue > 0.1) {
         portfolioTotal += token.totalValue;
+        dailyProfitLoss += token.profitLoss;
       }
     });
 
@@ -87,7 +88,9 @@ const TokenList = (props) => {
     setEthTotalValue(calculateChainValue(AVAILABLE_CHAINS.ethereum));
     setPolygonTotalValue(calculateChainValue(AVAILABLE_CHAINS.polygon));
     setAvalancheTotalValue(calculateChainValue(AVAILABLE_CHAINS.avalanche));
+
     props.updateTotalValue(portfolioTotal);
+    props.updateDailyProfitLoss(dailyProfitLoss);
     setTokenDataNotSpam(finalTokensWithPrice);
   };
 
@@ -300,7 +303,7 @@ const TokenList = (props) => {
                 price={token.price.toLocaleString("en-US", {
                   maximumFractionDigits: 6,
                 })}
-                dayChange={token.dayChange} 
+                dayChange={token.dayChange}
                 value={token.totalValue.toLocaleString("en-US", {
                   maximumFractionDigits: 2,
                 })}

@@ -4,10 +4,24 @@ import PortfolioSummary from "./Portfolio/PortfolioSummary";
 import ChainGasDisplay from "./GasStats/ChainGasDisplay";
 import Footer from "../FooterBar/Footer";
 import Vault from "../../icons/vault.svg";
-
+import { useState } from "react";
 
 //handles all the body components (BodyDisplay)
 const MainDisplay = (props) => {
+
+
+  const [totalPortfolioValue, setTotalPortfolioValue] = useState(0);
+  const [dailyProfitLoss, setDailyProfitLoss] = useState(0);
+
+  const handleUpdateTotalValue = (value) => {
+    setTotalPortfolioValue(value);
+  }
+
+  const handleUpdateDailyProfitLoss = (value) => {
+    setDailyProfitLoss(value);
+  }
+
+
   return (
     <main className={classes['main']}>
       <section className={classes['top']}>
@@ -16,7 +30,7 @@ const MainDisplay = (props) => {
           <h1 className={classes['portfolio-title']}>Portfolio</h1>
         </div>
         <div className={classes['portfolio-summary']}>
-          <PortfolioSummary />
+          <PortfolioSummary portfolioValue={totalPortfolioValue} profitLoss={dailyProfitLoss} />
         </div>
         <div className={classes['gas-stats']}>
           <ChainGasDisplay />
@@ -24,8 +38,10 @@ const MainDisplay = (props) => {
       </section>
       <section className={classes['centre']} >
         <section className={classes["Assets-container"]}>
-        <Assets tokenData={props.tokenData} />
-      </section>
+          <Assets tokenData={props.tokenData}
+            portfolioValue={totalPortfolioValue} updateTotalValue={handleUpdateTotalValue}
+            dailyProfitLoss={dailyProfitLoss} updateDailyProfitLoss={handleUpdateDailyProfitLoss} />
+        </section>
       </section>
       <Footer />
     </main>
