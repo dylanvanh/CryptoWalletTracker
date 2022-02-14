@@ -34,6 +34,11 @@ const TokenList = (props) => {
 
     let portfolioTotal = props.portfolioValue;
 
+    const calcPriceChange = () => {
+
+    }
+
+
     tokensWithPrice.forEach((token) => {
       let decimalValue = "0." + "0".repeat(token.decimals - 1) + "1";
       token.balance = (token.balance * decimalValue).toFixed(2);

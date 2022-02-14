@@ -26,9 +26,6 @@
   width:60px;
 }
 
-.row-2-container {
-  display: flex;
-}
 
 .total-value {
   font-size: 4rem;
@@ -69,6 +66,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding:0.2rem;
 }
 
 .daily-profit-title {

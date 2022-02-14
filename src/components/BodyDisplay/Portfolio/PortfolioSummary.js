@@ -18,9 +18,7 @@ const PortfolioSummary = (props) => {
           <h2 className={classes['balance-title']}>Your Balance</h2>
           <img src={Ethereum} className='chain'></img>
         </div>
-        <div className={classes['row-2-container']}>
           <h1 className={classes['total-value']}>${totalValue}</h1>
-        </div>
       </div>
       <div className={classes['bottom-row']}>
         <div className={classes['daily-profit-container']}>

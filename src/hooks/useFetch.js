@@ -140,6 +140,7 @@ const useFetch = () => {
       const convertNativeData = (nativePrices, nativeBalanceData) => {
         const updatedNativeData = {};
         updatedNativeData.token_address = "NATIVE_TOKEN";
+        updatedNativeData.dayChange = nativePrices['price_change_percentage_24h']
         updatedNativeData.name = NATIVE_TOKEN_NAMES[userCtx.selectedChain];
         updatedNativeData.balance = nativeBalanceData.balance;
         updatedNativeData.decimals = 18;
@@ -233,6 +234,8 @@ const useFetch = () => {
 
       //all chain current balances for wallet
       const combinedNativePriceData = await responseNativePrices.json();
+
+      console.log(combinedNativePriceData);
 
       const ethErc20Data = await responseEthErc20.json();
       const avalancheErc20Data = await responseAvalancheErc20.json();
@@ -331,7 +334,7 @@ const useFetch = () => {
       const convertNativeData = (nativePrices, nativeBalanceData, chainName) => {
         const updatedNativeData = {};
         updatedNativeData.token_address = "NATIVE_TOKEN";
-        updatedNativeData.dayChange = nativePrices.price_change_24h;
+        updatedNativeData.dayChange = nativePrices['price_change_percentage_24h']
         updatedNativeData.name = NATIVE_TOKEN_NAMES[chainName];
         updatedNativeData.balance = nativeBalanceData.balance;
         updatedNativeData.decimals = 18;

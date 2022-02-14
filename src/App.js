@@ -13,7 +13,7 @@ const App = () => {
 
   const { tokenData, isLoading, error } = useFetch();
 
-  // //DELETE
+  //DELETE
   // const tokenData = [];
 
   const userCtx = useContext(UserContext);
@@ -38,6 +38,7 @@ const App = () => {
         {isLoading && <Card><h1 className={classes.loading}>Loading...</h1></Card>}
         {error && <h1>Error encountered</h1>}
         {!isLoading && <Main tokenData={tokenData} />}
+        {/* {<Main tokenData={tokenData} />} */}
       </div>}
     </>
   );
