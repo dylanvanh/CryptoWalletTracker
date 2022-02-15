@@ -35,19 +35,18 @@ const TokenList = (props) => {
     let dailyProfitLoss = props.dailyProfitLoss;
 
     const calcPriceChange = (currentDayTotalValue, dayChange) => {
-
       let previousDayTotalValue;
       let profitLossValue;
       //profit
       if (dayChange >= 0) {
-        previousDayTotalValue = ((1 - (dayChange / 100)) * currentDayTotalValue);
+        previousDayTotalValue = currentDayTotalValue / (1 - dayChange / 100);
         profitLossValue = previousDayTotalValue - currentDayTotalValue;
       }
       //loss
       if (dayChange < 0) {
         //determine the price before decrease
-        previousDayTotalValue = (currentDayTotalValue / (1 - (dayChange / 100)));
-        profitLossValue = previousDayTotalValue - currentDayTotalValue;
+        previousDayTotalValue = ((1 - (dayChange / 100)) * currentDayTotalValue);
+        profitLossValue = currentDayTotalValue - previousDayTotalValue;
       }
       //round to two decimal places
       return profitLossValue;

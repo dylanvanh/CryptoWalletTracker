@@ -6,17 +6,24 @@ const Token = (props) => {
   const price = props.price;
   const formattedPrice = `$${price}`;
 
+  let arrowIcon;
+
   //profit
   if (props.dayChange >= 0) {
+    arrowIcon = ArrowUp;
   }
 
   //loss
-  if(props.dayChange < 0){
-
+  if (props.dayChange < 0) {
+    arrowIcon = ArrowDown;
   }
+
+
+
   return (
     <li className={classes.token}>
       <div className={classes.container}>
+        {props.tokenValue != 0 && <span className={classes.icon}><img src={arrowIcon} /></span>}
         <span className={classes.name}>{props.name}</span>
         <span className={classes.balance}>total balance = {props.balance}</span>
         <span className={classes.price}>price per = {formattedPrice}</span>
