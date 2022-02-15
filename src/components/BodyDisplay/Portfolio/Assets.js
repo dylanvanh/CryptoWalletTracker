@@ -32,23 +32,19 @@ const Assets = (props) => {
 
   return (
     <>
-      <div className={classes.container}>
-        <div className={classes.container}>
-          <div className={classes.display}>
-            <Card>
-              <div className={classes['checkbox-container']}>
-                <ViewAssettsCheckBox handleCheckboxChange={handleSpamAssetsCheckboxChange} checkboxState={spamCheckBoxValue} text={textShowSpamAssets} />
-              </div>
-              {userCtx.selectedChain == AVAILABLE_CHAINS.ALL_AVAILABLE &&
-                <ViewAssettsCheckBox handleCheckboxChange={handleArrangedChainDisplay} checkboxState={arrangeChainCheckBoxValue} text={textArrangeByChain} />}
-              <TokenList
-                tokenData={props.tokenData}
-                portfolioValue={props.portfolioValue} updateTotalValue={props.updateTotalValue}
-                dailyProfitLoss={props.dailyProfitLoss} updateDailyProfitLoss={props.updateDailyProfitLoss}
-                spamCheckBoxValue={spamCheckBoxValue} arrangeChainCheckBoxValue={arrangeChainCheckBoxValue}
-              />
-            </Card>
-          </div>
+      <div className={classes.assets}>
+        <div className={classes['checkbox-container']}>
+          <ViewAssettsCheckBox handleCheckboxChange={handleSpamAssetsCheckboxChange} checkboxState={spamCheckBoxValue} text={textShowSpamAssets} />
+        </div>
+        {userCtx.selectedChain == AVAILABLE_CHAINS.ALL_AVAILABLE &&
+          <ViewAssettsCheckBox handleCheckboxChange={handleArrangedChainDisplay} checkboxState={arrangeChainCheckBoxValue} text={textArrangeByChain} />}
+        <div className={classes['token-list']}>
+          <TokenList
+            tokenData={props.tokenData}
+            portfolioValue={props.portfolioValue} updateTotalValue={props.updateTotalValue}
+            dailyProfitLoss={props.dailyProfitLoss} updateDailyProfitLoss={props.updateDailyProfitLoss}
+            spamCheckBoxValue={spamCheckBoxValue} arrangeChainCheckBoxValue={arrangeChainCheckBoxValue}
+          />
         </div>
       </div>
     </>

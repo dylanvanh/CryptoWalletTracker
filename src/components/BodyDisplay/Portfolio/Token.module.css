@@ -1,11 +1,71 @@
-
-.token{
-  border-bottom: 2px solid #000000;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+.token {
+  display: flex;
+  align-items: center;
+  width: 80rem;
+  height: 3rem;
+  background: #272829;
+  padding: 0.8rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  color: white;
 }
 
-.container{
-  display:flex;
+.token-image {
+  width: 55px;
+  height: 55px;
+}
+
+.name{
+  width:10rem;
+  margin-left:0.4rem;
+  margin-top:0.5rem;
+}
+
+.name-percentage {
+  display: flex;
   flex-direction: column;
+}
+
+.piechart-percentage {
+  display: flex;
+  padding-left: 0.4rem;
+}
+
+.piechart-percentage > p {
+  padding-top: 0.6rem;
+  padding-left: 0.2rem;
+  font-size: 20px;
+}
+
+.piechart {
+  width: 15px;
+  height: 50px;
+}
+
+.value {
+  min-width: 25rem;
+  text-align: center;
+}
+
+.balance {
+  min-width: 12rem;
+
+  /* padding-left:8rem; */
+}
+
+.price {
+  min-width: 12rem;
+
+  /* padding-left:8rem; */
+}
+
+.profit-loss-percentage-change {
+  min-width: 12rem;
+
+  /* padding:8rem; */
+}
+
+.chain {
+  width: 50px;
+  height: 50px;
 }

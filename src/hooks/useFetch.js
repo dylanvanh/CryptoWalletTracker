@@ -190,6 +190,7 @@ const useFetch = () => {
     const avalanche_erc20 = `https://deep-index.moralis.io/api/v2/${userCtx.selectedWallet}/${TYPE.erc20}?chain=${MORALIS_CHAIN_NAMES.avalanche}`;
 
     setIsLoading(true);
+    setError(false);
 
     try {
       //balances
