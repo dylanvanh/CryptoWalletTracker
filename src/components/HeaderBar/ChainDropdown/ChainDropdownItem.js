@@ -12,6 +12,12 @@ const ChainDropdownItem = (props) => {
 
   const userCtx = useContext(UserContext);
 
+  //handles highlighting selected item
+  let cssClassName;
+  if (userCtx.selectedChain == props.name) {
+    cssClassName = 'menu-item-selected';
+  }
+
   //set the clicked on wallet button to be the globally selcted wallet for displaying
   const activeChainHandler = () => {
     const updatedSelectedChain = props.name;
@@ -24,14 +30,16 @@ const ChainDropdownItem = (props) => {
   }
 
   return (
-    <a
-      href="#"
-      onClick={activeChainHandler}
-      className={classes["menu-item"]}
-    >
-      <span className={classes["icon-button"]}>{props.leftIcon}</span>
-      {props.children}
-    </a>
+    <div className={classes.container}>
+      <a
+        href="#"
+        onClick={activeChainHandler}
+        className={classes[cssClassName]}
+      >
+        <span className={classes["icon-button"]}><img src={props.leftIcon}></img></span>
+        {props.children}
+      </a>
+    </div>
   );
 };
 

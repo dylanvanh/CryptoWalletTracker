@@ -9,7 +9,7 @@ const HeaderItem = (props) => {
   return (
     <li>
       <a href="#" className={classes["icon-button"]} onClick={() => setOpen(!open)}>
-        {props.icon}
+        <img src={props.icon} />
       </a>
       {open && props.children}
     </li >

@@ -1,8 +1,8 @@
 .dropdown {
   position: absolute;
-  top: 60px;
-  width: 300px;
-  transform: translateX(-10%);
+  top: 90px;
+  width: 180px;
+  transform: translateX(-20%);
   background-color: var(--bg);
   border: var(--border);
   border-radius: var(--border-radius);

@@ -1,18 +1,39 @@
+.menu-item-selected{
+  color:rgb(255, 216, 90);
+}
+
+.menu-item-selected > span{
+  background-color: rgb(255, 216, 90);
+}
 
 .icon-button {
-  --button-size: calc(var(--nav-size) * 0.5);
-  width: var(--button-size);
-  height: var(--button-size);
+  width: 45px;
   background-color: #484a4d;
   border-radius: 50%;
-  padding: 5px;
+  padding: 4px;
   margin: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: filter 300ms;
+}
+
+.icon-button > img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
 }
 
 .icon-button:hover {
   background-color: #5a5e66;
 }
+
+.container {
+  display: flex;
+}
+
+.container > a {
+  width: 1px;
+  height: 45px;
+}
+
+
