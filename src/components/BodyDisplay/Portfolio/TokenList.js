@@ -4,7 +4,6 @@ import Token from "./Token";
 import UserContext from "../../../context/UserContext";
 
 const TokenList = (props) => {
-
   const [tokenDataNotSpam, setTokenDataNotSpam] = useState([]);
   const [tokenDataSpam, setTokenDataSpam] = useState([]);
   const spamTokenCheckboxValue = props.spamCheckBoxValue;
@@ -13,7 +12,6 @@ const TokenList = (props) => {
   const [ethTotalValue, setEthTotalValue] = useState(0);
   const [polygonTotalValue, setPolygonTotalValue] = useState(0);
   const [avalancheTotalValue, setAvalancheTotalValue] = useState(0);
-
 
   const userCtx = useContext(UserContext);
 
@@ -28,7 +26,11 @@ const TokenList = (props) => {
 
   const handleTokensWithPrices = () => {
     const tokensWithPrice = props.tokenData.filter(
-      (token) => token.price != undefined && token.price > 0 && token.decimals >= 1 && token.dayChange != null
+      (token) =>
+        token.price != undefined &&
+        token.price > 0 &&
+        token.decimals >= 1 &&
+        token.dayChange != null
     );
 
     let portfolioTotal = props.portfolioValue;
@@ -45,12 +47,12 @@ const TokenList = (props) => {
       //loss
       if (dayChange < 0) {
         //determine the price before decrease
-        previousDayTotalValue = ((1 - (dayChange / 100)) * currentDayTotalValue);
+        previousDayTotalValue = (1 - dayChange / 100) * currentDayTotalValue;
         profitLossValue = currentDayTotalValue - previousDayTotalValue;
       }
       //round to two decimal places
       return profitLossValue;
-    }
+    };
 
     tokensWithPrice.forEach((token) => {
       let decimalValue = "0." + "0".repeat(token.decimals - 1) + "1";
@@ -78,11 +80,13 @@ const TokenList = (props) => {
     finalTokensWithPrice.sort((a, b) => b.totalValue - a.totalValue);
 
     const calculateChainValue = (chainName) => {
-      let tempValue = (finalTokensWithPrice.filter((token) => token.chain == chainName)).reduce((total, token) => {
-        return token.totalValue + total
-      }, 0);
-      return tempValue
-    }
+      let tempValue = finalTokensWithPrice
+        .filter((token) => token.chain == chainName)
+        .reduce((total, token) => {
+          return token.totalValue + total;
+        }, 0);
+      return tempValue;
+    };
 
     setEthTotalValue(calculateChainValue(AVAILABLE_CHAINS.ethereum));
     setPolygonTotalValue(calculateChainValue(AVAILABLE_CHAINS.polygon));
@@ -95,7 +99,10 @@ const TokenList = (props) => {
 
   const handleTokensWithoutPrices = () => {
     const tokensWithoutPrice = props.tokenData.filter(
-      (token) => token.price == undefined || token.price == 0 || token.decimals < 1 && token.dayChange != null
+      (token) =>
+        token.price == undefined ||
+        token.price == 0 ||
+        (token.decimals < 1 && token.dayChange != null)
     );
 
     //add the coins with under 0.1 value in portfolio -> likely spam coins
@@ -105,15 +112,23 @@ const TokenList = (props) => {
       if (+token.decimals > 0) {
         let decimalValue = "0." + "0".repeat(+token.decimals - 1) + "1";
         token.balance = token.balance * decimalValue;
+        token.profitLoss = 0;
 
-        if (token.price == null || token.price === undefined || token.price == 0) {
+        if (
+          token.price == null ||
+          token.price === undefined ||
+          token.price == 0
+        ) {
           token.price = 0;
           token.totalValue = 0;
+          token.dayChange = 0;
         }
         //further filter out spam coins
       } else {
         token.price = 0;
         token.totalValue = 0;
+        token.profitLoss = 0;
+        token.dayChange = 0;
       }
     });
 
@@ -132,41 +147,18 @@ const TokenList = (props) => {
     handleTokens();
   }, []);
 
-
   return (
     <>
-      <div className={classes['token-list']}>
-        {arrangeChainCheckBoxValue &&
+      <div className={classes["token-list"]}>
+        {arrangeChainCheckBoxValue && (
           <div>
-            {userCtx.selectedChain == AVAILABLE_CHAINS.all_available &&
+            {userCtx.selectedChain == AVAILABLE_CHAINS.all_available && (
               <div>
                 <h1>Ethereum: {ethTotalValue} </h1>
                 <ul className={classes["token-data"]}>
-                  {tokenDataNotSpam.filter((token) => token.chain == AVAILABLE_CHAINS.ethereum).map((token) => (
-                    <Token
-                      key={token.tokenAddress}
-                      name={token.name}
-                      balance={token.balance.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })}
-                      address={token.tokenAddress}
-                      symbol={token.symbol}
-                      price={token.price.toLocaleString("en-US", {
-                        maximumFractionDigits: 6,
-                      })}
-                      dayChange={token.dayChange}
-                      value={token.totalValue.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })}
-                    />
-                  ))}
-                  {spamTokenCheckboxValue && (
-                    <div>
-                      <h1>Tokens without price:</h1>
-                    </div>
-                  )}
-                  {spamTokenCheckboxValue &&
-                    tokenDataSpam.filter((token) => token.chain == AVAILABLE_CHAINS.ethereum).map((token) => (
+                  {tokenDataNotSpam
+                    .filter((token) => token.chain == AVAILABLE_CHAINS.ethereum)
+                    .map((token) => (
                       <Token
                         key={token.tokenAddress}
                         name={token.name}
@@ -176,46 +168,60 @@ const TokenList = (props) => {
                         address={token.tokenAddress}
                         symbol={token.symbol}
                         price={token.price.toLocaleString("en-US", {
-                          maximumFractionDigits: 6,
+                          maximumFractionDigits: 2,
                         })}
                         dayChange={token.dayChange}
                         value={token.totalValue.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
                         })}
+                        profitLoss={token.profitLoss.toLocaleString("en-US", {
+                          maximumFractionDigits: 2,
+                        })}
+                        chain={token.chain}
                       />
                     ))}
+                  {spamTokenCheckboxValue && (
+                    <div>
+                      <h1>Tokens without price:</h1>
+                    </div>
+                  )}
+                  {spamTokenCheckboxValue &&
+                    tokenDataSpam
+                      .filter(
+                        (token) => token.chain == AVAILABLE_CHAINS.ethereum
+                      )
+                      .map((token) => (
+                        <Token
+                          key={token.tokenAddress}
+                          name={token.name}
+                          balance={token.balance.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                          })}
+                          address={token.tokenAddress}
+                          symbol={token.symbol}
+                          price={token.price.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                          })}
+                          dayChange={token.dayChange}
+                          value={token.totalValue.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                          })}
+                          profitLoss={token.profitLoss.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                          })}
+                          chain={token.chain}
+                        />
+                      ))}
                 </ul>
               </div>
-            }
-            {userCtx.selectedChain == AVAILABLE_CHAINS.all_available &&
+            )}
+            {userCtx.selectedChain == AVAILABLE_CHAINS.all_available && (
               <div>
                 <h1>Polygon: {polygonTotalValue}</h1>
                 <ul className={classes["token-data"]}>
-                  {tokenDataNotSpam.filter((token) => token.chain == AVAILABLE_CHAINS.polygon).map((token) => (
-                    <Token
-                      key={token.tokenAddress}
-                      name={token.name}
-                      balance={token.balance.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })}
-                      address={token.tokenAddress}
-                      symbol={token.symbol}
-                      price={token.price.toLocaleString("en-US", {
-                        maximumFractionDigits: 6,
-                      })}
-                      dayChange={token.dayChange}
-                      value={token.totalValue.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })}
-                    />
-                  ))}
-                  {spamTokenCheckboxValue && (
-                    <div>
-                      <h1>Tokens without price:</h1>
-                    </div>
-                  )}
-                  {spamTokenCheckboxValue &&
-                    tokenDataSpam.filter((token) => token.chain == AVAILABLE_CHAINS.polygon).map((token) => (
+                  {tokenDataNotSpam
+                    .filter((token) => token.chain == AVAILABLE_CHAINS.polygon)
+                    .map((token) => (
                       <Token
                         key={token.tokenAddress}
                         name={token.name}
@@ -225,46 +231,62 @@ const TokenList = (props) => {
                         address={token.tokenAddress}
                         symbol={token.symbol}
                         price={token.price.toLocaleString("en-US", {
-                          maximumFractionDigits: 6,
+                          maximumFractionDigits: 2,
                         })}
                         dayChange={token.dayChange}
                         value={token.totalValue.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
                         })}
+                        profitLoss={token.profitLoss.toLocaleString("en-US", {
+                          maximumFractionDigits: 2,
+                        })}
+                        chain={token.chain}
                       />
                     ))}
+                  {spamTokenCheckboxValue && (
+                    <div>
+                      <h1>Tokens without price:</h1>
+                    </div>
+                  )}
+                  {spamTokenCheckboxValue &&
+                    tokenDataSpam
+                      .filter(
+                        (token) => token.chain == AVAILABLE_CHAINS.polygon
+                      )
+                      .map((token) => (
+                        <Token
+                          key={token.tokenAddress}
+                          name={token.name}
+                          balance={token.balance.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                          })}
+                          address={token.tokenAddress}
+                          symbol={token.symbol}
+                          price={token.price.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                          })}
+                          dayChange={token.dayChange}
+                          value={token.totalValue.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                          })}
+                          profitLoss={token.profitLoss.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                          })}
+                          chain={token.chain}
+                        />
+                      ))}
                 </ul>
               </div>
-            }
-            {userCtx.selectedChain == AVAILABLE_CHAINS.all_available &&
+            )}
+            {userCtx.selectedChain == AVAILABLE_CHAINS.all_available && (
               <div>
                 <h1>Avalanche: {avalancheTotalValue}</h1>
                 <ul className={classes["token-data"]}>
-                  {tokenDataNotSpam.filter((token) => token.chain == AVAILABLE_CHAINS.avalanche).map((token) => (
-                    <Token
-                      key={token.tokenAddress}
-                      name={token.name}
-                      balance={token.balance.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })}
-                      address={token.tokenAddress}
-                      symbol={token.symbol}
-                      price={token.price.toLocaleString("en-US", {
-                        maximumFractionDigits: 6,
-                      })}
-                      dayChange={token.dayChange}
-                      value={token.totalValue.toLocaleString("en-US", {
-                        maximumFractionDigits: 2,
-                      })}
-                    />
-                  ))}
-                  {spamTokenCheckboxValue && (
-                    <div>
-                      <h1>Tokens without price:</h1>
-                    </div>
-                  )}
-                  {spamTokenCheckboxValue &&
-                    tokenDataSpam.filter((token) => token.chain == AVAILABLE_CHAINS.avalanche).map((token) => (
+                  {tokenDataNotSpam
+                    .filter(
+                      (token) => token.chain == AVAILABLE_CHAINS.avalanche
+                    )
+                    .map((token) => (
                       <Token
                         key={token.tokenAddress}
                         name={token.name}
@@ -274,20 +296,57 @@ const TokenList = (props) => {
                         address={token.tokenAddress}
                         symbol={token.symbol}
                         price={token.price.toLocaleString("en-US", {
-                          maximumFractionDigits: 6,
+                          maximumFractionDigits: 2,
                         })}
                         dayChange={token.dayChange}
                         value={token.totalValue.toLocaleString("en-US", {
                           maximumFractionDigits: 2,
                         })}
+                        profitLoss={token.profitLoss.toLocaleString("en-US", {
+                          maximumFractionDigits: 2,
+                        })}
+                        chain={token.chain}
                       />
                     ))}
+                  {spamTokenCheckboxValue && (
+                    <div>
+                      <h1>Tokens without price:</h1>
+                    </div>
+                  )}
+                  {spamTokenCheckboxValue &&
+                    tokenDataSpam
+                      .filter(
+                        (token) => token.chain == AVAILABLE_CHAINS.avalanche
+                      )
+                      .map((token) => (
+                        <Token
+                          key={token.tokenAddress}
+                          name={token.name}
+                          balance={token.balance.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                          })}
+                          address={token.tokenAddress}
+                          symbol={token.symbol}
+                          price={token.price.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                          })}
+                          dayChange={token.dayChange}
+                          value={token.totalValue.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                          })}
+                          profitLoss={token.profitLoss.toLocaleString("en-US", {
+                            maximumFractionDigits: 2,
+                          })}
+                          chain={token.chain}
+                        />
+                      ))}
                 </ul>
               </div>
-            }
-          </div>}
+            )}
+          </div>
+        )}
 
-        {!arrangeChainCheckBoxValue &&
+        {!arrangeChainCheckBoxValue && (
           <div>
             <h1>{userCtx.selectedChain} Tokens</h1>
             <ul className={classes["token-data"]}>
@@ -301,7 +360,7 @@ const TokenList = (props) => {
                   address={token.tokenAddress}
                   symbol={token.symbol}
                   price={token.price.toLocaleString("en-US", {
-                    maximumFractionDigits: 6,
+                    maximumFractionDigits: 2,
                   })}
                   dayChange={token.dayChange}
                   value={token.totalValue.toLocaleString("en-US", {
@@ -310,6 +369,7 @@ const TokenList = (props) => {
                   profitLoss={token.profitLoss.toLocaleString("en-US", {
                     maximumFractionDigits: 2,
                   })}
+                  chain={token.chain}
                 />
               ))}
               {spamTokenCheckboxValue && (
@@ -328,17 +388,21 @@ const TokenList = (props) => {
                     address={token.tokenAddress}
                     symbol={token.symbol}
                     price={token.price.toLocaleString("en-US", {
-                      maximumFractionDigits: 6,
+                      maximumFractionDigits: 2,
                     })}
                     dayChange={token.dayChange}
                     value={token.totalValue.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                     })}
+                    profitLoss={token.profitLoss.toLocaleString("en-US", {
+                      maximumFractionDigits: 2,
+                    })}
+                    chain={token.chain}
                   />
                 ))}
             </ul>
           </div>
-        }
+        )}
       </div>
     </>
   );

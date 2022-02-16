@@ -1,34 +1,40 @@
 import classes from "./Token.module.css";
-import ArrowUp from '../../../icons/token/arrowupgreen.svg';
-import ArrowDown from '../../../icons/token/arrowdownred.svg';
-import PieChart from '../../../icons/token/piechart.svg';
-import AllChains from '../../../icons/chains/all-chains.svg';
-import Ethereum from '../../../icons/chains/ethereum.svg'
-import Avalanche from '../../../icons/chains/avalanche.svg'
-import Polygon from '../../../icons/chains/polygon.svg'
-import UserContext from "../../../context/UserContext";
-import { useContext } from "react";
+import ArrowUp from "../../../icons/token/arrowupgreen.svg";
+import ArrowDown from "../../../icons/token/arrowdownred.svg";
+import PieChart from "../../../icons/token/piechart.svg";
+import AllChains from "../../../icons/chains/all-chains.svg";
+import Ethereum from "../../../icons/chains/ethereum.svg";
+import Avalanche from "../../../icons/chains/avalanche.svg";
+import Polygon from "../../../icons/chains/polygon.svg";
+import SpamToken from "../../../icons/token/spam.svg";
 
 const Token = (props) => {
-  const userCtx = useContext(UserContext);
 
-  const price = props.price;
-  const formattedPrice = `$${price}`;
+  const formattedValue = '$' + props.value.toLocaleString("en-US", {maximumFractionDigits: 2})
+  const formattedBalance = props.balance.toLocaleString("en-US", {maximumFractionDigits: 2});
+  const formattedPrice = `$${props.price}`;
+  const formattedProfitLoss = `$${props.profitLoss}`;
+  const formattedDayChange = props.dayChange.toLocaleString("en-US", {maximumFractionDigits: 1}) + '%';
 
 
+  console.log(props.chain);
   let chainIcon;
-  switch (userCtx.selectedChain) {
-    case 'ethereum':
+  switch (props.chain) {
+    case "ethereum":
       chainIcon = Ethereum;
       break;
-    case 'avalanche':
+    case "avalanche":
       chainIcon = Avalanche;
       break;
-    case 'polygon':
+    case "polygon":
       chainIcon = Polygon;
       break;
-    case 'all':
+    case "all":
       chainIcon = AllChains;
+      break;
+    default:
+      chainIcon = Ethereum;
+      break;
   }
 
   let arrowIcon;
@@ -56,42 +62,35 @@ const Token = (props) => {
 
   return (
     <li className={classes.token}>
-      <img className={classes['token-image']} src={'https://assets.coingecko.com/coins/images/21129/thumb/token_wsOHM_logo.png?1638764900'} />
-      <div className={classes['name-percentage']}>
-        <p className={classes['name']}>{props.name}</p>
-        <div className={classes['piechart-percentage']}>
-          <img className={classes['piechart']} src={PieChart} />
-          <p className={classes['portfolio-distribution-amount']}>12.54%</p>
+      <img
+        className={classes["token-image"]}
+        src={
+          "https://assets.coingecko.com/coins/images/21129/thumb/token_wsOHM_logo.png?1638764900"
+        }
+      />
+      <div className={classes["name-percentage"]}>
+        <p className={classes["name"]}>{props.name}</p>
+        <div className={classes["piechart-percentage"]}>
+          <img className={classes["piechart"]} src={PieChart} />
+          <p className={classes["portfolio-distribution-amount"]}>12.54%</p>
         </div>
       </div>
-      <p className={classes['value']}>{props.value}</p>
-      <p className={classes['balance']}>{props.balance}</p>
-      <p className={classes['price']}>{formattedPrice}</p>
-      <div className={classes['profit-loss-percentage-change']}>
-        <p className={classes['profit-loss-amount']}>{props.profitLoss}</p>
-        <div className={classes['percentage-change']}>
-          <p className={classes['percentage-amount']}></p>
-          <img className={classes['arrow-image']} src={arrowIcon} />
+      <p className={classes["value"]}>{formattedValue}</p>
+      <div className={classes["balance-container"]}>
+        <p className={classes["balance"]}>{formattedBalance}</p>
+        <p className={classes["symbol"]}>{props.symbol}</p>
+      </div>
+      <p className={classes["price"]}>{formattedPrice}</p>
+      <div className={classes["profit-loss-percentage-change"]}>
+        <p className={classes["profit-loss-amount"]}>{formattedProfitLoss}</p>
+        <div className={classes["percentage-change-container"]}>
+          <p className={classes["percentage-amount"]}>{formattedDayChange}</p>
+          <img className={classes["arrow-image"]} src={arrowIcon} />
         </div>
       </div>
-      <img className={classes['chain']} src={chainIcon} />
-    </li >
+      <img className={classes["chain"]} src={chainIcon} />
+    </li>
   );
 };
-
-
-
-//   return (
-//     <li className={classes.token}>
-//         {props.tokenValue != 0 && <span className={classes.icon}><img src={arrowIcon} /></span>}
-//         <span className={classes.name}>{props.name}</span>
-//         <span className={classes.balance}>total balance = {props.balance}</span>
-//         <span className={classes.price}>price per = {formattedPrice}</span>
-//         <span className={classes.value}>value = {props.value}</span>
-//         <span className={classes.dayChange}>pc : {props.dayChange}</span>
-//         <span className={classes['profit-loss']}>profitloss= ${props.profitLoss}</span>
-//     </li >
-//   );
-// };
 
 export default Token;

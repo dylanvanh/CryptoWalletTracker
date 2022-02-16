@@ -1,7 +1,7 @@
 .token {
   display: flex;
   align-items: center;
-  width: 80rem;
+  width: 62rem;
   height: 3rem;
   background: #272829;
   padding: 0.8rem;
@@ -43,26 +43,39 @@
 }
 
 .value {
-  min-width: 25rem;
+  min-width: 12rem;
   text-align: center;
 }
 
-.balance {
+.balance-container {
   min-width: 12rem;
+  display:flex;
+}
 
-  /* padding-left:8rem; */
+.balance{
+  padding-right:0.3rem;
 }
 
 .price {
   min-width: 12rem;
-
-  /* padding-left:8rem; */
 }
 
 .profit-loss-percentage-change {
-  min-width: 12rem;
+  min-width: 8rem;
+  display:flex;
+  flex-direction: column;}
 
-  /* padding:8rem; */
+.percentage-change-container{
+  display:flex;
+  align-items: center;
+  font-size: 12px;
+  padding-top:0.3rem;
+}
+
+.arrow-image{
+  width:20px;
+  height:20px;
+  padding-left:0.3rem;
 }
 
 .chain {

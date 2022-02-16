@@ -6,7 +6,7 @@
   height:118px;
 }
 
-.footer > img {
+.footer > a >  img {
   width: 4rem;
   height: 4rem;
 }
