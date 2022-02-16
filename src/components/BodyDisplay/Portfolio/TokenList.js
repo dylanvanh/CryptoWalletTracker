@@ -127,6 +127,9 @@ const TokenList = (props) => {
       token.profitLoss = null;
       token.image = 'spam';
 
+      if (token.name == null) {
+        token.name = '';
+      }
 
       if (+token.decimals > 0) {
         let decimalValue = "0." + "0".repeat(+token.decimals - 1) + "1";
