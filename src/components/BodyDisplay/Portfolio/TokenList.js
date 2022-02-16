@@ -238,7 +238,6 @@ const TokenList = (props) => {
                         value={token.totalValue}
                         profitLoss={token.profitLoss}
                         chain={token.chain}
-                        image={token.image}
                       />
                     ))}
                   {spamTokenCheckboxValue && (
@@ -290,7 +289,6 @@ const TokenList = (props) => {
                         value={token.totalValue}
                         profitLoss={token.profitLoss}
                         chain={token.chain}
-                        image={token.image}
                       />
                     ))}
                   {spamTokenCheckboxValue && (
@@ -341,7 +339,6 @@ const TokenList = (props) => {
                   value={token.totalValue}
                   profitLoss={token.profitLoss}
                   chain={token.chain}
-                  image={token.image}
                 />
               ))}
               {spamTokenCheckboxValue && (
