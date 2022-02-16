@@ -7,29 +7,59 @@ import Ethereum from "../../../icons/chains/ethereum.svg";
 import Avalanche from "../../../icons/chains/avalanche.svg";
 import Polygon from "../../../icons/chains/polygon.svg";
 import SpamToken from "../../../icons/token/spam.svg";
+import UnknownToken from "../../../icons/token/questionmark.svg";
 
 const Token = (props) => {
 
-  const formattedValue = '$' + props.value.toLocaleString("en-US", {maximumFractionDigits: 2})
-  const formattedBalance = props.balance.toLocaleString("en-US", {maximumFractionDigits: 2});
-  const formattedPrice = `$${props.price}`;
-  const formattedProfitLoss = `$${props.profitLoss}`;
-  const formattedDayChange = props.dayChange.toLocaleString("en-US", {maximumFractionDigits: 1}) + '%';
+  const formattedName = props.name.substring(0,20);
+  const formattedValue = '$' + props.value.toLocaleString("en-US", { maximumFractionDigits: 2 })
+  const formattedBalance = props.balance.toLocaleString("en-US", { maximumFractionDigits: 2 });
+  const formattedPrice = '$' + props.price.toLocaleString("en-US", { maximumFractionDigits: 2 });
+  const formattedProfitLoss = '$' + props.profitLoss.toLocaleString("en-US", { maximumFractionDigits: 4 });
+  const formattedDayChange = props.dayChange.toLocaleString("en-US", { maximumFractionDigits: 1 }) + '%';
 
+  const AVAILABLE_CHAINS = {
+    ETHEREUM: "ethereum",
+    POLYGON: "polygon",
+    AVALANCHE: "avalanche",
+    ALL_AVAILABLE: "all",
+  };
 
-  console.log(props.chain);
+  let tokenImage = '';
+  if (props.image == 'NATIVE_TOKEN') {
+    switch (props.chain) {
+      case AVAILABLE_CHAINS.ETHEREUM:
+        tokenImage = Ethereum;
+        break;
+      case AVAILABLE_CHAINS.POLYGON:
+        tokenImage = Polygon;
+        break;
+      case AVAILABLE_CHAINS.AVALANCHE:
+        tokenImage = Avalanche;
+        break;
+    }
+  }
+
+  if (props.image == 'unknown') {
+    tokenImage = UnknownToken;
+  } else if (props.image == 'spam') {
+    tokenImage = SpamToken;
+  } else if (tokenImage.length == 0) {
+    tokenImage = props.image;
+  }
+
   let chainIcon;
   switch (props.chain) {
-    case "ethereum":
+    case AVAILABLE_CHAINS.ETHEREUM:
       chainIcon = Ethereum;
       break;
-    case "avalanche":
+    case AVAILABLE_CHAINS.AVALANCHE:
       chainIcon = Avalanche;
       break;
-    case "polygon":
+    case AVAILABLE_CHAINS.POLYGON:
       chainIcon = Polygon;
       break;
-    case "all":
+    case AVAILABLE_CHAINS.ALL_AVAILABLE:
       chainIcon = AllChains;
       break;
     default:
@@ -42,34 +72,19 @@ const Token = (props) => {
   if (props.dayChange >= 0) {
     arrowIcon = ArrowUp;
   }
-
   //loss
   if (props.dayChange < 0) {
     arrowIcon = ArrowDown;
   }
 
-  //icon -> need to get
-
-  //name
-  //percentage -> need to get
-
-  //value
-  //balance
-  //price
-  //profitloss
-  //percentageChange
-  //chain
-
   return (
     <li className={classes.token}>
       <img
         className={classes["token-image"]}
-        src={
-          "https://assets.coingecko.com/coins/images/21129/thumb/token_wsOHM_logo.png?1638764900"
-        }
+        src={tokenImage}
       />
       <div className={classes["name-percentage"]}>
-        <p className={classes["name"]}>{props.name}</p>
+        <p className={classes["name"]}>{formattedName}</p>
         <div className={classes["piechart-percentage"]}>
           <img className={classes["piechart"]} src={PieChart} />
           <p className={classes["portfolio-distribution-amount"]}>12.54%</p>

@@ -8,8 +8,7 @@ import { useState } from "react";
 
 //handles all the body components (BodyDisplay)
 const MainDisplay = (props) => {
-
-
+  
   const [totalPortfolioValue, setTotalPortfolioValue] = useState(0);
   const [dailyProfitLoss, setDailyProfitLoss] = useState(0);
 
@@ -20,7 +19,6 @@ const MainDisplay = (props) => {
   const handleUpdateDailyProfitLoss = (value) => {
     setDailyProfitLoss(value);
   }
-
 
   return (
     <main className={classes['main']}>

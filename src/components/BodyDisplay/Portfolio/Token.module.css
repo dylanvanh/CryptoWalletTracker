@@ -1,7 +1,7 @@
 .token {
   display: flex;
   align-items: center;
-  width: 62rem;
+  width: 71rem;
   height: 3rem;
   background: #272829;
   padding: 0.8rem;
@@ -11,19 +11,21 @@
 }
 
 .token-image {
-  width: 55px;
-  height: 55px;
-}
-
-.name{
-  width:10rem;
-  margin-left:0.4rem;
-  margin-top:0.5rem;
+  width: 45px;
+  height: 45px;
 }
 
 .name-percentage {
   display: flex;
   flex-direction: column;
+  height:3.5rem;
+}
+
+.name{
+  font-size:20px;
+  width:15rem;
+  height:1.5rem;
+  padding-left:0.6rem;
 }
 
 .piechart-percentage {
@@ -32,14 +34,15 @@
 }
 
 .piechart-percentage > p {
-  padding-top: 0.6rem;
+  padding-top: 0.4rem;
   padding-left: 0.2rem;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .piechart {
-  width: 15px;
-  height: 50px;
+  width: 12px;
+  height:12px;
+  padding-top:0.8rem;
 }
 
 .value {
@@ -49,6 +52,7 @@
 
 .balance-container {
   min-width: 12rem;
+
   display:flex;
 }
 
@@ -58,18 +62,21 @@
 
 .price {
   min-width: 12rem;
+
 }
 
 .profit-loss-percentage-change {
-  min-width: 8rem;
+  min-width: 12rem;
   display:flex;
-  flex-direction: column;}
+  flex-direction: column;
+}
 
 .percentage-change-container{
   display:flex;
   align-items: center;
   font-size: 12px;
   padding-top:0.3rem;
+  padding-left:0.3rem;
 }
 
 .arrow-image{

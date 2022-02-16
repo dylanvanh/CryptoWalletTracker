@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import classes from "./TokenList.module.css";
 import Token from "./Token";
 import UserContext from "../../../context/UserContext";
+import AllCoinGeckoTokenData from '../../../coingeckotokenlist/all.json';
 
 const TokenList = (props) => {
   const [tokenDataNotSpam, setTokenDataNotSpam] = useState([]);
@@ -23,6 +24,8 @@ const TokenList = (props) => {
     avalanche: "avalanche",
     all_available: "all",
   };
+
+  console.log(props.tokenData)
 
   const handleTokensWithPrices = () => {
     const tokensWithPrice = props.tokenData.filter(
@@ -60,14 +63,27 @@ const TokenList = (props) => {
       token.price = (+token.price).toFixed(6);
       token.totalValue = token.balance * token.price;
       token.profitLoss = calcPriceChange(token.totalValue, token.dayChange);
-
-      //further filter out spam coins
       if (token.totalValue > 0.1) {
         portfolioTotal += token.totalValue;
         dailyProfitLoss += token.profitLoss;
       }
+
+      if (token.token_address == 'NATIVE_TOKEN') {
+        token.image = 'NATIVE_TOKEN';
+      } else {
+        //find the image in the json coingecko token file
+        token.image = (AllCoinGeckoTokenData['tokens'].filter(
+          (coinGeckoToken) => (coinGeckoToken.symbol).toLowerCase() == (token.symbol.toLowerCase())));
+        //if the token was found
+        if (token.image.length != 0) {
+          token.image = token.image[0]['logoURI']
+        } else {
+          token.image = 'unknown';
+        }
+      }
     });
 
+    //further filter out potential spam coins (not registered on coingecko)
     //only display tokens with substantial value
     const finalTokensWithPrice = tokensWithPrice.filter(
       (token) => token.totalValue > 0.1
@@ -109,16 +125,15 @@ const TokenList = (props) => {
     Array.prototype.push.apply(tokensWithoutPrice, finalTokensMinorPrice);
     tokensWithoutPrice.forEach((token) => {
       token.profitLoss = null;
+      token.image = 'spam';
+
+
       if (+token.decimals > 0) {
         let decimalValue = "0." + "0".repeat(+token.decimals - 1) + "1";
         token.balance = token.balance * decimalValue;
         token.profitLoss = 0;
 
-        if (
-          token.price == null ||
-          token.price === undefined ||
-          token.price == 0
-        ) {
+        if (token.price == null || token.price === undefined || token.price == 0) {
           token.price = 0;
           token.totalValue = 0;
           token.dayChange = 0;
@@ -161,22 +176,15 @@ const TokenList = (props) => {
                     .map((token) => (
                       <Token
                         key={token.tokenAddress}
+                        image={token.image}
                         name={token.name}
-                        balance={token.balance.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                        })}
+                        balance={token.balance}
                         address={token.tokenAddress}
                         symbol={token.symbol}
-                        price={token.price.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                        })}
+                        price={token.price}
                         dayChange={token.dayChange}
-                        value={token.totalValue.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                        })}
-                        profitLoss={token.profitLoss.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                        })}
+                        value={token.totalValue}
+                        profitLoss={token.profitLoss}
                         chain={token.chain}
                       />
                     ))}
@@ -193,22 +201,15 @@ const TokenList = (props) => {
                       .map((token) => (
                         <Token
                           key={token.tokenAddress}
+                          image={token.image}
                           name={token.name}
-                          balance={token.balance.toLocaleString("en-US", {
-                            maximumFractionDigits: 2,
-                          })}
+                          balance={token.balance}
                           address={token.tokenAddress}
                           symbol={token.symbol}
-                          price={token.price.toLocaleString("en-US", {
-                            maximumFractionDigits: 2,
-                          })}
+                          price={token.price}
                           dayChange={token.dayChange}
-                          value={token.totalValue.toLocaleString("en-US", {
-                            maximumFractionDigits: 2,
-                          })}
-                          profitLoss={token.profitLoss.toLocaleString("en-US", {
-                            maximumFractionDigits: 2,
-                          })}
+                          value={token.totalValue}
+                          profitLoss={token.profitLoss}
                           chain={token.chain}
                         />
                       ))}
@@ -224,23 +225,17 @@ const TokenList = (props) => {
                     .map((token) => (
                       <Token
                         key={token.tokenAddress}
+                        image={token.image}
                         name={token.name}
-                        balance={token.balance.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                        })}
+                        balance={token.balance}
                         address={token.tokenAddress}
                         symbol={token.symbol}
-                        price={token.price.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                        })}
+                        price={token.price}
                         dayChange={token.dayChange}
-                        value={token.totalValue.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                        })}
-                        profitLoss={token.profitLoss.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                        })}
+                        value={token.totalValue}
+                        profitLoss={token.profitLoss}
                         chain={token.chain}
+                        image={token.image}
                       />
                     ))}
                   {spamTokenCheckboxValue && (
@@ -256,22 +251,15 @@ const TokenList = (props) => {
                       .map((token) => (
                         <Token
                           key={token.tokenAddress}
+                          image={token.image}
                           name={token.name}
-                          balance={token.balance.toLocaleString("en-US", {
-                            maximumFractionDigits: 2,
-                          })}
+                          balance={token.balance}
                           address={token.tokenAddress}
                           symbol={token.symbol}
-                          price={token.price.toLocaleString("en-US", {
-                            maximumFractionDigits: 2,
-                          })}
+                          price={token.price}
                           dayChange={token.dayChange}
-                          value={token.totalValue.toLocaleString("en-US", {
-                            maximumFractionDigits: 2,
-                          })}
-                          profitLoss={token.profitLoss.toLocaleString("en-US", {
-                            maximumFractionDigits: 2,
-                          })}
+                          value={token.totalValue}
+                          profitLoss={token.profitLoss}
                           chain={token.chain}
                         />
                       ))}
@@ -289,23 +277,17 @@ const TokenList = (props) => {
                     .map((token) => (
                       <Token
                         key={token.tokenAddress}
+                        image={token.image}
                         name={token.name}
-                        balance={token.balance.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                        })}
+                        balance={token.balance}
                         address={token.tokenAddress}
                         symbol={token.symbol}
-                        price={token.price.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                        })}
+                        price={token.price}
                         dayChange={token.dayChange}
-                        value={token.totalValue.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                        })}
-                        profitLoss={token.profitLoss.toLocaleString("en-US", {
-                          maximumFractionDigits: 2,
-                        })}
+                        value={token.totalValue}
+                        profitLoss={token.profitLoss}
                         chain={token.chain}
+                        image={token.image}
                       />
                     ))}
                   {spamTokenCheckboxValue && (
@@ -321,22 +303,15 @@ const TokenList = (props) => {
                       .map((token) => (
                         <Token
                           key={token.tokenAddress}
+                          image={token.image}
                           name={token.name}
-                          balance={token.balance.toLocaleString("en-US", {
-                            maximumFractionDigits: 2,
-                          })}
+                          balance={token.balance}
                           address={token.tokenAddress}
                           symbol={token.symbol}
-                          price={token.price.toLocaleString("en-US", {
-                            maximumFractionDigits: 2,
-                          })}
+                          price={token.price}
                           dayChange={token.dayChange}
-                          value={token.totalValue.toLocaleString("en-US", {
-                            maximumFractionDigits: 2,
-                          })}
-                          profitLoss={token.profitLoss.toLocaleString("en-US", {
-                            maximumFractionDigits: 2,
-                          })}
+                          value={token.totalValue}
+                          profitLoss={token.profitLoss}
                           chain={token.chain}
                         />
                       ))}
@@ -353,23 +328,17 @@ const TokenList = (props) => {
               {tokenDataNotSpam.map((token) => (
                 <Token
                   key={token.tokenAddress}
+                  image={token.image}
                   name={token.name}
-                  balance={token.balance.toLocaleString("en-US", {
-                    maximumFractionDigits: 2,
-                  })}
+                  balance={token.balance}
                   address={token.tokenAddress}
                   symbol={token.symbol}
-                  price={token.price.toLocaleString("en-US", {
-                    maximumFractionDigits: 2,
-                  })}
+                  price={token.price}
                   dayChange={token.dayChange}
-                  value={token.totalValue.toLocaleString("en-US", {
-                    maximumFractionDigits: 2,
-                  })}
-                  profitLoss={token.profitLoss.toLocaleString("en-US", {
-                    maximumFractionDigits: 2,
-                  })}
+                  value={token.totalValue}
+                  profitLoss={token.profitLoss}
                   chain={token.chain}
+                  image={token.image}
                 />
               ))}
               {spamTokenCheckboxValue && (
@@ -381,22 +350,15 @@ const TokenList = (props) => {
                 tokenDataSpam.map((token) => (
                   <Token
                     key={token.tokenAddress}
+                    image={token.image}
                     name={token.name}
-                    balance={token.balance.toLocaleString("en-US", {
-                      maximumFractionDigits: 2,
-                    })}
+                    balance={token.balance}
                     address={token.tokenAddress}
                     symbol={token.symbol}
-                    price={token.price.toLocaleString("en-US", {
-                      maximumFractionDigits: 2,
-                    })}
+                    price={token.price}
                     dayChange={token.dayChange}
-                    value={token.totalValue.toLocaleString("en-US", {
-                      maximumFractionDigits: 2,
-                    })}
-                    profitLoss={token.profitLoss.toLocaleString("en-US", {
-                      maximumFractionDigits: 2,
-                    })}
+                    value={token.totalValue}
+                    profitLoss={token.profitLoss}
                     chain={token.chain}
                   />
                 ))}
