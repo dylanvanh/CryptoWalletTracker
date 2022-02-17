@@ -12,8 +12,10 @@ import UnknownToken from "../../../../icons/token/questionmark.svg";
 const Token = (props) => {
 
   const formattedName = props.name.substring(0,20);
-  const formattedValue = '$' + props.value.toLocaleString("en-US", { maximumFractionDigits: 2 })
-  const formattedBalance = props.balance.toLocaleString("en-US", { maximumFractionDigits: 2 });
+  const formattedValue = '$' + props.value.toLocaleString("en-US", { maximumFractionDigits: 2 });
+  const formattedBalance = props.balance.toLocaleString("en-US", { maximumFractionDigits: 2 }).substring(0,10);
+  const formattedSymbol = props.symbol.substring(0,10);
+
   const formattedPrice = '$' + props.price.toLocaleString("en-US", { maximumFractionDigits: 2 });
   const formattedProfitLoss = '$' + props.profitLoss.toLocaleString("en-US", { maximumFractionDigits: 4 });
   const formattedDayChange = props.dayChange.toLocaleString("en-US", { maximumFractionDigits: 1 }) + '%';
@@ -77,6 +79,10 @@ const Token = (props) => {
     arrowIcon = ArrowDown;
   }
 
+  if(props.dayChange == 0){
+    arrowIcon = UnknownToken;
+  }
+
   return (
     <li className={classes.token}>
       <img
@@ -93,7 +99,7 @@ const Token = (props) => {
       <p className={classes["value"]}>{formattedValue}</p>
       <div className={classes["balance-container"]}>
         <p className={classes["balance"]}>{formattedBalance}</p>
-        <p className={classes["symbol"]}>{props.symbol}</p>
+        <p className={classes["symbol"]}>{formattedSymbol}</p>
       </div>
       <p className={classes["price"]}>{formattedPrice}</p>
       <div className={classes["profit-loss-percentage-change"]}>

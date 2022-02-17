@@ -46,12 +46,12 @@
 }
 
 .value {
-  min-width: 12rem;
+  width: 12rem;
   text-align: center;
 }
 
 .balance-container {
-  min-width: 12rem;
+  width: 12rem;
 
   display:flex;
 }
@@ -61,7 +61,7 @@
 }
 
 .price {
-  min-width: 12rem;
+  width: 12rem;
 
 }
 
