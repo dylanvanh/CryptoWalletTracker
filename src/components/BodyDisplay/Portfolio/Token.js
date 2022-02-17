@@ -11,7 +11,7 @@ import UnknownToken from "../../../icons/token/questionmark.svg";
 
 const Token = (props) => {
 
-  const formattedName = props.name.substring(0,25);
+  const formattedName = props.name.substring(0,20);
   const formattedValue = '$' + props.value.toLocaleString("en-US", { maximumFractionDigits: 2 })
   const formattedBalance = props.balance.toLocaleString("en-US", { maximumFractionDigits: 2 });
   const formattedPrice = '$' + props.price.toLocaleString("en-US", { maximumFractionDigits: 2 });

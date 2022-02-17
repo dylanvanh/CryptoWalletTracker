@@ -12,7 +12,7 @@
 .vault-header{
   display:flex;
   align-items: center;
-  margin-top:18rem;
+  padding-top:12rem;
 }
 
 .vault-header > img{
