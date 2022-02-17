@@ -11,11 +11,15 @@ import UnknownToken from "../../../../icons/token/questionmark.svg";
 
 const Token = (props) => {
 
-  const formattedName = props.name.substring(0,20);
-  const formattedValue = '$' + props.value.toLocaleString("en-US", { maximumFractionDigits: 2 });
-  const formattedBalance = props.balance.toLocaleString("en-US", { maximumFractionDigits: 2 }).substring(0,10);
-  const formattedSymbol = props.symbol.substring(0,10);
+  const calcPercentageOfTotal = (portfolioValue, tokenValue) => {
+    return (tokenValue / portfolioValue) * 100
+  }
 
+  const formattedName = props.name.substring(0, 20);
+  const formattedValue = '$' + props.value.toLocaleString("en-US", { maximumFractionDigits: 2 });
+  const formattedBalance = props.balance.toLocaleString("en-US", { maximumFractionDigits: 2 }).substring(0, 10);
+  const formattedSymbol = props.symbol.substring(0, 10);
+  const formattedDistributionAmount = calcPercentageOfTotal(props.portfolioValue, props.value).toLocaleString("en-US", { maximumFractionDigits: 3 }) + '%';
   const formattedPrice = '$' + props.price.toLocaleString("en-US", { maximumFractionDigits: 2 });
   const formattedProfitLoss = '$' + props.profitLoss.toLocaleString("en-US", { maximumFractionDigits: 4 });
   const formattedDayChange = props.dayChange.toLocaleString("en-US", { maximumFractionDigits: 1 }) + '%';
@@ -51,6 +55,7 @@ const Token = (props) => {
   }
 
   let chainIcon;
+  console.log(props.chain)
   switch (props.chain) {
     case AVAILABLE_CHAINS.ETHEREUM:
       chainIcon = Ethereum;
@@ -64,10 +69,9 @@ const Token = (props) => {
     case AVAILABLE_CHAINS.ALL_AVAILABLE:
       chainIcon = AllChains;
       break;
-    default:
-      chainIcon = Ethereum;
-      break;
   }
+
+  console.log(chainIcon)
 
   let arrowIcon;
   //profit
@@ -79,9 +83,11 @@ const Token = (props) => {
     arrowIcon = ArrowDown;
   }
 
-  if(props.dayChange == 0){
+  if (props.dayChange == 0) {
     arrowIcon = UnknownToken;
   }
+
+
 
   return (
     <li className={classes.token}>
@@ -93,7 +99,7 @@ const Token = (props) => {
         <p className={classes["name"]}>{formattedName}</p>
         <div className={classes["piechart-percentage"]}>
           <img className={classes["piechart"]} src={PieChart} />
-          <p className={classes["portfolio-distribution-amount"]}>12.54%</p>
+          <p className={classes["portfolio-distribution-amount"]}>{formattedDistributionAmount}</p>
         </div>
       </div>
       <p className={classes["value"]}>{formattedValue}</p>

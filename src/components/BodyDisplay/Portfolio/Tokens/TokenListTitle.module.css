@@ -1,0 +1,29 @@
+.token-titles {
+  display: flex;
+  width: 71rem;
+  color:white;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.value {
+  padding-left: 24rem;
+}
+
+.balance{
+  padding-left:5.5rem;
+}
+
+.price {
+  padding-left: 9.5rem;
+}
+
+
+.profit-loss {
+  padding-left: 8rem;
+} 
+
+.chain {
+  padding-left: 8.3rem;
+
+}

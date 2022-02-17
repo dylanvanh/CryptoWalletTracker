@@ -15,4 +15,6 @@
   justify-content: flex-end;
 }
 
-
+.token-titles {
+  display: flex;
+}

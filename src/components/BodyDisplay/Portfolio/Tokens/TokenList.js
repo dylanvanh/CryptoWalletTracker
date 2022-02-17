@@ -4,6 +4,8 @@ import Token from "./Token";
 import UserContext from "../../../../context/UserContext";
 import AllCoinGeckoTokenData from '../../../../coingeckotokenlist/all.json';
 import ChainSectionHeader from "./ChainSectionHeader";
+import TokenListTitle from "./TokenListTitle";
+
 
 const TokenList = (props) => {
   const [tokenDataNotSpam, setTokenDataNotSpam] = useState([]);
@@ -163,6 +165,9 @@ const TokenList = (props) => {
     handleTokens();
   }, []);
 
+
+
+
   return (
     <>
       <div className={classes["token-list"]}>
@@ -171,6 +176,7 @@ const TokenList = (props) => {
             {userCtx.selectedChain == AVAILABLE_CHAINS.all_available && (
               <div>
                 <ChainSectionHeader chain={AVAILABLE_CHAINS.ethereum} value={ethereumTotalValue} spam={false} />
+                <TokenListTitle />
                 <ul className={classes["token-data"]}>
                   {tokenDataNotSpam
                     .filter((token) => token.chain == AVAILABLE_CHAINS.ethereum)
@@ -187,6 +193,7 @@ const TokenList = (props) => {
                         value={token.totalValue}
                         profitLoss={token.profitLoss}
                         chain={token.chain}
+                        portfolioValue={props.portfolioValue}
                       />
                     ))}
                   {spamTokenCheckboxValue && (
@@ -210,6 +217,7 @@ const TokenList = (props) => {
                           value={token.totalValue}
                           profitLoss={token.profitLoss}
                           chain={token.chain}
+                          portfolioValue={0}
                         />
                       ))}
                 </ul>
@@ -218,6 +226,7 @@ const TokenList = (props) => {
             {userCtx.selectedChain == AVAILABLE_CHAINS.all_available && (
               <div>
                 <ChainSectionHeader chain={AVAILABLE_CHAINS.polygon} value={polygonTotalValue} />
+                <TokenListTitle />
                 <ul className={classes["token-data"]}>
                   {tokenDataNotSpam
                     .filter((token) => token.chain == AVAILABLE_CHAINS.polygon)
@@ -234,6 +243,7 @@ const TokenList = (props) => {
                         value={token.totalValue}
                         profitLoss={token.profitLoss}
                         chain={token.chain}
+                        portfolioValue={props.portfolioValue}
                       />
                     ))}
                   {spamTokenCheckboxValue && (
@@ -257,6 +267,7 @@ const TokenList = (props) => {
                           value={token.totalValue}
                           profitLoss={token.profitLoss}
                           chain={token.chain}
+                          portfolioValue={0}
                         />
                       ))}
                 </ul>
@@ -265,6 +276,7 @@ const TokenList = (props) => {
             {userCtx.selectedChain == AVAILABLE_CHAINS.all_available && (
               <div>
                 <ChainSectionHeader chain={AVAILABLE_CHAINS.avalanche} value={avalancheTotalValue} />
+                <TokenListTitle />
                 <ul className={classes["token-data"]}>
                   {tokenDataNotSpam
                     .filter(
@@ -283,6 +295,7 @@ const TokenList = (props) => {
                         value={token.totalValue}
                         profitLoss={token.profitLoss}
                         chain={token.chain}
+                        portfolioValue={props.portfolioValue}
                       />
                     ))}
                   {spamTokenCheckboxValue && (
@@ -306,6 +319,7 @@ const TokenList = (props) => {
                           value={token.totalValue}
                           profitLoss={token.profitLoss}
                           chain={token.chain}
+                          portfolioValue={0}
                         />
                       ))}
                 </ul>
@@ -316,7 +330,8 @@ const TokenList = (props) => {
         {!arrangeChainCheckBoxValue && (
           <div >
             <div className={classes['token-chain-header']}>
-              <ChainSectionHeader chain={AVAILABLE_CHAINS.all_available} value={props.portfolioValue} />
+              <ChainSectionHeader chain={userCtx.selectedChain} value={props.portfolioValue} />
+              <TokenListTitle />
               <ul className={classes["token-data"]}>
                 {tokenDataNotSpam.map((token) => (
                   <Token
@@ -331,11 +346,12 @@ const TokenList = (props) => {
                     value={token.totalValue}
                     profitLoss={token.profitLoss}
                     chain={token.chain}
+                    portfolioValue={props.portfolioValue}
                   />
                 ))}
                 {spamTokenCheckboxValue && (
                   <div>
-                    <ChainSectionHeader chain={AVAILABLE_CHAINS.all_available} value={0} spam={true} />
+                    <ChainSectionHeader chain={userCtx.selectedChain} value={0} spam={true} />
                   </div>
                 )}
                 {spamTokenCheckboxValue &&
@@ -352,6 +368,7 @@ const TokenList = (props) => {
                       value={token.totalValue}
                       profitLoss={token.profitLoss}
                       chain={token.chain}
+                      portfolioValue={0}
                     />
                   ))}
               </ul>

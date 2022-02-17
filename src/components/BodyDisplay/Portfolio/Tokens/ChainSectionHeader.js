@@ -18,6 +18,9 @@ const ChainSectionHeader = (props) => {
   let chainIcon;
   let chainName;
 
+  console.log(chainName)
+
+
   switch (props.chain) {
     case AVAILABLE_CHAINS.all_available:
       chainIcon = AllChains;
@@ -39,6 +42,9 @@ const ChainSectionHeader = (props) => {
       chainIcon = UnknownChain;
       chainName = 'Unknown'
   }
+
+  console.log(chainIcon)
+
 
   const formattedAmount = '$' + props.value.toLocaleString("en-US", { maximumFractionDigits: 2 });
   const dash = ' - ';
