@@ -35,7 +35,7 @@ const MainDisplay = (props) => {
         </div>
       </section>
       <section className={classes['centre']} >
-        <section className={classes["Assets-container"]}>
+        <section className={classes["assets-container"]}>
           <Assets tokenData={props.tokenData}
             portfolioValue={totalPortfolioValue} updateTotalValue={handleUpdateTotalValue}
             dailyProfitLoss={dailyProfitLoss} updateDailyProfitLoss={handleUpdateDailyProfitLoss} />

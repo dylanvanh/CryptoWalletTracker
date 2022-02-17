@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from "react";
 import classes from "./TokenList.module.css";
 import Token from "./Token";
-import UserContext from "../../../context/UserContext";
-import AllCoinGeckoTokenData from '../../../coingeckotokenlist/all.json';
+import UserContext from "../../../../context/UserContext";
+import AllCoinGeckoTokenData from '../../../../coingeckotokenlist/all.json';
 
 const TokenList = (props) => {
   const [tokenDataNotSpam, setTokenDataNotSpam] = useState([]);
@@ -323,31 +323,11 @@ const TokenList = (props) => {
         )}
 
         {!arrangeChainCheckBoxValue && (
-          <div>
-            <h1>{userCtx.selectedChain} Tokens</h1>
-            <ul className={classes["token-data"]}>
-              {tokenDataNotSpam.map((token) => (
-                <Token
-                  key={token.tokenAddress}
-                  image={token.image}
-                  name={token.name}
-                  balance={token.balance}
-                  address={token.tokenAddress}
-                  symbol={token.symbol}
-                  price={token.price}
-                  dayChange={token.dayChange}
-                  value={token.totalValue}
-                  profitLoss={token.profitLoss}
-                  chain={token.chain}
-                />
-              ))}
-              {spamTokenCheckboxValue && (
-                <div>
-                  <h1>{userCtx.selectedChain} Tokens without price: </h1>
-                </div>
-              )}
-              {spamTokenCheckboxValue &&
-                tokenDataSpam.map((token) => (
+          <div >
+            <div className={classes['token-chain-header']}>
+              <h1>{userCtx.selectedChain}</h1>
+              <ul className={classes["token-data"]}>
+                {tokenDataNotSpam.map((token) => (
                   <Token
                     key={token.tokenAddress}
                     image={token.image}
@@ -362,7 +342,29 @@ const TokenList = (props) => {
                     chain={token.chain}
                   />
                 ))}
-            </ul>
+                {spamTokenCheckboxValue && (
+                  <div>
+                    <h1>{userCtx.selectedChain} Tokens without price: </h1>
+                  </div>
+                )}
+                {spamTokenCheckboxValue &&
+                  tokenDataSpam.map((token) => (
+                    <Token
+                      key={token.tokenAddress}
+                      image={token.image}
+                      name={token.name}
+                      balance={token.balance}
+                      address={token.tokenAddress}
+                      symbol={token.symbol}
+                      price={token.price}
+                      dayChange={token.dayChange}
+                      value={token.totalValue}
+                      profitLoss={token.profitLoss}
+                      chain={token.chain}
+                    />
+                  ))}
+              </ul>
+            </div>
           </div>
         )}
       </div>

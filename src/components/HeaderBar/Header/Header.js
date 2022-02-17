@@ -24,12 +24,6 @@ const Header = () => {
 
   const selectedWallet = userCtx.selectedWallet;
 
-
-  // const handleClick = (event) => {
-  //   event.preventDefault();
-  //   console.log(userCtx)
-  // }
-
   let chainIcon;
 
   switch (userCtx.selectedChain) {
@@ -45,7 +39,6 @@ const Header = () => {
     case 'all':
       chainIcon = AllChains;
   }
-
 
   return (
     <nav className={classes.header} >

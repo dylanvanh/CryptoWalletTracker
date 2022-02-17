@@ -16,10 +16,10 @@
   top: 0;
   left: 0;
   width: 100%;
+  height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100px;
   padding: 0 1rem;
   border-bottom: var(--border);
   list-style: none;
@@ -34,7 +34,7 @@
 }
 
 .wallet-div > h2 {
-  padding:1rem;
+  padding: 1rem;
 }
 
 .wallet-address {

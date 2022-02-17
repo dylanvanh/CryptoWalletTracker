@@ -1,13 +1,13 @@
 import classes from "./Token.module.css";
-import ArrowUp from "../../../icons/token/arrowupgreen.svg";
-import ArrowDown from "../../../icons/token/arrowdownred.svg";
-import PieChart from "../../../icons/token/piechart.svg";
-import AllChains from "../../../icons/chains/all-chains.svg";
-import Ethereum from "../../../icons/chains/ethereum.svg";
-import Avalanche from "../../../icons/chains/avalanche.svg";
-import Polygon from "../../../icons/chains/polygon.svg";
-import SpamToken from "../../../icons/token/spam.svg";
-import UnknownToken from "../../../icons/token/questionmark.svg";
+import ArrowUp from "../../../../icons/token/arrowupgreen.svg";
+import ArrowDown from "../../../../icons/token/arrowdownred.svg";
+import PieChart from "../../../../icons/token/piechart.svg";
+import AllChains from "../../../../icons/chains/all-chains.svg";
+import Ethereum from "../../../../icons/chains/ethereum.svg";
+import Avalanche from "../../../../icons/chains/avalanche.svg";
+import Polygon from "../../../../icons/chains/polygon.svg";
+import SpamToken from "../../../../icons/token/spam.svg";
+import UnknownToken from "../../../../icons/token/questionmark.svg";
 
 const Token = (props) => {
 
