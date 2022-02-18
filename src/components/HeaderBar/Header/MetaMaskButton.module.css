@@ -1,16 +1,21 @@
+.list {
+  list-style: none;
+}
+
 .icon-button {
-  --button-size: calc(var(--nav-size) * 0.5);
-  /* width: var(--button-size); */
-  /* height: var(--button-size); */
-  width: 2rem;
   height: 2rem;
-  background-color: #484a4d;
-  border-radius: 50%;
-  padding: 5px;
-  margin: 2px;
+  width: 10rem;
+  height: 1.5rem;
+  padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 20%;
+  border-radius: 15px;
+}
+
+.icon-button > img {
+  height: 60px;
 }
 
 .icon-button:hover {

@@ -1,5 +1,58 @@
-.container{
+.wallet-modal {
+  color: white;
+}
+
+.main-content {
+  text-align: center;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wallet-modal > img {
+  width: 60px;
+  border-radius: 50%;
+}
+
+.title{
+  font-size:3rem;
+  font-weight: bold;
+  padding-bottom:2rem;
+}
+
+.invalid-wallet{
+  color:rgb(179, 27, 27);
+}
+
+.wallet-modal > img:hover {
+  background-color: #5a5e66;
+}
+
+.input-main{
   display:flex;
   justify-content: center;
   align-items: center;
 }
+
+.input-header{
+  font-size: 1rem;
+}
+
+.address-input{
+  width:20rem;
+  height:2rem;
+  margin-left:4rem;
+}
+
+.submit {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  justify-self:center;
+  margin-left : 1rem;
+}
+
+.submit:hover{
+  background-color: #5a5e66;
+}
+

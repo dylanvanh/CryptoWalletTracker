@@ -1,0 +1,1 @@
+https://www.currency-api.com/rates?base=USD

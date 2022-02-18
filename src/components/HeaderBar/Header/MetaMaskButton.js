@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import classes from "./MetaMaskButton.module.css";
-import { ReactComponent as MetaMaskIcon } from "../../../icons/modal/metamask.svg";
+import MetaMaskIcon from "../../../icons/modal/metamask.svg";
 
 const MetaMaskButton = (props) => {
 
@@ -19,8 +19,8 @@ const MetaMaskButton = (props) => {
     checkForMetaMask()
   }, [])
 
-  const connectMetaMaskHandler = async(event) => {
-    
+  const connectMetaMaskHandler = async (event) => {
+
     event.preventDefault()
     const walletAddresses = await window.ethereum.request({ method: 'eth_requestAccounts' });
     console.log(walletAddresses[0].length)
@@ -33,16 +33,18 @@ const MetaMaskButton = (props) => {
   return (
     <>
       {isMetaMaskInstalled &&
-        <li>
+        <li className={classes['list']}>
           <a href="#" className={classes["icon-button"]} onClick={connectMetaMaskHandler}>
-            {<MetaMaskIcon />}
+            <img src={MetaMaskIcon} />
+            <p>MetaMask</p>
           </a>
         </li >
       }
       {!isMetaMaskInstalled &&
         <li>
           <a href='https://metamask.io/download/' className={classes["icon-button"]}>
-            {<MetaMaskIcon />}
+            <img src={MetaMaskIcon} />
+            <p>MetaMask</p>
           </a>
         </li >}
     </>
