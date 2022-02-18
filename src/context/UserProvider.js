@@ -128,7 +128,7 @@ const userReducer = (state, action) => {
     }
 
     case availableActions.ADD: {
-      
+
       const currentWallets = state.wallets;
       const newWalletAddress = action.walletAddress;
 
@@ -187,6 +187,14 @@ const userReducer = (state, action) => {
           }
         }
         const firstWallet = () => {
+
+          //deleted wallet == the first wallet
+          if (action.walletAddress == state.wallets[0]) {
+            localStorage.setItem('selectedWallet', JSON.stringify(state.wallets[1]));
+            return state.wallets[1];
+          }
+
+          localStorage.setItem('selectedWallet', JSON.stringify(state.wallets[0]));
           return state.wallets[0]
         }
         return {
