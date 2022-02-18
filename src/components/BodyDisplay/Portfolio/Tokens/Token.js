@@ -55,7 +55,6 @@ const Token = (props) => {
   }
 
   let chainIcon;
-  console.log(props.chain)
   switch (props.chain) {
     case AVAILABLE_CHAINS.ETHEREUM:
       chainIcon = Ethereum;
@@ -71,7 +70,6 @@ const Token = (props) => {
       break;
   }
 
-  console.log(chainIcon)
 
   let arrowIcon;
   //profit
