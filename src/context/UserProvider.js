@@ -26,8 +26,6 @@ const walletStorageHandler = () => {
     //try to retrieve localStorage variable
     const walletAddresses = JSON.parse(localStorage.getItem('walletAddresses'));
 
-    console.log(walletAddresses)
-
     if (!walletAddresses) {
       localStorage.setItem('walletAddresses', JSON.stringify([]));
       return [];

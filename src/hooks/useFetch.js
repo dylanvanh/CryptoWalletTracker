@@ -42,7 +42,7 @@ const useFetch = () => {
 
   const MORALIS_API_HEADER = {
     accept: "application/json",
-    "X-API-Key": `${process.env.REACT_APP_X_API_KEY}`,
+    "X-API-Key": `${process.env.REACT_APP_MORALIS_API_KEY}`,
   };
 
   const COINGECKO_API_HEADER = {
@@ -235,8 +235,6 @@ const useFetch = () => {
 
       //all chain current balances for wallet
       const combinedNativePriceData = await responseNativePrices.json();
-
-      console.log(combinedNativePriceData);
 
       const ethErc20Data = await responseEthErc20.json();
       const avalancheErc20Data = await responseAvalancheErc20.json();

@@ -1,0 +1,3 @@
+https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=YourApiKeyToken
+https://api.polygonscan.com/api?module=gastracker&action=gasoracle&apikey=YourApiKeyToken
+https://gavax.blockscan.com/gasapi.ashx?apikey=key&method=gasoracle
