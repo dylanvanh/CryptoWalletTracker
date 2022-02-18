@@ -1,5 +1,5 @@
 import classes from "./Assets.module.css";
-import TokenList from "./Tokens/TokenList";
+import TokenList from "./TokenDisplay/TokenList";
 import { useState, useContext } from "react";
 import AssetOptionsMenu from './Checkbox/AssetOptionsMenu';
 import UserContext from "../../../context/UserContext";
