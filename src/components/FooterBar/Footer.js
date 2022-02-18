@@ -15,7 +15,7 @@ const Footer = () => {
         <img src={Twitter} />
       </a>
       <a
-        href="https://github.com/SparklingWater45"
+        href="https://github.com/SparklingWater45/Crypto-Dashboard"
         target="_blank"
         rel="noopener noreferrer"
       >

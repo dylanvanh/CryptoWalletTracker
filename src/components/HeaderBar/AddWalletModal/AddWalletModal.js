@@ -1,7 +1,7 @@
 
 import { useContext, useRef, useState } from "react";
 import UserContext from "../../../context/UserContext";
-import MetaMaskButton from "../Header/MetaMaskButton";
+import MetaMaskButton from "./MetaMaskButton";
 import Exit from '../../../icons/modal/exit.svg';
 import Submit from '../../../icons/modal/submit.svg';
 import classes from "./AddWalletModal.module.css";
@@ -47,7 +47,7 @@ const AddWalletModal = (props) => {
           <h1 className={classes['title']}>Connect Wallet</h1>
           <p className={classes['input-header']}>Enter Wallet Address</p>
           {!isEnteredWalletValueValid &&
-            <p className={classes['invalid-wallet']}>Invalid wallet entered</p>}
+            <p className={classes['invalid-wallet']}>Invalid wallet address entered</p>}
           <div className={classes['input-main']}>
             <input className={classes['address-input']} type='text' ref={walletAddressRef}></input>
             <input className={classes['submit']} src={Submit} type='image' />
