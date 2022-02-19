@@ -1,13 +1,5 @@
 import classes from './ChainDropdownMenu.module.css';
 import ChainDropdownItem from './ChainDropdownItem';
-
-// import { ReactComponent as Ethereum } from "../../../icons/chains/ethereum.svg";
-// import { ReactComponent as Polygon } from "../../../icons/chains/polygon.svg";
-// import { ReactComponent as Avalanche } from "../../../icons/chains/avalanche.svg";
-// import { ReactComponent as All } from "../../../icons/chains/all-chains.svg";
-
-
-
 import Ethereum from "../../../icons/chains/ethereum.svg";
 import Polygon from "../../../icons/chains/polygon.svg";
 import Avalanche from "../../../icons/chains/avalanche.svg";
@@ -16,8 +8,6 @@ import All from "../../../icons/chains/all-chains.svg";
 
 
 const ChainDropdownMenu = () => {
-  //leftIcons causing error iwth clickable area 
-  //->to fix
   return (
     <div className={classes.dropdown}>
       <p>Available Networks</p>

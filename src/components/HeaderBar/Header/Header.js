@@ -17,6 +17,7 @@ import { useContext } from 'react';
 import WalletDropdownMenu from "../WalletDropdown/WalletDropdownMenu";
 import UserContext from "../../../context/UserContext";
 import ChainDropdownMenu from "../ChainDropdown/ChainDropdownMenu"
+import CurrencyDropdownMenu from "../CurrencyDropDown/CurrencyDropdownMenu";
 
 const Header = () => {
 
@@ -57,6 +58,7 @@ const Header = () => {
         </HeaderItem>
         <h3>Currencies</h3>
         <HeaderItem icon={Currency}>
+          <CurrencyDropdownMenu />
         </HeaderItem>
       </div>
     </nav >

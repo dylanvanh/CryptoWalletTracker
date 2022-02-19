@@ -248,6 +248,10 @@ const userReducer = (state, action) => {
 
     case availableActions.SELECTCURRENCY:
       const updatedCurrency = action.currencyName;
+
+      console.log('new = ', updatedCurrency);
+      console.log('old = ',state.selectedCurrency)
+
       return {
         ...state,
         selectedCurrency: updatedCurrency,
@@ -306,6 +310,7 @@ const UserProvider = (props) => {
     isModalShowing: userState.isModalShowing,
     selectedWallet: userState.selectedWallet,
     selectedChain: userState.selectedChain,
+    selectedCurrency: userState.selectedCurrency,
     showModal: showModalHandler,
     hideModal: hideModalHandler,
     addWallet: addWalletHandler,
