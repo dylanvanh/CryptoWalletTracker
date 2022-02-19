@@ -9,7 +9,8 @@ const availableActions = {
   REMOVE: 'remove',
   SELECTWALLET: 'selectwallet',
   SELECTCHAIN: 'selectchain',
-  ISDATAFETCHED: 'isDataFetched'
+  ISDATAFETCHED: 'isDataFetched',
+  SELECTCURRENCY: 'selectCurrency'
 }
 
 const availableChains = {
@@ -17,6 +18,11 @@ const availableChains = {
   POLYGON: 'polygon',
   AVALANCHE: 'avalanche',
   ALL_AVAILABLE: 'all',
+}
+
+const availableCurrencies = {
+  USA: 'usa',
+  ZA: 'za',
 }
 
 // handles local storage for wallet addresses on app launch
@@ -97,12 +103,13 @@ const initialSelectedChainHandler = () => {
 
 // const walletLength = false;
 const initialUserState = {
-  // wallets: ['0x9b863d76c11b7a74f63fcaa1632198b0bcad93f0','0xa9ac72E3BbD107eC40546Fc1C68c5e40fc7A9DD9', '0x2','0x1','0x1A9EFC7507D3Bb3206cA5baBb4dF9e168Bd5cDEE'],
+  // wallets: ['0x9b863d76c11b7a74f63fcaa1632198b0bcad93f0','0xa9ac72E3BbD107eC40546Fc1C68c5e40fc7A9DD9','0x1A9EFC7507D3Bb3206cA5baBb4dF9e168Bd5cDEE'],
   //fetch wallets from local storage
   wallets: walletStorageHandler(),
   isModalShowing: false,
   selectedWallet: initalSelectedWalletHandler(),
   selectedChain: initialSelectedChainHandler(),
+  selectedCurrency: availableCurrencies.USA,
 };
 
 const userReducer = (state, action) => {
@@ -239,6 +246,13 @@ const userReducer = (state, action) => {
       }
     }
 
+    case availableActions.SELECTCURRENCY:
+      const updatedCurrency = action.currencyName;
+      return {
+        ...state,
+        selectedCurrency: updatedCurrency,
+      }
+
     default:
       return {
         ...state
@@ -273,6 +287,11 @@ const UserProvider = (props) => {
     dispatchUserAction({ type: availableActions.SELECTCHAIN, chainName: chainName })
   }
 
+  const selectCurrencyHandler = (currencyName) => {
+    dispatchUserAction({ type: availableActions.SELECTCURRENCY, currencyName: currencyName })
+  }
+
+
   //sets the isdatafetched state to true
   const isDataFetchedHandler = () => {
     dispatchUserAction({ type: availableActions.ISDATAFETCHED });
@@ -293,6 +312,7 @@ const UserProvider = (props) => {
     removeWallet: removeWalletHandler,
     selectWallet: selectedWalletHandler,
     selectChain: selectChainHandler,
+    selectCurrency: selectCurrencyHandler,
   }
 
   return (
