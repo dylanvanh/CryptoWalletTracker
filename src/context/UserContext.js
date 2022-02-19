@@ -12,7 +12,7 @@ const UserContext = createContext({
   removeWallet: (walletAddress) => { },
   selectWallet: () => { },
   selectChain: () => { },
-  selectedCurrency: () => { },
+  selectCurrency: () => { },
 });
 
 export default UserContext;
