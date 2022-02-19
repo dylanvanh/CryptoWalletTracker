@@ -25,6 +25,7 @@ const availableCurrencies = {
   ZA: 'za',
 }
 
+
 // handles local storage for wallet addresses on app launch
 const walletStorageHandler = () => {
   /* in a try catch as firefox thorws an error  when localStorage doenst exist */
@@ -249,8 +250,9 @@ const userReducer = (state, action) => {
     case availableActions.SELECTCURRENCY:
       const updatedCurrency = action.currencyName;
 
-      console.log('new = ', updatedCurrency);
-      console.log('old = ',state.selectedCurrency)
+      if (updatedCurrency == availableCurrencies.USA) {
+        const currencyValue = 1;
+      }
 
       return {
         ...state,

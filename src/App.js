@@ -11,8 +11,7 @@ const App = () => {
 
   const [isMetaMaskInstalled, setisMetaMaskInstalled] = useState(false);
 
-  const { tokenData, isLoading, error } = useFetch();
-
+  const { tokenData, isLoading, error } = useFetch()
   const userCtx = useContext(UserContext);
 
   useEffect(() => {
