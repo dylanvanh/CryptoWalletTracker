@@ -4,10 +4,9 @@ import { useContext } from "react";
 import UserContext from "../../../../context/UserContext";
 
 const AssetOptionsMenu = (props) => {
-
-  const textShowSpamAssets = <p>Display $0.00 assets</p>;
-  const textArrangeByChain = <p>Display by Chain</p>;
   const userCtx = useContext(UserContext);
+  const textShowSpamAssets = <p>Display {userCtx.selectedCurrencySymbol}0.00 assets</p>;
+  const textArrangeByChain = <p>Display by Chain</p>;
 
   const AVAILABLE_CHAINS = {
     ETHEREUM: "ethereum",

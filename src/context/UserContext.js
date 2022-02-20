@@ -7,6 +7,8 @@ const UserContext = createContext({
   selectedWallet: null,
   selectedChain: null,
   selectedCurrency: null,
+  selectedCurrencyValue : null,
+  selectedCurrencySymbol : null,
   showModal: () => { },
   hideModal: () => { },
   addWallet: (walletAddress) => { },

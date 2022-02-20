@@ -9,19 +9,25 @@ import Polygon from "../../../../icons/chains/polygon.svg";
 import SpamToken from "../../../../icons/token/spam.svg";
 import UnknownToken from "../../../../icons/token/questionmark.svg";
 
+import UserContext from "../../../../context/UserContext";
+import { useContext } from "react";
+
 const Token = (props) => {
+
+  const userCtx = useContext(UserContext);
+
 
   const calcPercentageOfTotal = (portfolioValue, tokenValue) => {
     return (tokenValue / portfolioValue) * 100
   }
 
   const formattedName = props.name.substring(0, 20);
-  const formattedValue = '$' + props.value.toLocaleString("en-US", { maximumFractionDigits: 2 });
+  const formattedValue = userCtx.selectedCurrencySymbol + props.value.toLocaleString("en-US", { maximumFractionDigits: 2 });
   const formattedBalance = props.balance.toLocaleString("en-US", { maximumFractionDigits: 2 }).substring(0, 10);
   const formattedSymbol = props.symbol.substring(0, 10);
   const formattedDistributionAmount = calcPercentageOfTotal(props.portfolioValue, props.value).toLocaleString("en-US", { maximumFractionDigits: 3 }) + '%';
-  const formattedPrice = '$' + props.price.toLocaleString("en-US", { maximumFractionDigits: 2 });
-  const formattedProfitLoss = '$' + props.profitLoss.toLocaleString("en-US", { maximumFractionDigits: 4 });
+  const formattedPrice = userCtx.selectedCurrencySymbol + props.price.toLocaleString("en-US", { maximumFractionDigits: 2 });
+  const formattedProfitLoss = userCtx.selectedCurrencySymbol + props.profitLoss.toLocaleString("en-US", { maximumFractionDigits: 4 });
   const formattedDayChange = props.dayChange.toLocaleString("en-US", { maximumFractionDigits: 1 }) + '%';
 
   const AVAILABLE_CHAINS = {

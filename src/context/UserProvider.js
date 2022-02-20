@@ -20,13 +20,13 @@ const availableChains = {
 };
 
 const availableCurrencies = {
-  USD: 'USD',
-  ZAR: 'ZAR',
+  USD: "USD",
+  ZAR: "ZAR",
 };
 
 const availableCurrenciesSymbol = {
-  USD: '$',
-  ZAR: 'R',
+  USD: "$",
+  ZAR: "R",
 };
 
 // handles local storage for wallet addresses on app launch
@@ -119,8 +119,8 @@ const initialUserState = {
   selectedWallet: initalSelectedWalletHandler(),
   selectedChain: initialSelectedChainHandler(),
   selectedCurrency: availableCurrencies.USA,
-  currencyValue: 1,
-  currencySymbol : availableCurrenciesSymbol.USD,
+  selectedCurrencyValue: 1,
+  selectedCurrencySymbol: availableCurrenciesSymbol.USD,
 };
 
 const userReducer = (state, action) => {
@@ -273,22 +273,27 @@ const userReducer = (state, action) => {
     case availableActions.SELECT_CURRENCY:
       const updatedCurrency = action.currencyName;
 
-      if (updatedCurrency == availableCurrencies.USA) {
-        const updatedCurrencyValue = 1;
-        return {
-          ...state,
-          updatedCurrencyValue,
-        };
-      }
+      // if (updatedCurrency == availableCurrencies.USA) {
+      //   const updatedCurrencyValue = 1;
+      //   const updatedCurrencySymbol =
+      //     availableCurrenciesSymbol[updatedCurrency];
+
+      //   return {
+      //     ...state,
+      //     selectedCurrency: updatedCurrency,
+      //     currencyValue: updatedCurrencyValue,
+      //     currencySymbol: updatedCurrencySymbol,
+      //   };
+      // }
 
       const updatedCurrencyValue = action.currencyValue;
-
-      console.log(availableCurrenciesSymbol[updatedCurrency]);
+      const updatedCurrencySymbol = availableCurrenciesSymbol[updatedCurrency];
 
       return {
         ...state,
         selectedCurrency: updatedCurrency,
-        updatedCurrencyValue : updatedCurrencyValue,
+        selectedCurrencyValue: updatedCurrencyValue,
+        selectedCurrencySymbol: updatedCurrencySymbol,
       };
 
     default:
@@ -355,6 +360,8 @@ const UserProvider = (props) => {
     selectedWallet: userState.selectedWallet,
     selectedChain: userState.selectedChain,
     selectedCurrency: userState.selectedCurrency,
+    selectedCurrencyValue: userState.selectedCurrencyValue,
+    selectedCurrencySymbol: userState.selectedCurrencySymbol,
     showModal: showModalHandler,
     hideModal: hideModalHandler,
     addWallet: addWalletHandler,
