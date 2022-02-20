@@ -4,9 +4,6 @@ import USA from "../../../icons/currencies/usa.svg";
 import ZA from "../../../icons/currencies/za.svg";
 const CurrencyDropdownMenu = () => {
 
-
-  fetchCurrencyData();
-
   return (
     <div className={classes.dropdown}>
       <p>Available Currencies</p>

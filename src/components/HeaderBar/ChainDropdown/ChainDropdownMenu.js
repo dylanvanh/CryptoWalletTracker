@@ -5,8 +5,6 @@ import Polygon from "../../../icons/chains/polygon.svg";
 import Avalanche from "../../../icons/chains/avalanche.svg";
 import All from "../../../icons/chains/all-chains.svg";
 
-
-
 const ChainDropdownMenu = () => {
   return (
     <div className={classes.dropdown}>

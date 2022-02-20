@@ -20,8 +20,8 @@ const availableChains = {
 };
 
 const availableCurrencies = {
-  USA: { usa: "$" },
-  ZA: { za: "R" },
+  USA: 'usa',
+  ZA: 'za',
 };
 
 const availableCurrenciesSymbol = {
@@ -111,7 +111,6 @@ const initialSelectedChainHandler = () => {
   }
 };
 
-// const walletLength = false;
 const initialUserState = {
   // wallets: ['0x9b863d76c11b7a74f63fcaa1632198b0bcad93f0','0xa9ac72E3BbD107eC40546Fc1C68c5e40fc7A9DD9','0x1A9EFC7507D3Bb3206cA5baBb4dF9e168Bd5cDEE'],
   //fetch wallets from local storage
@@ -289,14 +288,6 @@ const userReducer = (state, action) => {
         updatedCurrencyValue,
       };
 
-    // case availableActions.SET_CURRENCY_VALUE:
-    //   const updatedCurrencyValue = action.currencyValue;
-
-    //   return {
-    //     ...state,
-    //     updatedCurrencyValue,
-    //   };
-
     default:
       return {
         ...state,
@@ -354,13 +345,6 @@ const UserProvider = (props) => {
       currencyValue: currencyValue,
     });
   };
-
-  // const setCurrencyValueHandler = (currencyValue) => {
-  //   dispatchUserAction({
-  //     type: availableActions.SET_CURRENCY_VALUE,
-  //     currencyValue: currencyValue,
-  //   });
-  // };
 
   const userContext = {
     wallets: userState.wallets,
