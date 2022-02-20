@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import UserContext from "../context/UserContext";
 
-const useFetch = () => {
+const useFetchTokenData = () => {
   const [tokenData, setTokenData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -404,4 +404,4 @@ const useFetch = () => {
   };
 };
 
-export default useFetch;
+export default useFetchTokenData;

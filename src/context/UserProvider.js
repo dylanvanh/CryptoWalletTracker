@@ -1,40 +1,43 @@
 import { useReducer } from "react";
-import useFetch from "../hooks/useFetch";
-import UserContext from './UserContext';
+import UserContext from "./UserContext";
 
 const availableActions = {
-  DISPLAY: 'display',
-  HIDE: 'hide',
-  ADD: 'add',
-  REMOVE: 'remove',
-  SELECTWALLET: 'selectwallet',
-  SELECTCHAIN: 'selectchain',
-  ISDATAFETCHED: 'isDataFetched',
-  SELECTCURRENCY: 'selectCurrency'
-}
+  DISPLAY: "display",
+  HIDE: "hide",
+  ADD: "add",
+  REMOVE: "remove",
+  SELECT_WALLET: "selectWallet",
+  SELECT_CHAIN: "selectChain",
+  SELECT_CURRENCY: "selectCurrency",
+  SET_CURRENCY_VALUE: "setCurrencyValue",
+};
 
 const availableChains = {
-  ETHEREUM: 'ethereum',
-  POLYGON: 'polygon',
-  AVALANCHE: 'avalanche',
-  ALL_AVAILABLE: 'all',
-}
+  ETHEREUM: "ethereum",
+  POLYGON: "polygon",
+  AVALANCHE: "avalanche",
+  ALL_AVAILABLE: "all",
+};
 
 const availableCurrencies = {
-  USA: 'usa',
-  ZA: 'za',
-}
+  USA: { usa: "$" },
+  ZA: { za: "R" },
+};
 
+const availableCurrenciesSymbol = {
+  USA: { usa: "$" },
+  ZA: { za: "R" },
+};
 
 // handles local storage for wallet addresses on app launch
 const walletStorageHandler = () => {
   /* in a try catch as firefox thorws an error  when localStorage doenst exist */
   try {
     //try to retrieve localStorage variable
-    const walletAddresses = JSON.parse(localStorage.getItem('walletAddresses'));
+    const walletAddresses = JSON.parse(localStorage.getItem("walletAddresses"));
 
     if (!walletAddresses) {
-      localStorage.setItem('walletAddresses', JSON.stringify([]));
+      localStorage.setItem("walletAddresses", JSON.stringify([]));
       return [];
     }
 
@@ -52,55 +55,61 @@ const walletStorageHandler = () => {
     //error caught -> localStorage doenst exist in firefox(during testing)
   } catch (e) {
     //create empty walletAddresses localStorage object
-    localStorage.setItem('walletAddresses', JSON.stringify([]));
+    localStorage.setItem("walletAddresses", JSON.stringify([]));
     return [];
   }
-}
-
+};
 
 const initalSelectedWalletHandler = (wallets) => {
-
-  const walletAddresses = JSON.parse(localStorage.getItem('walletAddresses'));
+  const walletAddresses = JSON.parse(localStorage.getItem("walletAddresses"));
 
   try {
-    const selectedWallet = JSON.parse(localStorage.getItem('selectedWallet'));
+    const selectedWallet = JSON.parse(localStorage.getItem("selectedWallet"));
 
     if (!selectedWallet) {
       if (!walletAddresses) {
-        localStorage.setItem('selectedWallet', JSON.stringify(''));
+        localStorage.setItem("selectedWallet", JSON.stringify(""));
         return null;
       }
 
-      localStorage.setItem('selectedWallet', JSON.stringify(walletAddresses[0]));
+      localStorage.setItem(
+        "selectedWallet",
+        JSON.stringify(walletAddresses[0])
+      );
       return walletAddresses[0];
     }
 
-    if (selectedWallet && selectedWallet !== '') {
-      return selectedWallet
+    if (selectedWallet && selectedWallet !== "") {
+      return selectedWallet;
     } else {
-      return walletAddresses[0]
+      return walletAddresses[0];
     }
   } catch (e) {
-    localStorage.setItem('selectedWallet', JSON.stringify(''));
+    localStorage.setItem("selectedWallet", JSON.stringify(""));
     return null;
   }
-}
-
+};
 
 const initialSelectedChainHandler = () => {
   try {
-    const selectedChain = JSON.parse(localStorage.getItem('selectedChain'));
+    const selectedChain = JSON.parse(localStorage.getItem("selectedChain"));
 
     if (!selectedChain) {
-      localStorage.setItem('selectedChain', JSON.stringify(availableChains.ETHEREUM))
+      localStorage.setItem(
+        "selectedChain",
+        JSON.stringify(availableChains.ETHEREUM)
+      );
       return availableChains.ETHEREUM;
     }
     return selectedChain;
   } catch (e) {
-    localStorage.setItem('selectedChain', JSON.stringify(availableChains.ETHEREUM))
-    return availableChains.ETHEREUM
+    localStorage.setItem(
+      "selectedChain",
+      JSON.stringify(availableChains.ETHEREUM)
+    );
+    return availableChains.ETHEREUM;
   }
-}
+};
 
 // const walletLength = false;
 const initialUserState = {
@@ -111,12 +120,13 @@ const initialUserState = {
   selectedWallet: initalSelectedWalletHandler(),
   selectedChain: initialSelectedChainHandler(),
   selectedCurrency: availableCurrencies.USA,
+  currencyValue: 1,
 };
 
 const userReducer = (state, action) => {
   switch (action.type) {
     case availableActions.DISPLAY: {
-      console.log('display!')
+      console.log("display!");
       return {
         wallets: state.wallets,
         isModalShowing: true,
@@ -126,7 +136,7 @@ const userReducer = (state, action) => {
     }
 
     case availableActions.HIDE: {
-      console.log('hide!')
+      console.log("hide!");
       return {
         wallets: state.wallets,
         isModalShowing: false,
@@ -136,81 +146,91 @@ const userReducer = (state, action) => {
     }
 
     case availableActions.ADD: {
-
       const currentWallets = state.wallets;
       const newWalletAddress = action.walletAddress;
 
       // //if blank input field
       if (newWalletAddress.length === 0) {
-        console.log('blank address entered')
+        console.log("blank address entered");
         return {
           ...state,
-        }
+        };
       }
 
-      const lowerCaseWalletAddresses = currentWallets.map(address => address.toLowerCase());
+      const lowerCaseWalletAddresses = currentWallets.map((address) =>
+        address.toLowerCase()
+      );
 
-      if (lowerCaseWalletAddresses.includes((action.walletAddress).toLowerCase())) {
-        console.log('wallet already added')
+      if (
+        lowerCaseWalletAddresses.includes(action.walletAddress.toLowerCase())
+      ) {
+        console.log("wallet already added");
         //switch to the already added wallet
         // availableActions.selectWallet(action.walletAddress)
         return {
           ...state,
           selectedWallet: newWalletAddress,
-        }
+        };
       }
 
       currentWallets.push(newWalletAddress);
-      localStorage.setItem('walletAddresses', JSON.stringify(currentWallets));
-      localStorage.setItem('selectedWallet', JSON.stringify(newWalletAddress));
+      localStorage.setItem("walletAddresses", JSON.stringify(currentWallets));
+      localStorage.setItem("selectedWallet", JSON.stringify(newWalletAddress));
 
       return {
         wallets: currentWallets,
         isModalShowing: state.isModalShowing,
         selectedWallet: newWalletAddress,
         selectedChain: state.selectedChain,
-      }
+      };
     }
 
     case availableActions.REMOVE: {
-      console.log('Remove')
+      console.log("Remove");
       const walletAddresses = state.wallets;
-      const updatedWallets = walletAddresses.filter((wallet) => wallet != action.walletAddress)
+      const updatedWallets = walletAddresses.filter(
+        (wallet) => wallet != action.walletAddress
+      );
 
       console.log(updatedWallets);
-      localStorage.setItem('walletAddresses', JSON.stringify(updatedWallets));
+      localStorage.setItem("walletAddresses", JSON.stringify(updatedWallets));
 
       //check if clicked wallet is currently active wallet
 
       if (action.walletAddress == state.selectedWallet) {
         if (updatedWallets.length == 0) {
-          console.log('empty wallet')
-          localStorage.setItem('selectedWallet', JSON.stringify(''));
+          console.log("empty wallet");
+          localStorage.setItem("selectedWallet", JSON.stringify(""));
 
           return {
             wallets: updatedWallets,
             isModalShowing: state.isModalShowing,
-            selectedWallet: '',
+            selectedWallet: "",
             selectedChain: state.selectedChain,
-          }
+          };
         }
         const firstWallet = () => {
-
           //deleted wallet == the first wallet
           if (action.walletAddress == state.wallets[0]) {
-            localStorage.setItem('selectedWallet', JSON.stringify(state.wallets[1]));
+            localStorage.setItem(
+              "selectedWallet",
+              JSON.stringify(state.wallets[1])
+            );
             return state.wallets[1];
           }
 
-          localStorage.setItem('selectedWallet', JSON.stringify(state.wallets[0]));
-          return state.wallets[0]
-        }
+          localStorage.setItem(
+            "selectedWallet",
+            JSON.stringify(state.wallets[0])
+          );
+          return state.wallets[0];
+        };
         return {
           wallets: updatedWallets,
           isModalShowing: state.isModalShowing,
           selectedWallet: firstWallet(),
           selectedChain: state.selectedChain,
-        }
+        };
       }
 
       return {
@@ -218,53 +238,71 @@ const userReducer = (state, action) => {
         isModalShowing: state.isModalShowing,
         selectedWallet: state.selectedWallet,
         selectedChain: state.selectedChain,
-      }
+      };
     }
 
-    case availableActions.SELECTWALLET: {
-      console.log('Select wallet');
+    case availableActions.SELECT_WALLET: {
+      console.log("Select wallet");
       const updatedSelectedWallet = action.walletAddress;
 
-      localStorage.setItem('selectedWallet', JSON.stringify(updatedSelectedWallet));
+      localStorage.setItem(
+        "selectedWallet",
+        JSON.stringify(updatedSelectedWallet)
+      );
 
       return {
         ...state,
         selectedWallet: updatedSelectedWallet,
         selectedChain: state.selectedChain,
-      }
+      };
     }
 
-    case availableActions.SELECTCHAIN: {
-      console.log('Select Chain');
+    case availableActions.SELECT_CHAIN: {
+      console.log("Select Chain");
       const updatedChain = action.chainName;
-      console.log('new CHAIN = ', action.chainName);
+      console.log("new CHAIN = ", action.chainName);
 
-      localStorage.setItem('selectedChain', JSON.stringify(updatedChain));
+      localStorage.setItem("selectedChain", JSON.stringify(updatedChain));
 
       return {
         ...state,
         selectedChain: updatedChain,
-      }
+      };
     }
 
-    case availableActions.SELECTCURRENCY:
+    case availableActions.SELECT_CURRENCY:
       const updatedCurrency = action.currencyName;
 
       if (updatedCurrency == availableCurrencies.USA) {
-        const currencyValue = 1;
+        const updatedCurrencyValue = 1;
+        return {
+          ...state,
+          updatedCurrencyValue,
+        };
       }
+
+      const updatedCurrencyValue = action.currencyValue;
 
       return {
         ...state,
         selectedCurrency: updatedCurrency,
-      }
+        updatedCurrencyValue,
+      };
+
+    // case availableActions.SET_CURRENCY_VALUE:
+    //   const updatedCurrencyValue = action.currencyValue;
+
+    //   return {
+    //     ...state,
+    //     updatedCurrencyValue,
+    //   };
 
     default:
       return {
-        ...state
+        ...state,
       };
   }
-}
+};
 
 const UserProvider = (props) => {
   const [userState, dispatchUserAction] = useReducer(
@@ -273,39 +311,56 @@ const UserProvider = (props) => {
   );
 
   const showModalHandler = () => {
-    dispatchUserAction({ type: availableActions.DISPLAY })
-  }
+    dispatchUserAction({ type: availableActions.DISPLAY });
+  };
 
   const hideModalHandler = () => {
-    dispatchUserAction({ type: availableActions.HIDE })
-  }
+    dispatchUserAction({ type: availableActions.HIDE });
+  };
 
   const addWalletHandler = (walletAddress) => {
-    dispatchUserAction({ type: availableActions.ADD, walletAddress: walletAddress })
-  }
+    dispatchUserAction({
+      type: availableActions.ADD,
+      walletAddress: walletAddress,
+    });
+  };
+
+  const removeWalletHandler = (walletAddress) => {
+    dispatchUserAction({
+      type: availableActions.REMOVE,
+      walletAddress: walletAddress,
+    });
+  };
 
   const selectedWalletHandler = (walletAddress) => {
-    dispatchUserAction({ type: availableActions.SELECTWALLET, walletAddress: walletAddress })
-  }
+    dispatchUserAction({
+      type: availableActions.SELECT_WALLET,
+      walletAddress: walletAddress,
+    });
+  };
 
   //chain dropdown in menu
   const selectChainHandler = (chainName) => {
-    dispatchUserAction({ type: availableActions.SELECTCHAIN, chainName: chainName })
-  }
+    dispatchUserAction({
+      type: availableActions.SELECT_CHAIN,
+      chainName: chainName,
+    });
+  };
 
-  const selectCurrencyHandler = (currencyName) => {
-    dispatchUserAction({ type: availableActions.SELECTCURRENCY, currencyName: currencyName })
-  }
+  const selectCurrencyHandler = (currencyName, currencyValue) => {
+    dispatchUserAction({
+      type: availableActions.SELECT_CURRENCY,
+      currencyName: currencyName,
+      currencyValue: currencyValue,
+    });
+  };
 
-
-  //sets the isdatafetched state to true
-  const isDataFetchedHandler = () => {
-    dispatchUserAction({ type: availableActions.ISDATAFETCHED });
-  }
-
-  const removeWalletHandler = (walletAddress) => {
-    dispatchUserAction({ type: availableActions.REMOVE, walletAddress: walletAddress })
-  }
+  // const setCurrencyValueHandler = (currencyValue) => {
+  //   dispatchUserAction({
+  //     type: availableActions.SET_CURRENCY_VALUE,
+  //     currencyValue: currencyValue,
+  //   });
+  // };
 
   const userContext = {
     wallets: userState.wallets,
@@ -320,7 +375,7 @@ const UserProvider = (props) => {
     selectWallet: selectedWalletHandler,
     selectChain: selectChainHandler,
     selectCurrency: selectCurrencyHandler,
-  }
+  };
 
   return (
     <UserContext.Provider value={userContext}>

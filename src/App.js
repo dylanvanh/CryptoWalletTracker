@@ -5,13 +5,16 @@ import Header from "./components/HeaderBar/Header/Header.js";
 import AddWalletModal from "./components/HeaderBar/AddWalletModal/AddWalletModal";
 import UserContext from './context/UserContext';
 import Card from './components/UI/Card';
-import useFetch from './hooks/useFetch';
+import useFetchTokenData from './hooks/useFetchTokenData';
+import useFetchCurrencyData from './hooks/useFetchCurrencyData';
+
 
 const App = () => {
 
   const [isMetaMaskInstalled, setisMetaMaskInstalled] = useState(false);
 
-  const { tokenData, isLoading, error } = useFetch()
+  const {currencyData} = useFetchCurrencyData();
+  const { tokenData,isLoading, error } = useFetchTokenData();
   const userCtx = useContext(UserContext);
 
   useEffect(() => {
@@ -22,13 +25,13 @@ const App = () => {
         console.log('MetaMask is not installed!');
       }
     }
-    checkForMetaMask()
+    checkForMetaMask();
   })
 
   return (
     <>
       {userCtx.isModalShowing && <AddWalletModal />}
-      <Header metaMaskStatus={isMetaMaskInstalled} />
+      <Header metaMaskStatus={isMetaMaskInstalled} currencyData={''} />
       {!userCtx.selectedWallet && <Card><h1>NO WALLET SELECTED</h1></Card>}
       {userCtx.selectedWallet && <div>
         {isLoading && <Card><h1 className={classes.loading}>Loading...</h1></Card>}
