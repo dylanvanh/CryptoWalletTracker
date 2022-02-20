@@ -4,7 +4,7 @@ const useFetchCurrencyData = () => {
   const [currencyData,setCurrencyData] = useState([])
 
   const fetchCurrencyData = async () => {
-    const currencyApiCall = "https://www.currency-api.com/rates?base=USD";
+    const currencyApiCall = "https://freecurrencyapi.net/api/v2/latest?apikey=4a9eacc0-928e-11ec-a1c3-d5989bbaffcb";
     try {
       const responseCurrency = await fetch(currencyApiCall);
 
@@ -14,7 +14,7 @@ const useFetchCurrencyData = () => {
       const retrievedCurrencyData= await responseCurrency.json();
       console.log(retrievedCurrencyData)
 
-      setCurrencyData(retrievedCurrencyData) 
+      setCurrencyData(retrievedCurrencyData);
     } catch (e) {
       console.log(e);
     }
@@ -22,7 +22,6 @@ const useFetchCurrencyData = () => {
 
   useEffect(() => {
     fetchCurrencyData();
-    console.log(currencyData);
   }, []);
 
   return {
