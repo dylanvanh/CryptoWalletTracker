@@ -4,7 +4,10 @@ const useFetchCurrencyData = () => {
   const [currencyData,setCurrencyData] = useState([])
 
   const fetchCurrencyData = async () => {
-    const currencyApiCall = "https://freecurrencyapi.net/api/v2/latest?apikey=4a9eacc0-928e-11ec-a1c3-d5989bbaffcb";
+    const currencyApiCall = `https://freecurrencyapi.net/api/v2/latest?apikey=${process.env.REACT_APP_CURRENCY_API_KEY}`;
+    
+    console.log(currencyApiCall)
+    
     try {
       const responseCurrency = await fetch(currencyApiCall);
 

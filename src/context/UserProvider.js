@@ -20,13 +20,13 @@ const availableChains = {
 };
 
 const availableCurrencies = {
-  USA: 'usa',
-  ZA: 'za',
+  USD: 'USD',
+  ZAR: 'ZAR',
 };
 
 const availableCurrenciesSymbol = {
-  USA: { usa: "$" },
-  ZA: { za: "R" },
+  USD: '$',
+  ZAR: 'R',
 };
 
 // handles local storage for wallet addresses on app launch
@@ -120,6 +120,7 @@ const initialUserState = {
   selectedChain: initialSelectedChainHandler(),
   selectedCurrency: availableCurrencies.USA,
   currencyValue: 1,
+  currencySymbol : availableCurrenciesSymbol.USD,
 };
 
 const userReducer = (state, action) => {
@@ -282,10 +283,12 @@ const userReducer = (state, action) => {
 
       const updatedCurrencyValue = action.currencyValue;
 
+      console.log(availableCurrenciesSymbol[updatedCurrency]);
+
       return {
         ...state,
         selectedCurrency: updatedCurrency,
-        updatedCurrencyValue,
+        updatedCurrencyValue : updatedCurrencyValue,
       };
 
     default:

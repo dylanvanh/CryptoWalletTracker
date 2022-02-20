@@ -15,11 +15,13 @@ const App = () => {
 
   const { tokenData, isLoading, error } = useFetchTokenData();
   const {currencyData} = useFetchCurrencyData();
+  // const currencyData = [];
+
   
   const userCtx = useContext(UserContext);
 
 
-  console.log(currencyData);
+  // console.log(currencyData);
   console.log(tokenData);
 
   useEffect(() => {
@@ -36,12 +38,12 @@ const App = () => {
   return (
     <>
       {userCtx.isModalShowing && <AddWalletModal />}
-      <Header metaMaskStatus={isMetaMaskInstalled} currencyData={''} />
+      <Header metaMaskStatus={isMetaMaskInstalled} currencyData={currencyData} />
       {!userCtx.selectedWallet && <Card><h1>NO WALLET SELECTED</h1></Card>}
       {userCtx.selectedWallet && <div>
         {isLoading && <Card><h1 className={classes.loading}>Loading...</h1></Card>}
         {error && <h1>Error encountered</h1>}
-        {!isLoading && <Main tokenData={tokenData} />}
+        {!isLoading && <Main tokenData={tokenData}  />}
       </div>}
     </>
   );
