@@ -128,20 +128,16 @@ const userReducer = (state, action) => {
     case availableActions.DISPLAY: {
       console.log("display!");
       return {
-        wallets: state.wallets,
+        ...state,
         isModalShowing: true,
-        selectedWallet: state.selectedWallet,
-        selectedChain: state.selectedChain,
       };
     }
 
     case availableActions.HIDE: {
       console.log("hide!");
       return {
-        wallets: state.wallets,
+        ...state,
         isModalShowing: false,
-        selectedWallet: state.selectedWallet,
-        selectedChain: state.selectedChain,
       };
     }
 
@@ -166,7 +162,6 @@ const userReducer = (state, action) => {
       ) {
         console.log("wallet already added");
         //switch to the already added wallet
-        // availableActions.selectWallet(action.walletAddress)
         return {
           ...state,
           selectedWallet: newWalletAddress,
@@ -178,10 +173,9 @@ const userReducer = (state, action) => {
       localStorage.setItem("selectedWallet", JSON.stringify(newWalletAddress));
 
       return {
+        ...state,
         wallets: currentWallets,
-        isModalShowing: state.isModalShowing,
         selectedWallet: newWalletAddress,
-        selectedChain: state.selectedChain,
       };
     }
 
@@ -203,10 +197,9 @@ const userReducer = (state, action) => {
           localStorage.setItem("selectedWallet", JSON.stringify(""));
 
           return {
+            ...state,
             wallets: updatedWallets,
-            isModalShowing: state.isModalShowing,
             selectedWallet: "",
-            selectedChain: state.selectedChain,
           };
         }
         const firstWallet = () => {
@@ -226,18 +219,15 @@ const userReducer = (state, action) => {
           return state.wallets[0];
         };
         return {
+          ...state,
           wallets: updatedWallets,
-          isModalShowing: state.isModalShowing,
           selectedWallet: firstWallet(),
-          selectedChain: state.selectedChain,
         };
       }
 
       return {
+        ...state,
         wallets: updatedWallets,
-        isModalShowing: state.isModalShowing,
-        selectedWallet: state.selectedWallet,
-        selectedChain: state.selectedChain,
       };
     }
 
@@ -253,7 +243,6 @@ const userReducer = (state, action) => {
       return {
         ...state,
         selectedWallet: updatedSelectedWallet,
-        selectedChain: state.selectedChain,
       };
     }
 
@@ -272,7 +261,7 @@ const userReducer = (state, action) => {
 
     case availableActions.SELECT_CURRENCY:
       const updatedCurrency = action.currencyName;
-      
+
       const updatedCurrencyValue = action.currencyValue;
       const updatedCurrencySymbol = availableCurrenciesSymbol[updatedCurrency];
 
