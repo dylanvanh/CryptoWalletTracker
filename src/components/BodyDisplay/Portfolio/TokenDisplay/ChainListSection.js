@@ -3,6 +3,7 @@ import Token from './Token';
 import ChainSectionHeader from './ChainSectionHeader';
 import { useEffect, useState, useContext } from 'react';
 import UserContext from '../../../../context/UserContext';
+import TokenListTitle from './TokenListTitle';
 
 const ChainListSection = (props) => {
 
@@ -117,24 +118,28 @@ const ChainListSection = (props) => {
               value={value}
               spam={false}
             />
+            <TokenListTitle />
             {mappedPriceTokens}
           </div>}
       </div>
       }
-      {spamTokenCheckboxValue && (
-        <div>
-          {hasSpamTokens &&
-            <div>
-              <ChainSectionHeader
-                chain={chain}
-                value={0}
-                spam={true}
-              />
-              {mappedSpamTokens}
-            </div>}
-        </div>
-      )}
-    </ul>
+      {
+        spamTokenCheckboxValue && (
+          <div>
+            {hasSpamTokens &&
+              <div>
+                <ChainSectionHeader
+                  chain={chain}
+                  value={0}
+                  spam={true}
+                />
+                <TokenListTitle />
+                {mappedSpamTokens}
+              </div>}
+          </div>
+        )
+      }
+    </ul >
   )
 
 }
