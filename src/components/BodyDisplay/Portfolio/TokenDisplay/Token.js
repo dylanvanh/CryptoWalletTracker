@@ -22,11 +22,11 @@ const Token = (props) => {
   }
 
   const formattedName = props.name.substring(0, 20);
-  const formattedValue = userCtx.selectedCurrencySymbol + props.value.toLocaleString("en-US", { maximumFractionDigits: 2 });
+  const formattedValue = (userCtx.selectedCurrencySymbol + props.value).toLocaleString("en-US", { maximumFractionDigits: 2 });
   const formattedBalance = props.balance.toLocaleString("en-US", { maximumFractionDigits: 2 }).substring(0, 10);
   const formattedSymbol = props.symbol.substring(0, 10);
   const formattedDistributionAmount = calcPercentageOfTotal(props.portfolioValue, props.value).toLocaleString("en-US", { maximumFractionDigits: 3 }) + '%';
-  const formattedPrice = userCtx.selectedCurrencySymbol + props.price.toLocaleString("en-US", { maximumFractionDigits: 2 });
+  const formattedPrice = (userCtx.selectedCurrencySymbol + props.price).toLocaleString("en-US", { maximumFractionDigits: 2 });
   const formattedProfitLoss = userCtx.selectedCurrencySymbol + props.profitLoss.toLocaleString("en-US", { maximumFractionDigits: 4 });
   const formattedDayChange = props.dayChange.toLocaleString("en-US", { maximumFractionDigits: 1 }) + '%';
 

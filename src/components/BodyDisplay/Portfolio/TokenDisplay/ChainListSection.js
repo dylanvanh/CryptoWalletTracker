@@ -1,7 +1,8 @@
 import classes from './ChainListSection.module.css';
 import Token from './Token';
 import ChainSectionHeader from './ChainSectionHeader';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import UserContext from '../../../../context/UserContext';
 
 const ChainListSection = (props) => {
 
@@ -15,6 +16,8 @@ const ChainListSection = (props) => {
 
   const [mappedPriceTokens, setMappedPriceTokens] = useState([]);
   const [mappedSpamTokens, setMappedSpamTokens] = useState([]);
+
+  const userCtx = useContext(UserContext);
 
   const mapTokens = (tokenData, spam) => {
 
@@ -52,12 +55,12 @@ const ChainListSection = (props) => {
             balance={token.balance}
             address={token.tokenAddress}
             symbol={token.symbol}
-            price={token.price}
+            price={token.price * userCtx.selectedCurrencyValue}
             dayChange={token.dayChange}
-            value={token.totalValue}
-            profitLoss={token.profitLoss}
+            value={token.totalValue * userCtx.selectedCurrencyValue}
+            profitLoss={token.profitLoss * userCtx.selectedCurrencyValue}
             chain={token.chain}
-            portfolioValue={props.portfolioValue}
+            portfolioValue={props.portfolioValue * userCtx.selectedCurrencyValue}
           />
         ))
 

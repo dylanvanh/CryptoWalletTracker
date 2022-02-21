@@ -272,20 +272,7 @@ const userReducer = (state, action) => {
 
     case availableActions.SELECT_CURRENCY:
       const updatedCurrency = action.currencyName;
-
-      // if (updatedCurrency == availableCurrencies.USA) {
-      //   const updatedCurrencyValue = 1;
-      //   const updatedCurrencySymbol =
-      //     availableCurrenciesSymbol[updatedCurrency];
-
-      //   return {
-      //     ...state,
-      //     selectedCurrency: updatedCurrency,
-      //     currencyValue: updatedCurrencyValue,
-      //     currencySymbol: updatedCurrencySymbol,
-      //   };
-      // }
-
+      
       const updatedCurrencyValue = action.currencyValue;
       const updatedCurrencySymbol = availableCurrenciesSymbol[updatedCurrency];
 

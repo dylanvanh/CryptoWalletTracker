@@ -28,8 +28,8 @@ const PortfolioSummary = (props) => {
 
   const portfolioValue =
     userCtx.selectedCurrencySymbol +
-    props.portfolioValue.toLocaleString("en-US", { maximumFractionDigits: 2 });
-  let profitLoss = props.profitLoss;
+    (props.portfolioValue * userCtx.selectedCurrencyValue).toLocaleString("en-US", { maximumFractionDigits: 2 });
+  let profitLoss = props.profitLoss * userCtx.selectedCurrencyValue;
   let arrowImage;
   let percentageDifference;
   let previousDayPortfolioValue = props.portfolioValue + profitLoss;
@@ -41,11 +41,10 @@ const PortfolioSummary = (props) => {
         previousDayPortfolioValue) *
       100;
     profitLoss =
-      "+$" + profitLoss.toLocaleString("en-US", { maximumFractionDigits: 2 });
+      "+" + userCtx.selectedCurrencySymbol +  profitLoss.toLocaleString("en-US", { maximumFractionDigits: 2 });
     arrowImage = ArrowUp;
     percentageDifference =
       "+" +
-      userCtx.selectedCurrencySymbol +
       percentageDifference.toLocaleString("en-US", {
         maximumFractionDigits: 1,
       }) +

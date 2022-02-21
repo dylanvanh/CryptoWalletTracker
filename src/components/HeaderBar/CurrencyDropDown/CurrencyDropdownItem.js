@@ -9,7 +9,11 @@ const CurrencyDropdownItem = (props) => {
   //handles highlighting selected item
   let cssClassName;
   console.log(userCtx.selectedCurrency);
-  if (userCtx.selectedCurrency == props.name) {
+  //default is 1 -> USA on first load
+  if (userCtx.selectedCurrencyValue == props.value) {
+    cssClassName = 'menu-item-selected';
+  } else if (userCtx.selectedCurrency == props.name) {
+    //change highlighted currency after click
     cssClassName = 'menu-item-selected';
   }
 
@@ -18,13 +22,19 @@ const CurrencyDropdownItem = (props) => {
   const activeCurrencyHandler = () => {
 
     const updatedSelectedCurrency = props.name;
-    const updatedCurrencyValue = props.value[props.name];
+
+    let updatedCurrencyValue;
+    if (updatedSelectedCurrency != 'USD') {
+      updatedCurrencyValue = props.value[updatedSelectedCurrency];
+    } else {
+      updatedCurrencyValue = 1;
+    }
 
     //if selected wallet is the same as currently active
     if (updatedSelectedCurrency === userCtx.selectedCurrency) {
       return;
     }
-    userCtx.selectCurrency(updatedSelectedCurrency,updatedCurrencyValue);
+    userCtx.selectCurrency(updatedSelectedCurrency, updatedCurrencyValue);
   }
 
   return (

@@ -207,7 +207,7 @@ const TokenList = (props) => {
             <div className={classes["token-chain-header"]}>
               <ChainSectionHeader
                 chain={userCtx.selectedChain}
-                value={props.portfolioValue}
+                value={props.portfolioValue * userCtx.selectedCurrencyValue}
               />
               <TokenListTitle />
               <ul className={classes["token-data"]}>
@@ -219,12 +219,12 @@ const TokenList = (props) => {
                     balance={token.balance}
                     address={token.tokenAddress}
                     symbol={token.symbol}
-                    price={token.price}
+                    price={token.price * userCtx.selectedCurrencyValue}
                     dayChange={token.dayChange}
-                    value={token.totalValue}
-                    profitLoss={token.profitLoss}
+                    value={token.totalValue * userCtx.selectedCurrencyValue}
+                    profitLoss={token.profitLoss * userCtx.selectedCurrencyValue}
                     chain={token.chain}
-                    portfolioValue={props.portfolioValue}
+                    portfolioValue={props.portfolioValue * userCtx.selectedCurrencyValue}
                   />
                 ))}
                 {spamTokenCheckboxValue && (

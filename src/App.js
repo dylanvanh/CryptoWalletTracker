@@ -14,16 +14,10 @@ const App = () => {
   const [isMetaMaskInstalled, setisMetaMaskInstalled] = useState(false);
 
   const { tokenData, isLoading, error } = useFetchTokenData();
-  const {currencyData} = useFetchCurrencyData();
-  // const currencyData = [];
-
-  
+  const {currencyData} = useFetchCurrencyData();  
   const userCtx = useContext(UserContext);
 
-
-  // console.log(currencyData);
-  console.log(tokenData);
-
+  
   useEffect(() => {
     const checkForMetaMask = () => {
       if (typeof window.ethereum !== 'undefined') {
