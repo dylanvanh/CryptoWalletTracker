@@ -17,18 +17,18 @@
   font-size: 45px;
 }
 
-.amount{
-  font-size:45px;
+.amount {
+  font-size: 45px;
 }
 
-.dash{
-  font-size:35px;
-  padding-left:0.5rem;
-  padding-right:0.5rem;
+.dash {
+  font-size: 35px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
-.spam-tokens{
-  font-size:45px;
-  padding-left:0.5rem;
-  font-weight:500;
+.spam-tokens {
+  font-size: 45px;
+  padding-left: 0.5rem;
+  font-weight: 500;
 }

@@ -1,33 +1,48 @@
 import classes from "./Token.module.css";
-import ArrowUp from "../../../../icons/token/arrowupgreen.svg";
-import ArrowDown from "../../../../icons/token/arrowdownred.svg";
-import PieChart from "../../../../icons/token/piechart.svg";
-import AllChains from "../../../../icons/chains/all-chains.svg";
-import Ethereum from "../../../../icons/chains/ethereum.svg";
-import Avalanche from "../../../../icons/chains/avalanche.svg";
-import Polygon from "../../../../icons/chains/polygon.svg";
-import SpamToken from "../../../../icons/token/spam.svg";
-import UnknownToken from "../../../../icons/token/questionmark.svg";
-
+import ArrowUpIcon from "../../../../icons/token/arrowupgreen.svg";
+import ArrowDownIcon from "../../../../icons/token/arrowdownred.svg";
+import PieChartIcon from "../../../../icons/token/piechart.svg";
+import AllChainsIcon from "../../../../icons/chains/all-chains.svg";
+import EthereumIcon from "../../../../icons/chains/ethereum.svg";
+import AvalancheIcon from "../../../../icons/chains/avalanche.svg";
+import PolygonIcon from "../../../../icons/chains/polygon.svg";
+import SpamTokenIcon from "../../../../icons/token/spam.svg";
+import UnknownTokenIcon from "../../../../icons/token/questionmark.svg";
 import UserContext from "../../../../context/UserContext";
 import { useContext } from "react";
 
 const Token = (props) => {
-
   const userCtx = useContext(UserContext);
 
   const calcPercentageOfTotal = (portfolioValue, tokenValue) => {
-    return (tokenValue / portfolioValue) * 100
-  }
+    return (tokenValue / portfolioValue) * 100;
+  };
 
   const formattedName = props.name.substring(0, 20);
-  const formattedValue = userCtx.selectedCurrencySymbol + ((props.value).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
-  const formattedBalance = (+props.balance).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).substring(0, 10);
+  const formattedValue =
+    userCtx.selectedCurrencySymbol +
+    props.value.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  const formattedBalance = (+props.balance)
+    .toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })
+    .substring(0, 10);
   const formattedSymbol = props.symbol.substring(0, 10);
-  const formattedDistributionAmount = calcPercentageOfTotal(props.portfolioValue, props.value).toFixed(2) + '%';
-  const formattedPrice = userCtx.selectedCurrencySymbol + ((props.price).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
-  const formattedProfitLoss = userCtx.selectedCurrencySymbol + props.profitLoss.toFixed(4);
-  const formattedDayChange = props.dayChange.toFixed(1) + '%';
+  const formattedDistributionAmount =
+    calcPercentageOfTotal(props.portfolioValue, props.value).toFixed(2) + "%";
+  const formattedPrice =
+    userCtx.selectedCurrencySymbol +
+    props.price.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+  const formattedProfitLoss =
+    userCtx.selectedCurrencySymbol + props.profitLoss.toFixed(4);
+  const formattedDayChange = props.dayChange.toFixed(1) + "%";
 
   const AVAILABLE_CHAINS = {
     ETHEREUM: "ethereum",
@@ -36,25 +51,25 @@ const Token = (props) => {
     ALL_AVAILABLE: "all",
   };
 
-  let tokenImage = '';
-  if (props.image == 'NATIVE_TOKEN') {
+  let tokenImage = "";
+  if (props.image == "NATIVE_TOKEN") {
     switch (props.chain) {
       case AVAILABLE_CHAINS.ETHEREUM:
-        tokenImage = Ethereum;
+        tokenImage = EthereumIcon;
         break;
       case AVAILABLE_CHAINS.POLYGON:
-        tokenImage = Polygon;
+        tokenImage = PolygonIcon;
         break;
       case AVAILABLE_CHAINS.AVALANCHE:
-        tokenImage = Avalanche;
+        tokenImage = AvalancheIcon;
         break;
     }
   }
 
-  if (props.image == 'unknown') {
-    tokenImage = UnknownToken;
-  } else if (props.image == 'spam') {
-    tokenImage = SpamToken;
+  if (props.image == "unknown") {
+    tokenImage = UnknownTokenIcon;
+  } else if (props.image == "spam") {
+    tokenImage = SpamTokenIcon;
   } else if (tokenImage.length == 0) {
     tokenImage = props.image;
   }
@@ -62,47 +77,43 @@ const Token = (props) => {
   let chainIcon;
   switch (props.chain) {
     case AVAILABLE_CHAINS.ETHEREUM:
-      chainIcon = Ethereum;
+      chainIcon = EthereumIcon;
       break;
     case AVAILABLE_CHAINS.AVALANCHE:
-      chainIcon = Avalanche;
+      chainIcon = AvalancheIcon;
       break;
     case AVAILABLE_CHAINS.POLYGON:
-      chainIcon = Polygon;
+      chainIcon = PolygonIcon;
       break;
     case AVAILABLE_CHAINS.ALL_AVAILABLE:
-      chainIcon = AllChains;
+      chainIcon = AllChainsIcon;
       break;
   }
-
 
   let arrowIcon;
   //profit
   if (props.dayChange >= 0) {
-    arrowIcon = ArrowUp;
+    arrowIcon = ArrowUpIcon;
   }
   //loss
   if (props.dayChange < 0) {
-    arrowIcon = ArrowDown;
+    arrowIcon = ArrowDownIcon;
   }
 
   if (props.dayChange == 0) {
-    arrowIcon = UnknownToken;
+    arrowIcon = UnknownTokenIcon;
   }
-
-
 
   return (
     <li className={classes.token}>
-      <img
-        className={classes["token-image"]}
-        src={tokenImage}
-      />
+      <img className={classes["token-image"]} src={tokenImage} />
       <div className={classes["name-percentage"]}>
         <p className={classes["name"]}>{formattedName}</p>
         <div className={classes["piechart-percentage"]}>
-          <img className={classes["piechart"]} src={PieChart} />
-          <p className={classes["portfolio-distribution-amount"]}>{formattedDistributionAmount}</p>
+          <img className={classes["piechart"]} src={PieChartIcon} />
+          <p className={classes["portfolio-distribution-amount"]}>
+            {formattedDistributionAmount}
+          </p>
         </div>
       </div>
       <p className={classes["value"]}>{formattedValue}</p>

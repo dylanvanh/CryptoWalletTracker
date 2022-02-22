@@ -1,8 +1,8 @@
 import classes from "./Footer.module.css";
-import Twitter from "../../icons/footer/twitter.svg";
-import Github from "../../icons/footer/github.svg";
-import Linkedin from "../../icons/footer/linkedin.svg";
-import Figma from "../../icons/footer/figma.svg";
+import TwitterIcon from "../../icons/footer/twitter.svg";
+import GithubIcon from "../../icons/footer/github.svg";
+import LinkedinIcon from "../../icons/footer/linkedin.svg";
+import FigmaIcon from "../../icons/footer/figma.svg";
 
 const Footer = () => {
   return (
@@ -12,28 +12,28 @@ const Footer = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img src={Twitter} />
+        <img src={TwitterIcon} />
       </a>
       <a
         href="https://github.com/SparklingWater45/Crypto-Dashboard"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img src={Github} />
+        <img src={GithubIcon} />
       </a>
       <a
         href="https://www.linkedin.com/in/dylan-van-heerden-a7b160139/"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img src={Linkedin} />
+        <img src={LinkedinIcon} />
       </a>
       <a
         href="https://www.figma.com/file/pVftCgx2dEmcLa9s4F7oxN/CryptoDashboardv2?node-id=0%3A1"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img src={Figma} />
+        <img src={FigmaIcon} />
       </a>
     </footer>
   );

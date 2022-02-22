@@ -1,12 +1,12 @@
-.checkbox{
-  display:flex;
+.checkbox {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.title{
-  padding-left : 1rem;
+.title {
+  padding-left: 1rem;
   padding-bottom: 0.5rem;
   color: white;
 }

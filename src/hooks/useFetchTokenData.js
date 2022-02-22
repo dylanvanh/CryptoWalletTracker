@@ -78,7 +78,7 @@ const useFetchTokenData = () => {
         headers: COINGECKO_API_HEADER,
       });
 
-      if (!responseErc20.ok) {
+      if (!responseErc20.ok || !responseNativePrice.ok || !responseNativeBalance.ok) {
         throw new Error("Error fetching token data");
       }
 

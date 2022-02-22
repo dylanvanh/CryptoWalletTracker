@@ -1,12 +1,10 @@
-import classes from './ChainListSection.module.css';
-import Token from './Token';
-import ChainSectionHeader from './ChainSectionHeader';
-import { useEffect, useState, useContext } from 'react';
-import UserContext from '../../../../context/UserContext';
-import TokenListTitle from './TokenListTitle';
+import Token from "./Token";
+import ChainSectionHeader from "./ChainSectionHeader";
+import UserContext from "../../../../context/UserContext";
+import TokenListTitle from "./TokenListTitle";
+import { useEffect, useState, useContext } from "react";
 
 const ChainListSection = (props) => {
-
   const tokenDataNotSpam = props.tokenDataNotSpam;
   const tokenDataSpam = props.tokenDataSpam;
   const value = props.value;
@@ -21,10 +19,9 @@ const ChainListSection = (props) => {
   const userCtx = useContext(UserContext);
 
   const mapTokens = (tokenData, spam) => {
-
-    console.log(tokenData, spam)
+    console.log(tokenData, spam);
     const checkChainIsEmpty = (tokenData, spam) => {
-      const foundItem = tokenData.find(token => token.chain == chain);
+      const foundItem = tokenData.find((token) => token.chain == chain);
 
       //not spam tokens
       if (!spam) {
@@ -33,21 +30,22 @@ const ChainListSection = (props) => {
           return;
         }
 
-        console.log('founditem = ', foundItem)
+        console.log("founditem = ", foundItem);
         setHasPriceTokens(true);
       } else {
         //spam tokens
         if (foundItem == undefined) {
           return;
         }
-        console.log('founditem = ', foundItem)
+        console.log("founditem = ", foundItem);
 
         setHasSpamTokens(true);
       }
-    }
+    };
 
     if (!spam) {
-      const tokensMapped = tokenData.filter((token) => token.chain == chain)
+      const tokensMapped = tokenData
+        .filter((token) => token.chain == chain)
         .map((token) => (
           <Token
             key={token.tokenAddress}
@@ -61,17 +59,19 @@ const ChainListSection = (props) => {
             value={token.totalValue * userCtx.selectedCurrencyValue}
             profitLoss={token.profitLoss * userCtx.selectedCurrencyValue}
             chain={token.chain}
-            portfolioValue={props.portfolioValue * userCtx.selectedCurrencyValue}
+            portfolioValue={
+              props.portfolioValue * userCtx.selectedCurrencyValue
+            }
           />
-        ))
+        ));
 
       //pass tokenDataNotSpam data
       checkChainIsEmpty(tokenData, false);
       setMappedPriceTokens(tokensMapped);
-
     } else {
       //spam data
-      const tokensMapped = tokenData.filter((token) => token.chain == chain)
+      const tokensMapped = tokenData
+        .filter((token) => token.chain == chain)
         .map((token) => (
           <Token
             key={token.tokenAddress}
@@ -87,61 +87,52 @@ const ChainListSection = (props) => {
             chain={token.chain}
             portfolioValue={0}
           />
-        ))
+        ));
 
       //pass spam tokenData
       checkChainIsEmpty(tokenData, true);
       setMappedSpamTokens(tokensMapped);
     }
-  }
+  };
 
   useEffect(() => {
     mapTokens(tokenDataNotSpam, false);
-    console.log(mappedPriceTokens)
-  }, [])
+    console.log(mappedPriceTokens);
+  }, []);
 
   useEffect(() => {
     mapTokens(tokenDataSpam, true);
-    console.log(mappedSpamTokens)
-  }, [])
-
+    console.log(mappedSpamTokens);
+  }, []);
 
   //if the token has a value -> display the value
 
   return (
-    <ul className={classes["token-data"]}>
-      {<div>
-        {hasPriceTokens &&
-          <div>
-            <ChainSectionHeader
-              chain={chain}
-              value={value}
-              spam={false}
-            />
-            <TokenListTitle />
-            {mappedPriceTokens}
-          </div>}
-      </div>
-      }
+    <ul>
       {
-        spamTokenCheckboxValue && (
-          <div>
-            {hasSpamTokens &&
-              <div>
-                <ChainSectionHeader
-                  chain={chain}
-                  value={0}
-                  spam={true}
-                />
-                <TokenListTitle />
-                {mappedSpamTokens}
-              </div>}
-          </div>
-        )
+        <div>
+          {hasPriceTokens && (
+            <div>
+              <ChainSectionHeader chain={chain} value={value} spam={false} />
+              <TokenListTitle />
+              {mappedPriceTokens}
+            </div>
+          )}
+        </div>
       }
-    </ul >
-  )
-
-}
+      {spamTokenCheckboxValue && (
+        <div>
+          {hasSpamTokens && (
+            <div>
+              <ChainSectionHeader chain={chain} value={0} spam={true} />
+              <TokenListTitle />
+              {mappedSpamTokens}
+            </div>
+          )}
+        </div>
+      )}
+    </ul>
+  );
+};
 
 export default ChainListSection;

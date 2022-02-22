@@ -1,14 +1,12 @@
 import classes from "./Assets.module.css";
 import TokenList from "./TokenDisplay/TokenList";
-import { useState, useContext } from "react";
-import AssetOptionsMenu from './Checkbox/AssetOptionsMenu';
-import UserContext from "../../../context/UserContext";
+import AssetOptionsMenu from "./Checkbox/AssetOptionsMenu";
+import { useState } from "react";
 
 const Assets = (props) => {
   const [spamCheckBoxValue, setSpamCheckBoxValue] = useState(false);
-  const [arrangeChainCheckBoxValue, setArrangeChainCheckBoxValue] = useState(false);
-
-  const userCtx = useContext(UserContext);
+  const [arrangeChainCheckBoxValue, setArrangeChainCheckBoxValue] =
+    useState(false);
 
   const handleArrangedChainDisplay = () => {
     setArrangeChainCheckBoxValue(!arrangeChainCheckBoxValue);
@@ -17,7 +15,6 @@ const Assets = (props) => {
   const handleSpamAssetsCheckboxChange = () => {
     setSpamCheckBoxValue(!spamCheckBoxValue);
   };
-
 
   return (
     <>

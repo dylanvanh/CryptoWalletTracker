@@ -2,9 +2,9 @@ import classes from "./PortfolioSummary.module.css";
 import ArrowUp from "../../../icons/token/arrowupgreen.svg";
 import ArrowDown from "../../../icons/token/arrowdownred.svg";
 import AllChains from "../../../icons/chains/all-chains.svg";
-import Ethereum from "../../../icons/chains/ethereum.svg";
-import Avalanche from "../../../icons/chains/avalanche.svg";
-import Polygon from "../../../icons/chains/polygon.svg";
+import EthereumIcon from "../../../icons/chains/ethereum.svg";
+import AvalancheIcon from "../../../icons/chains/avalanche.svg";
+import PolygonIcon from "../../../icons/chains/polygon.svg";
 import UserContext from "../../../context/UserContext";
 import { useContext } from "react";
 
@@ -14,13 +14,13 @@ const PortfolioSummary = (props) => {
 
   switch (userCtx.selectedChain) {
     case "ethereum":
-      chainIcon = Ethereum;
+      chainIcon = EthereumIcon;
       break;
     case "avalanche":
-      chainIcon = Avalanche;
+      chainIcon = AvalancheIcon;
       break;
     case "polygon":
-      chainIcon = Polygon;
+      chainIcon = PolygonIcon;
       break;
     case "all":
       chainIcon = AllChains;
@@ -28,20 +28,27 @@ const PortfolioSummary = (props) => {
 
   const portfolioValue =
     userCtx.selectedCurrencySymbol +
-    (props.portfolioValue * userCtx.selectedCurrencyValue).toLocaleString("en-US", { maximumFractionDigits: 2 });
+    (props.portfolioValue * userCtx.selectedCurrencyValue).toLocaleString(
+      "en-US",
+      { maximumFractionDigits: 2 }
+    );
   let profitLoss = props.profitLoss * userCtx.selectedCurrencyValue;
   let arrowImage;
   let percentageDifference;
-  let previousDayPortfolioValue = (props.portfolioValue * userCtx.selectedCurrencyValue) + profitLoss;
+  let previousDayPortfolioValue =
+    props.portfolioValue * userCtx.selectedCurrencyValue + profitLoss;
 
   //increase
   if (profitLoss >= 0) {
     percentageDifference =
-      (((props.portfolioValue * userCtx.selectedCurrencyValue) - previousDayPortfolioValue) /
+      ((props.portfolioValue * userCtx.selectedCurrencyValue -
+        previousDayPortfolioValue) /
         previousDayPortfolioValue) *
       100;
     profitLoss =
-      "+" + userCtx.selectedCurrencySymbol + profitLoss.toLocaleString("en-US", { maximumFractionDigits: 2 });
+      "+" +
+      userCtx.selectedCurrencySymbol +
+      profitLoss.toLocaleString("en-US", { maximumFractionDigits: 2 });
     arrowImage = ArrowUp;
     percentageDifference =
       "+" +
@@ -58,7 +65,8 @@ const PortfolioSummary = (props) => {
         maximumFractionDigits: 2,
       });
     percentageDifference =
-      (((props.portfolioValue * userCtx.selectedCurrencyValue) - previousDayPortfolioValue) /
+      ((props.portfolioValue * userCtx.selectedCurrencyValue -
+        previousDayPortfolioValue) /
         previousDayPortfolioValue) *
       100;
     arrowImage = ArrowDown;

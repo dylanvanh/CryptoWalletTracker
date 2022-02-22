@@ -19,14 +19,14 @@
 .name-percentage {
   display: flex;
   flex-direction: column;
-  height:3.5rem;
+  height: 3.5rem;
 }
 
-.name{
-  font-size:20px;
-  width:15rem;
-  height:1.5rem;
-  padding-left:0.6rem;
+.name {
+  font-size: 20px;
+  width: 15rem;
+  height: 1.5rem;
+  padding-left: 0.6rem;
 }
 
 .piechart-percentage {
@@ -42,8 +42,8 @@
 
 .piechart {
   width: 12px;
-  height:12px;
-  padding-top:0.8rem;
+  height: 12px;
+  padding-top: 0.8rem;
 }
 
 .value {
@@ -54,36 +54,35 @@
 .balance-container {
   width: 12rem;
 
-  display:flex;
+  display: flex;
 }
 
-.balance{
-  padding-right:0.3rem;
+.balance {
+  padding-right: 0.3rem;
 }
 
 .price {
   width: 12rem;
-
 }
 
 .profit-loss-percentage-change {
   min-width: 12rem;
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
 
-.percentage-change-container{
-  display:flex;
+.percentage-change-container {
+  display: flex;
   align-items: center;
   font-size: 12px;
-  padding-top:0.3rem;
-  padding-left:0.3rem;
+  padding-top: 0.3rem;
+  padding-left: 0.3rem;
 }
 
-.arrow-image{
-  width:20px;
-  height:20px;
-  padding-left:0.3rem;
+.arrow-image {
+  width: 20px;
+  height: 20px;
+  padding-left: 0.3rem;
 }
 
 .chain {

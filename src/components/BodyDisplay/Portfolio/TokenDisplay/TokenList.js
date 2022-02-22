@@ -1,12 +1,10 @@
-import { useEffect, useState, useContext } from "react";
-import classes from "./TokenList.module.css";
 import Token from "./Token";
 import UserContext from "../../../../context/UserContext";
 import AllCoinGeckoTokenData from "../../../../coingecko-image-tokenlist/all.json";
 import ChainSectionHeader from "./ChainSectionHeader";
 import TokenListTitle from "./TokenListTitle";
 import ChainListSection from "./ChainListSection";
-
+import { useEffect, useState, useContext } from "react";
 
 const TokenList = (props) => {
   const [tokenDataNotSpam, setTokenDataNotSpam] = useState([]);
@@ -170,7 +168,7 @@ const TokenList = (props) => {
 
   return (
     <>
-      <div className={classes["token-list"]}>
+      <div>
         {/*Display by chain */}
         {arrangeChainCheckBoxValue && (
           <div>
@@ -204,13 +202,13 @@ const TokenList = (props) => {
         {/*Display by one chain format (all_chains) counts as 1 chain*/}
         {!arrangeChainCheckBoxValue && (
           <div>
-            <div className={classes["token-chain-header"]}>
+            <div>
               <ChainSectionHeader
                 chain={userCtx.selectedChain}
                 value={props.portfolioValue * userCtx.selectedCurrencyValue}
               />
               <TokenListTitle />
-              <ul className={classes["token-data"]}>
+              <ul>
                 {tokenDataNotSpam.map((token) => (
                   <Token
                     key={token.tokenAddress}
@@ -222,9 +220,13 @@ const TokenList = (props) => {
                     price={token.price * userCtx.selectedCurrencyValue}
                     dayChange={token.dayChange}
                     value={token.totalValue * userCtx.selectedCurrencyValue}
-                    profitLoss={token.profitLoss * userCtx.selectedCurrencyValue}
+                    profitLoss={
+                      token.profitLoss * userCtx.selectedCurrencyValue
+                    }
                     chain={token.chain}
-                    portfolioValue={props.portfolioValue * userCtx.selectedCurrencyValue}
+                    portfolioValue={
+                      props.portfolioValue * userCtx.selectedCurrencyValue
+                    }
                   />
                 ))}
                 {spamTokenCheckboxValue && (

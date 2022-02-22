@@ -1,10 +1,9 @@
 import classes from "./ChainSectionHeader.module.css";
-import AllChains from "../../../../icons/chains/all-chains.svg";
-import Ethereum from "../../../../icons/chains/ethereum.svg";
-import Avalanche from "../../../../icons/chains/avalanche.svg";
-import Polygon from "../../../../icons/chains/polygon.svg";
-import UnknownChain from "../../../../icons/token/questionmark.svg";
-import Token from "./Token";
+import AllChainsIcon from "../../../../icons/chains/all-chains.svg";
+import EthereumIcon from "../../../../icons/chains/ethereum.svg";
+import AvalancheIcon from "../../../../icons/chains/avalanche.svg";
+import PolygonIcon from "../../../../icons/chains/polygon.svg";
+import UnknownChainIcon from "../../../../icons/token/questionmark.svg";
 import UserContext from "../../../../context/UserContext";
 import { useContext } from "react";
 
@@ -17,29 +16,28 @@ const ChainSectionHeader = (props) => {
   };
 
   const userCtx = useContext(UserContext);
-
   let chainIcon;
   let chainName;
 
   switch (props.chain) {
     case AVAILABLE_CHAINS.all_available:
-      chainIcon = AllChains;
+      chainIcon = AllChainsIcon;
       chainName = "All Assets";
       break;
     case AVAILABLE_CHAINS.ethereum:
-      chainIcon = Ethereum;
+      chainIcon = EthereumIcon;
       chainName = "Ethereum";
       break;
     case AVAILABLE_CHAINS.avalanche:
-      chainIcon = Avalanche;
+      chainIcon = AvalancheIcon;
       chainName = "Avalanche";
       break;
     case AVAILABLE_CHAINS.polygon:
-      chainIcon = Polygon;
+      chainIcon = PolygonIcon;
       chainName = "Polygon";
       break;
     default:
-      chainIcon = UnknownChain;
+      chainIcon = UnknownChainIcon;
       chainName = "Unknown";
   }
 

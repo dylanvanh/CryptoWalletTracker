@@ -4,7 +4,7 @@ const AssetCheckbox = (props) => {
   return (
     <div className={classes.checkbox}>
       <div className={classes.title}>{props.text}</div>
-      <input 
+      <input
         className={classes.input}
         type="checkbox"
         checked={props.checkboxState}
