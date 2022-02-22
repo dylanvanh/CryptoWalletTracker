@@ -21,11 +21,11 @@ const ChainListSection = (props) => {
   const mapTokens = (tokenData, spam) => {
     console.log(tokenData, spam);
     const checkChainIsEmpty = (tokenData, spam) => {
-      const foundItem = tokenData.find((token) => token.chain == chain);
+      const foundItem = tokenData.find((token) => token.chain === chain);
 
       //not spam tokens
       if (!spam) {
-        if (foundItem == undefined) {
+        if (foundItem === undefined) {
           //default state set to true
           return;
         }
@@ -34,7 +34,7 @@ const ChainListSection = (props) => {
         setHasPriceTokens(true);
       } else {
         //spam tokens
-        if (foundItem == undefined) {
+        if (foundItem === undefined) {
           return;
         }
         console.log("founditem = ", foundItem);
@@ -45,7 +45,7 @@ const ChainListSection = (props) => {
 
     if (!spam) {
       const tokensMapped = tokenData
-        .filter((token) => token.chain == chain)
+        .filter((token) => token.chain === chain)
         .map((token) => (
           <Token
             key={token.tokenAddress}
@@ -71,7 +71,7 @@ const ChainListSection = (props) => {
     } else {
       //spam data
       const tokensMapped = tokenData
-        .filter((token) => token.chain == chain)
+        .filter((token) => token.chain === chain)
         .map((token) => (
           <Token
             key={token.tokenAddress}
@@ -98,12 +98,12 @@ const ChainListSection = (props) => {
   useEffect(() => {
     mapTokens(tokenDataNotSpam, false);
     console.log(mappedPriceTokens);
-  }, []);
+  });
 
   useEffect(() => {
     mapTokens(tokenDataSpam, true);
     console.log(mappedSpamTokens);
-  }, []);
+  });
 
   //if the token has a value -> display the value
 

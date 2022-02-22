@@ -52,7 +52,7 @@ const Token = (props) => {
   };
 
   let tokenImage = "";
-  if (props.image == "NATIVE_TOKEN") {
+  if (props.image === "NATIVE_TOKEN") {
     switch (props.chain) {
       case AVAILABLE_CHAINS.ETHEREUM:
         tokenImage = EthereumIcon;
@@ -63,14 +63,17 @@ const Token = (props) => {
       case AVAILABLE_CHAINS.AVALANCHE:
         tokenImage = AvalancheIcon;
         break;
+      default:
+        tokenImage = UnknownTokenIcon;
+        break;
     }
   }
 
-  if (props.image == "unknown") {
+  if (props.image === "unknown") {
     tokenImage = UnknownTokenIcon;
-  } else if (props.image == "spam") {
+  } else if (props.image === "spam") {
     tokenImage = SpamTokenIcon;
-  } else if (tokenImage.length == 0) {
+  } else if (tokenImage.length === 0) {
     tokenImage = props.image;
   }
 
@@ -88,6 +91,9 @@ const Token = (props) => {
     case AVAILABLE_CHAINS.ALL_AVAILABLE:
       chainIcon = AllChainsIcon;
       break;
+    default:
+      tokenImage = UnknownTokenIcon;
+      break;
   }
 
   let arrowIcon;
@@ -100,17 +106,21 @@ const Token = (props) => {
     arrowIcon = ArrowDownIcon;
   }
 
-  if (props.dayChange == 0) {
+  if (props.dayChange === 0) {
     arrowIcon = UnknownTokenIcon;
   }
 
   return (
     <li className={classes.token}>
-      <img className={classes["token-image"]} src={tokenImage} />
+      <img className={classes["token-image"]} src={tokenImage} alt="token" />
       <div className={classes["name-percentage"]}>
         <p className={classes["name"]}>{formattedName}</p>
         <div className={classes["piechart-percentage"]}>
-          <img className={classes["piechart"]} src={PieChartIcon} />
+          <img
+            className={classes["piechart"]}
+            src={PieChartIcon}
+            alt="piechart"
+          />
           <p className={classes["portfolio-distribution-amount"]}>
             {formattedDistributionAmount}
           </p>
@@ -126,10 +136,14 @@ const Token = (props) => {
         <p className={classes["profit-loss-amount"]}>{formattedProfitLoss}</p>
         <div className={classes["percentage-change-container"]}>
           <p className={classes["percentage-amount"]}>{formattedDayChange}</p>
-          <img className={classes["arrow-image"]} src={arrowIcon} />
+          <img
+            className={classes["arrow-image"]}
+            src={arrowIcon}
+            alt="profit-loss-arrow"
+          />
         </div>
       </div>
-      <img className={classes["chain"]} src={chainIcon} />
+      <img className={classes["chain"]} src={chainIcon} alt="chain" />
     </li>
   );
 };

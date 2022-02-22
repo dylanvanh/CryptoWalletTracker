@@ -21,7 +21,7 @@ const AssetOptionsMenu = (props) => {
     <>
       <div className={classes["checkboxes"]}>
         <div className={classes["chain-checkbox"]}>
-          {userCtx.selectedChain == AVAILABLE_CHAINS.ALL_AVAILABLE && (
+          {userCtx.selectedChain === AVAILABLE_CHAINS.ALL_AVAILABLE && (
             <AssetCheckbox
               handleCheckboxChange={props.handleArrangedChainDisplay}
               checkboxState={props.arrangeChainCheckBoxValue}

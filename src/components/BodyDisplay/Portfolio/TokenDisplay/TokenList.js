@@ -30,10 +30,10 @@ const TokenList = (props) => {
   const handleTokensWithPrices = () => {
     const tokensWithPrice = props.tokenData.filter(
       (token) =>
-        token.price != undefined &&
+        token.price !== undefined &&
         token.price > 0 &&
         token.decimals >= 1 &&
-        token.dayChange != null
+        token.dayChange !== null
     );
 
     let portfolioTotal = props.portfolioValue;
@@ -67,16 +67,16 @@ const TokenList = (props) => {
         portfolioTotal += token.totalValue;
         dailyProfitLoss += token.profitLoss;
       }
-      if (token.token_address == "NATIVE_TOKEN") {
+      if (token.token_address === "NATIVE_TOKEN") {
         token.image = "NATIVE_TOKEN";
       } else {
         //find the image in the json coingecko token file
         token.image = AllCoinGeckoTokenData["tokens"].filter(
           (coinGeckoToken) =>
-            coinGeckoToken.symbol.toLowerCase() == token.symbol.toLowerCase()
+            coinGeckoToken.symbol.toLowerCase() === token.symbol.toLowerCase()
         );
         //if the token was found
-        if (token.image.length != 0) {
+        if (token.image.length !== 0) {
           token.image = token.image[0]["logoURI"];
         } else {
           token.image = "unknown";
@@ -98,7 +98,7 @@ const TokenList = (props) => {
 
     const calculateChainValue = (chainName) => {
       let tempValue = finalTokensWithPrice
-        .filter((token) => token.chain == chainName)
+        .filter((token) => token.chain === chainName)
         .reduce((total, token) => {
           return token.totalValue + total;
         }, 0);
@@ -117,9 +117,9 @@ const TokenList = (props) => {
   const handleTokensWithoutPrices = () => {
     const tokensWithoutPrice = props.tokenData.filter(
       (token) =>
-        token.price == undefined ||
-        token.price == 0 ||
-        (token.decimals < 1 && token.dayChange != null)
+        token.price === undefined ||
+        token.price === 0 ||
+        (token.decimals < 1 && token.dayChange !== null)
     );
 
     //add the coins with under 0.1 value in portfolio -> likely spam coins
@@ -132,11 +132,11 @@ const TokenList = (props) => {
       token.profitLoss = 0;
       token.dayChange = 0;
 
-      if (token.name == null) {
+      if (token.name === null) {
         token.name = "";
       }
 
-      if (token.symbol == null) {
+      if (token.symbol === null) {
         token.symbol = "";
       }
 
@@ -144,7 +144,7 @@ const TokenList = (props) => {
         let decimalValue = "0." + "0".repeat(+token.decimals - 1) + "1";
         token.balance = token.balance * decimalValue;
 
-        if (token.price == null || token.price === undefined) {
+        if (token.price === null || token.price === undefined) {
           token.dayChange = 0;
         }
         //further filter out spam coins

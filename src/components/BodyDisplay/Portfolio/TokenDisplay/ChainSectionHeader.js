@@ -50,7 +50,11 @@ const ChainSectionHeader = (props) => {
   if (!props.spam) {
     return (
       <div className={classes["chain-header"]}>
-        <img className={classes["chain-image"]} src={chainIcon} />
+        <img
+          className={classes["chain-image"]}
+          src={chainIcon}
+          alt="chain-icon"
+        />
         <p className={classes["title"]}>{chainName}</p>
         <p className={classes["dash"]}>{dash}</p>
         <p className={classes["amount"]}>{formattedAmount}</p>
@@ -60,7 +64,11 @@ const ChainSectionHeader = (props) => {
     //tokens without prices (spam tokens)
     return (
       <div className={classes["chain-header"]}>
-        <img className={classes["chain-image"]} src={chainIcon} />
+        <img
+          className={classes["chain-image"]}
+          src={chainIcon}
+          alt="chain-icon"
+        />
         <p className={classes["spam-tokens"]}>$0.00 assets</p>
       </div>
     );

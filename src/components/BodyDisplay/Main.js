@@ -24,7 +24,7 @@ const MainDisplay = (props) => {
     <main className={classes['main']}>
       <section className={classes['top']}>
         <div className={classes['vault-header']}>
-          <img src={Vault} alt='vault-image' />
+          <img src={Vault} alt='vault' />
           <h1 className={classes['portfolio-title']}>Portfolio</h1>
         </div>
         <div className={classes['portfolio-summary']}>

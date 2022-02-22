@@ -5,6 +5,7 @@ import AllChains from "../../../icons/chains/all-chains.svg";
 import EthereumIcon from "../../../icons/chains/ethereum.svg";
 import AvalancheIcon from "../../../icons/chains/avalanche.svg";
 import PolygonIcon from "../../../icons/chains/polygon.svg";
+import UnknownIcon from "../../../icons/token/questionmark.svg";
 import UserContext from "../../../context/UserContext";
 import { useContext } from "react";
 
@@ -24,6 +25,10 @@ const PortfolioSummary = (props) => {
       break;
     case "all":
       chainIcon = AllChains;
+      break;
+    default:
+      chainIcon = UnknownIcon;
+      break;
   }
 
   const portfolioValue =
@@ -52,9 +57,9 @@ const PortfolioSummary = (props) => {
     arrowImage = ArrowUp;
     percentageDifference =
       "+" +
-      percentageDifference.toLocaleString("en-US", {
+      Math.abs(percentageDifference.toLocaleString("en-US", {
         maximumFractionDigits: 1,
-      }) +
+      })) +
       "%";
   } else {
     //decrease
@@ -65,7 +70,7 @@ const PortfolioSummary = (props) => {
         maximumFractionDigits: 2,
       });
     percentageDifference =
-      ((props.portfolioValue * userCtx.selectedCurrencyValue -
+      Math.abs((props.portfolioValue * userCtx.selectedCurrencyValue -
         previousDayPortfolioValue) /
         previousDayPortfolioValue) *
       100;
@@ -84,7 +89,7 @@ const PortfolioSummary = (props) => {
         <div className={classes["top-area"]}>
           <div className={classes["top-row"]}>
             <h2 className={classes["balance-title"]}>Your Balance</h2>
-            <img src={chainIcon} className="chain" alt='chain-icon'></img>
+            <img src={chainIcon} className="chain" alt="chain-icon"></img>
           </div>
           <h1 className={classes["total-value"]}>{portfolioValue}</h1>
         </div>
@@ -96,7 +101,7 @@ const PortfolioSummary = (props) => {
           <div className={classes["daily-percentage-container"]}>
             <div className={classes["daily-percentage"]}>
               <h5>{percentageDifference}</h5>
-              <img src={arrowImage} alt='arrow-image'></img>
+              <img src={arrowImage} alt="arrow"></img>
             </div>
           </div>
         </div>
