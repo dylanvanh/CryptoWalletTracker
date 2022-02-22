@@ -10,7 +10,7 @@ import { useContext, useRef, useState } from "react";
 
 //Wallet add allows you to search for a wallet location and click add
 //Adds the wallet to list of drop down wallets
-const AddWalletModal = (props) => {
+const AddWalletModal = () => {
   const userCtx = useContext(UserContext);
 
   const walletAddressRef = useRef();
@@ -30,7 +30,7 @@ const AddWalletModal = (props) => {
       console.log("Invalid Wallet address entered");
     }
 
-    if (validatedWalletAddress != undefined) {
+    if (validatedWalletAddress !== undefined) {
       userCtx.addWallet(validatedWalletAddress);
       setIsEnteredWalletValueValid(true);
     } else {
@@ -52,6 +52,7 @@ const AddWalletModal = (props) => {
           className={classes["exit-button"]}
           src={Exit}
           onClick={userCtx.hideModal}
+          alt='exit-button'
         />
         <div className={classes["main-content"]}>
           <h1 className={classes["title"]}>Connect Wallet</h1>
@@ -66,8 +67,9 @@ const AddWalletModal = (props) => {
               className={classes["address-input"]}
               type="text"
               ref={walletAddressRef}
+              alt='address-input'
             ></input>
-            <input className={classes["submit"]} src={Submit} type="image" />
+            <input className={classes["submit"]} src={Submit} type="image" alt='submit-button' />
           </div>
           <div onClick={userCtx.hideModal}>
             <MetaMaskButton addWallet={addMetaMaskWallet} />

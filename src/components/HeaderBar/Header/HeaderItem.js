@@ -7,11 +7,11 @@ const HeaderItem = (props) => {
   return (
     <li>
       <a
-        href="#"
+        href="/#"
         className={classes["icon-button"]}
         onClick={() => setOpen(!open)}
       >
-        <img src={props.icon} />
+        <img src={props.icon} alt='icon' />
       </a>
       {open && props.children}
     </li>

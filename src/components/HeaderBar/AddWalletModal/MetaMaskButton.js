@@ -32,11 +32,11 @@ const MetaMaskButton = (props) => {
       {isMetaMaskInstalled && (
         <li className={classes["list"]}>
           <a
-            href="#"
+            href="/#"
             className={classes["icon-button"]}
             onClick={connectMetaMaskHandler}
           >
-            <img src={MetaMaskIcon} />
+            <img src={MetaMaskIcon} alt='metamask-icon' />
             <p>MetaMask</p>
           </a>
         </li>
@@ -47,7 +47,7 @@ const MetaMaskButton = (props) => {
             href="https://metamask.io/download/"
             className={classes["icon-button"]}
           >
-            <img src={MetaMaskIcon} />
+            <img src={MetaMaskIcon} alt='metamask-icon' />
             <p>MetaMask</p>
           </a>
         </li>

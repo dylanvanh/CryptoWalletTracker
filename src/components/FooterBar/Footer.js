@@ -12,28 +12,29 @@ const Footer = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img src={TwitterIcon} />
+        <img src={TwitterIcon} alt="twitter" />
       </a>
       <a
         href="https://github.com/SparklingWater45/Crypto-Dashboard"
         target="_blank"
         rel="noopener noreferrer"
+        alt="github"
       >
-        <img src={GithubIcon} />
+        <img src={GithubIcon} alt="github" />
       </a>
       <a
         href="https://www.linkedin.com/in/dylan-van-heerden-a7b160139/"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img src={LinkedinIcon} />
+        <img src={LinkedinIcon} alt="linkedin" />
       </a>
       <a
         href="https://www.figma.com/file/pVftCgx2dEmcLa9s4F7oxN/CryptoDashboardv2?node-id=0%3A1"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img src={FigmaIcon} />
+        <img src={FigmaIcon} alt="figma" />
       </a>
     </footer>
   );
