@@ -1,6 +1,6 @@
 import classes from "./Header.module.css";
 import HeaderItem from "./HeaderItem";
-import WalletIcon from "../WalletIcon";
+import WalletIcon from "../WalletIcon/WalletIcon";
 import CaretIcon from "../../../icons/headerbar/caret.svg";
 import Network from "../../../icons/headerbar/network.svg";
 import Currency from "../../../icons/currencies/currency.svg";

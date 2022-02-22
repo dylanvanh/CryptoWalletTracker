@@ -8,16 +8,15 @@ import Card from './components/UI/Card';
 import useFetchTokenData from './hooks/useFetchTokenData';
 import useFetchCurrencyData from './hooks/useFetchCurrencyData';
 
-
 const App = () => {
 
   const [isMetaMaskInstalled, setisMetaMaskInstalled] = useState(false);
 
   const { tokenData, isLoading, error } = useFetchTokenData();
-  const {currencyData} = useFetchCurrencyData();  
+  const { currencyData } = useFetchCurrencyData();
   const userCtx = useContext(UserContext);
 
-  
+
   useEffect(() => {
     const checkForMetaMask = () => {
       if (typeof window.ethereum !== 'undefined') {

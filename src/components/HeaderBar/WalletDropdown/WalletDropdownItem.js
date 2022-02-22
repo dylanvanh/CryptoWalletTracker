@@ -1,14 +1,11 @@
 import { useContext } from "react";
 import UserContext from "../../../context/UserContext";
 import classes from './WalletDropdownItem.module.css';
-// import { ReactComponent as Delete } from "../../../icons/walletdropdown/trash.svg";
 import Delete from "../../../icons/walletdropdown/trash.svg";
-
-
+import BlockieImage from "../WalletIcon/BlockieImage";
 
 const WalletDropdownItem = (props) => {
   const userCtx = useContext(UserContext);
-
 
   //handles highlighting selected item
   let cssClassName;
@@ -39,13 +36,14 @@ const WalletDropdownItem = (props) => {
         onClick={activeWalletHandler}
         className={classes[cssClassName]}
       >
-        <span className={classes["icon-button"]}><img src={props.leftIcon}></img></span>
+        {/* <span className={classes["icon-button"]}><img src={props.leftIcon}></img></span> */}
+        <span className={classes["icon-button"]}><BlockieImage address={props.name} diameter={50} /></span>
         {props.children}
       </a>
       <a className={classes.delete}>
         <img onClick={deleteWalletHandler} src={Delete}></img>
       </a>
-    </div>
+    </div >
   );
 };
 
