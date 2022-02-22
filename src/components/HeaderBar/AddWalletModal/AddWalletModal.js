@@ -52,7 +52,9 @@ const AddWalletModal = (props) => {
             <input className={classes['address-input']} type='text' ref={walletAddressRef}></input>
             <input className={classes['submit']} src={Submit} type='image' />
           </div>
-          <MetaMaskButton addWallet={addMetaMaskWallet} />
+          <div onClick={userCtx.hideModal}>
+            <MetaMaskButton addWallet={addMetaMaskWallet} />
+          </div>
         </div>
       </form>
     </Modal>
