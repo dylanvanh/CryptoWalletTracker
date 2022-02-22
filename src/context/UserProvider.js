@@ -31,7 +31,7 @@ const availableCurrenciesSymbol = {
 
 // handles local storage for wallet addresses on app launch
 const walletStorageHandler = () => {
-  /* in a try catch as firefox thorws an error  when localStorage doenst exist */
+  /* in a try catch as firefox thorws an error when localStorage variable doenst exist */
   try {
     //try to retrieve localStorage variable
     const walletAddresses = JSON.parse(localStorage.getItem("walletAddresses"));
@@ -60,7 +60,7 @@ const walletStorageHandler = () => {
   }
 };
 
-const initalSelectedWalletHandler = (wallets) => {
+const initalSelectedWalletHandler = () => {
   const walletAddresses = JSON.parse(localStorage.getItem("walletAddresses"));
 
   try {
@@ -112,7 +112,7 @@ const initialSelectedChainHandler = () => {
 };
 
 const initialUserState = {
-  // wallets: ['0x9b863d76c11b7a74f63fcaa1632198b0bcad93f0','0xa9ac72E3BbD107eC40546Fc1C68c5e40fc7A9DD9','0x1A9EFC7507D3Bb3206cA5baBb4dF9e168Bd5cDEE'],
+  // example_wallets: ['0x9b863d76c11b7a74f63fcaa1632198b0bcad93f0','0xa9ac72E3BbD107eC40546Fc1C68c5e40fc7A9DD9','0x1A9EFC7507D3Bb3206cA5baBb4dF9e168Bd5cDEE'],
   //fetch wallets from local storage
   wallets: walletStorageHandler(),
   isModalShowing: false,
@@ -126,7 +126,6 @@ const initialUserState = {
 const userReducer = (state, action) => {
   switch (action.type) {
     case availableActions.DISPLAY: {
-      console.log("display!");
       return {
         ...state,
         isModalShowing: true,
@@ -134,7 +133,6 @@ const userReducer = (state, action) => {
     }
 
     case availableActions.HIDE: {
-      console.log("hide!");
       return {
         ...state,
         isModalShowing: false,
@@ -147,7 +145,6 @@ const userReducer = (state, action) => {
 
       // //if blank input field
       if (newWalletAddress.length === 0) {
-        console.log("blank address entered");
         return {
           ...state,
         };
@@ -180,20 +177,17 @@ const userReducer = (state, action) => {
     }
 
     case availableActions.REMOVE: {
-      console.log("Remove");
       const walletAddresses = state.wallets;
       const updatedWallets = walletAddresses.filter(
         (wallet) => wallet != action.walletAddress
       );
 
-      console.log(updatedWallets);
       localStorage.setItem("walletAddresses", JSON.stringify(updatedWallets));
 
       //check if clicked wallet is currently active wallet
 
       if (action.walletAddress == state.selectedWallet) {
         if (updatedWallets.length == 0) {
-          console.log("empty wallet");
           localStorage.setItem("selectedWallet", JSON.stringify(""));
 
           return {
@@ -211,7 +205,6 @@ const userReducer = (state, action) => {
             );
             return state.wallets[1];
           }
-
           localStorage.setItem(
             "selectedWallet",
             JSON.stringify(state.wallets[0])
@@ -232,9 +225,7 @@ const userReducer = (state, action) => {
     }
 
     case availableActions.SELECT_WALLET: {
-      console.log("Select wallet");
       const updatedSelectedWallet = action.walletAddress;
-
       localStorage.setItem(
         "selectedWallet",
         JSON.stringify(updatedSelectedWallet)
@@ -247,12 +238,8 @@ const userReducer = (state, action) => {
     }
 
     case availableActions.SELECT_CHAIN: {
-      console.log("Select Chain");
       const updatedChain = action.chainName;
-      console.log("new CHAIN = ", action.chainName);
-
       localStorage.setItem("selectedChain", JSON.stringify(updatedChain));
-
       return {
         ...state,
         selectedChain: updatedChain,
@@ -261,10 +248,8 @@ const userReducer = (state, action) => {
 
     case availableActions.SELECT_CURRENCY:
       const updatedCurrency = action.currencyName;
-
       const updatedCurrencyValue = action.currencyValue;
       const updatedCurrencySymbol = availableCurrenciesSymbol[updatedCurrency];
-
       return {
         ...state,
         selectedCurrency: updatedCurrency,

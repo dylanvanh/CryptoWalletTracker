@@ -7,15 +7,15 @@ const UserContext = createContext({
   selectedWallet: null,
   selectedChain: null,
   selectedCurrency: null,
-  selectedCurrencyValue : null,
-  selectedCurrencySymbol : null,
+  selectedCurrencyValue: null,
+  selectedCurrencySymbol: null,
   showModal: () => { },
   hideModal: () => { },
   addWallet: (walletAddress) => { },
   removeWallet: (walletAddress) => { },
-  selectWallet: () => { },
-  selectChain: () => { },
-  selectCurrency: () => { },
+  selectWallet: (walletAddress) => { },
+  selectChain: (chainName) => { },
+  selectCurrency: (currencyName, currencyValue) => { },
 });
 
 export default UserContext;
