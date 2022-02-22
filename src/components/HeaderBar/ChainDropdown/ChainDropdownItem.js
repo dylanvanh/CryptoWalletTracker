@@ -1,8 +1,6 @@
-import { useContext } from 'react';
-import UserContext from '../../../context/UserContext';
-import classes from './ChainDropdownItem.module.css';
-
-
+import classes from "./ChainDropdownItem.module.css";
+import UserContext from "../../../context/UserContext";
+import { useContext } from "react";
 
 const ChainDropdownItem = (props) => {
   const userCtx = useContext(UserContext);
@@ -10,7 +8,7 @@ const ChainDropdownItem = (props) => {
   //handles highlighting selected item
   let cssClassName;
   if (userCtx.selectedChain == props.name) {
-    cssClassName = 'menu-item-selected';
+    cssClassName = "menu-item-selected";
   }
 
   //set the clicked on wallet button to be the globally selcted wallet for displaying
@@ -22,7 +20,7 @@ const ChainDropdownItem = (props) => {
       return;
     }
     userCtx.selectChain(updatedSelectedChain);
-  }
+  };
 
   return (
     <div className={classes.container}>
@@ -31,12 +29,13 @@ const ChainDropdownItem = (props) => {
         onClick={activeChainHandler}
         className={classes[cssClassName]}
       >
-        <span className={classes["icon-button"]}><img src={props.leftIcon}></img></span>
+        <span className={classes["icon-button"]}>
+          <img src={props.leftIcon}></img>
+        </span>
         {props.children}
       </a>
     </div>
   );
 };
-
 
 export default ChainDropdownItem;

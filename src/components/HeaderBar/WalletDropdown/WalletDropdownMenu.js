@@ -1,12 +1,9 @@
 import classes from "./WalletDropdownMenu.module.css";
 import { ReactComponent as PlusIcon } from "../../../icons/walletdropdown/plus.svg";
-import { useContext } from 'react';
-
 import UserContext from "../../../context/UserContext";
 import WalletDropdownItem from "./WalletDropdownItem";
 import WalletIcon from "../../../icons/walletdropdown/wallet-icon.png";
-
-
+import { useContext } from "react";
 
 const WalletDropdownMenu = () => {
   const userCtx = useContext(UserContext);
@@ -18,26 +15,30 @@ const WalletDropdownMenu = () => {
         {props.children}
       </a>
     );
-  }
+  };
 
   const dropDownItems = (
     <ul>
       {userCtx.wallets.map((walletAddress) => (
-        <WalletDropdownItem key={walletAddress} name={walletAddress} leftIcon={WalletIcon}>
+        <WalletDropdownItem
+          key={walletAddress}
+          name={walletAddress}
+          leftIcon={WalletIcon}
+        >
           <h3>
-            {walletAddress.slice(0, 3)}{'...'}{walletAddress.slice(-3)}
+            {walletAddress.slice(0, 3)}
+            {"..."}
+            {walletAddress.slice(-3)}
           </h3>
         </WalletDropdownItem>
       ))}
     </ul>
-  )
+  );
 
   return (
     <div className={classes.dropdown}>
       <p>Available Wallets</p>
-      <div>
-        {dropDownItems}
-      </div>
+      <div>{dropDownItems}</div>
       <AddWalletButton leftIcon={<PlusIcon />}>
         <h3>Add Wallet</h3>
       </AddWalletButton>

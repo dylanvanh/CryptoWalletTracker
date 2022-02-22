@@ -1,8 +1,8 @@
-.menu-item-selected{
-  color:rgb(255, 216, 90);
+.menu-item-selected {
+  color: rgb(255, 216, 90);
 }
 
-.menu-item-selected > span{
+.menu-item-selected > span {
   background-color: rgb(255, 216, 90);
 }
 
@@ -35,5 +35,3 @@
   width: 1px;
   height: 45px;
 }
-
-

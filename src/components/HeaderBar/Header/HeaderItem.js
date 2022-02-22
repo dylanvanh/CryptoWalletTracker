@@ -1,6 +1,4 @@
-
 import classes from "./HeaderItem.module.css";
-
 import { useState } from "react";
 
 const HeaderItem = (props) => {
@@ -8,12 +6,16 @@ const HeaderItem = (props) => {
 
   return (
     <li>
-      <a href="#" className={classes["icon-button"]} onClick={() => setOpen(!open)}>
+      <a
+        href="#"
+        className={classes["icon-button"]}
+        onClick={() => setOpen(!open)}
+      >
         <img src={props.icon} />
       </a>
       {open && props.children}
-    </li >
+    </li>
   );
-}
+};
 
 export default HeaderItem;

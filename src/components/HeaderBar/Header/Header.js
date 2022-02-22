@@ -2,15 +2,13 @@ import classes from "./Header.module.css";
 import HeaderItem from "./HeaderItem";
 import WalletIcon from "../WalletIcon/WalletIcon";
 import CaretIcon from "../../../icons/headerbar/caret.svg";
-import Network from "../../../icons/headerbar/network.svg";
-import Currency from "../../../icons/currencies/currency.svg";
-
-import { useContext } from "react";
-
+import NetworkIcon from "../../../icons/headerbar/network.svg";
+import CurrencyIcon from "../../../icons/currencies/currency.svg";
 import WalletDropdownMenu from "../WalletDropdown/WalletDropdownMenu";
 import UserContext from "../../../context/UserContext";
 import ChainDropdownMenu from "../ChainDropdown/ChainDropdownMenu";
 import CurrencyDropdownMenu from "../CurrencyDropDown/CurrencyDropdownMenu";
+import { useContext } from "react";
 
 const Header = (props) => {
   const userCtx = useContext(UserContext);
@@ -29,11 +27,11 @@ const Header = (props) => {
       <h2 className={classes["wallet-address"]}>{selectedWallet}</h2>
       <div className={classes["end-dropdowns"]}>
         <h3>Networks</h3>
-        <HeaderItem icon={Network}>
+        <HeaderItem icon={NetworkIcon}>
           <ChainDropdownMenu />
         </HeaderItem>
         <h3>Currencies</h3>
-        <HeaderItem icon={Currency}>
+        <HeaderItem icon={CurrencyIcon}>
           <CurrencyDropdownMenu currencyData={props.currencyData} />
         </HeaderItem>
       </div>

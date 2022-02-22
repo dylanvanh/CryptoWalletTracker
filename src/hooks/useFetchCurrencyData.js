@@ -1,21 +1,21 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const useFetchCurrencyData = () => {
-  const [currencyData,setCurrencyData] = useState([])
+  const [currencyData, setCurrencyData] = useState([]);
 
   const fetchCurrencyData = async () => {
     const currencyApiCall = `https://freecurrencyapi.net/api/v2/latest?apikey=${process.env.REACT_APP_CURRENCY_API_KEY}`;
-    
-    console.log(currencyApiCall)
-    
+
+    console.log(currencyApiCall);
+
     try {
       const responseCurrency = await fetch(currencyApiCall);
 
       if (!responseCurrency.ok) {
         throw new Error("Error fetching currency data");
       }
-      const retrievedCurrencyData= await responseCurrency.json();
-      console.log(retrievedCurrencyData)
+      const retrievedCurrencyData = await responseCurrency.json();
+      console.log(retrievedCurrencyData);
 
       setCurrencyData(retrievedCurrencyData);
     } catch (e) {
@@ -29,7 +29,7 @@ const useFetchCurrencyData = () => {
 
   return {
     currencyData,
-  }
+  };
 };
 
 export default useFetchCurrencyData;
