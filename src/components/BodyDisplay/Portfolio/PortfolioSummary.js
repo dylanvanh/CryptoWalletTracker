@@ -84,7 +84,7 @@ const PortfolioSummary = (props) => {
         <div className={classes["top-area"]}>
           <div className={classes["top-row"]}>
             <h2 className={classes["balance-title"]}>Your Balance</h2>
-            <img src={chainIcon} className="chain"></img>
+            <img src={chainIcon} className="chain" alt='chain-icon'></img>
           </div>
           <h1 className={classes["total-value"]}>{portfolioValue}</h1>
         </div>
@@ -96,7 +96,7 @@ const PortfolioSummary = (props) => {
           <div className={classes["daily-percentage-container"]}>
             <div className={classes["daily-percentage"]}>
               <h5>{percentageDifference}</h5>
-              <img src={arrowImage}></img>
+              <img src={arrowImage} alt='arrow-image'></img>
             </div>
           </div>
         </div>

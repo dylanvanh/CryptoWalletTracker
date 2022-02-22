@@ -1,4 +1,3 @@
-import { useContext, useEffect, useState, useCallback } from "react";
 import classes from "./App.module.css";
 import Main from "./components/BodyDisplay/Main";
 import Header from "./components/HeaderBar/Header/Header.js";
@@ -8,6 +7,9 @@ import Card from "./components/UI/Card";
 import useFetchTokenData from "./hooks/useFetchTokenData";
 import useFetchCurrencyData from "./hooks/useFetchCurrencyData";
 import Footer from "./components/FooterBar/Footer";
+import { useContext, useEffect, useState } from "react";
+
+
 const App = () => {
   const [isMetaMaskInstalled, setisMetaMaskInstalled] = useState(false);
 

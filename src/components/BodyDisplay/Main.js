@@ -6,7 +6,7 @@ import Footer from "../FooterBar/Footer";
 import Vault from "../../icons/vault.svg";
 import { useState } from "react";
 
-//handles all the body components (BodyDisplay)
+//handles all the body (main) components 
 const MainDisplay = (props) => {
   
   const [totalPortfolioValue, setTotalPortfolioValue] = useState(0);
@@ -24,7 +24,7 @@ const MainDisplay = (props) => {
     <main className={classes['main']}>
       <section className={classes['top']}>
         <div className={classes['vault-header']}>
-          <img src={Vault} />
+          <img src={Vault} alt='vault-image' />
           <h1 className={classes['portfolio-title']}>Portfolio</h1>
         </div>
         <div className={classes['portfolio-summary']}>
