@@ -4,7 +4,7 @@
 
 .main-content {
   text-align: center;
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
@@ -14,50 +14,50 @@
   border-radius: 50%;
 }
 
-.title{
-  font-size:3rem;
+.title {
+  font-size: 3rem;
   font-weight: bold;
-  padding:2rem;
+  padding: 1rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 25px;
+  background: #222224;
 }
 
-.invalid-wallet{
-  color:rgb(179, 27, 27);
+.invalid-wallet {
+  color: rgb(179, 27, 27);
 }
 
 .wallet-modal > img:hover {
   background-color: #5a5e66;
 }
 
-.input-main{
-  display:flex;
+.input-main {
+  display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom:1rem;
+  margin-bottom: 1rem;
 }
 
-.input-header{
+.input-header {
   font-size: 1rem;
   margin-top: 2rem;
 }
 
-.address-input{
-  width:20rem;
-  height:2rem;
-  margin-left:4rem;
-  font-size:1rem;
+.address-input {
+  width: 20rem;
+  height: 2rem;
+  margin-left: 4rem;
+  font-size: 1rem;
 }
 
 .submit {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  justify-self:center;
-  margin-left : 1rem;
+  justify-self: center;
+  margin-left: 1rem;
 }
 
-.submit:hover{
+.submit:hover {
   background-color: #5a5e66;
 }
-
