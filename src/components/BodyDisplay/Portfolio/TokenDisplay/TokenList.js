@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import classes from "./TokenList.module.css";
 import Token from "./Token";
 import UserContext from "../../../../context/UserContext";
-import AllCoinGeckoTokenData from "../../../../coingeckotokenlist/all.json";
+import AllCoinGeckoTokenData from "../../../../coingecko-image-tokenlist/all.json";
 import ChainSectionHeader from "./ChainSectionHeader";
 import TokenListTitle from "./TokenListTitle";
 import ChainListSection from "./ChainListSection";
