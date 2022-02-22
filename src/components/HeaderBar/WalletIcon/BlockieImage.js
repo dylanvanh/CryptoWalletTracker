@@ -21,7 +21,7 @@ const BlockieImage = (props) => {
   return (
     <>
       <canvas ref={canvasRef} style={{ display: "none" }} />
-      <img src={dataUrl} height={diameter} width={diameter} />
+      <img src={dataUrl} height={diameter} width={diameter} alt='wallet-icon' />
     </>
   );
 };

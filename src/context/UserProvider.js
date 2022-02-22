@@ -98,7 +98,7 @@ const initialSelectedChainHandler = () => {
       localStorage.setItem(
         "selectedChain",
         JSON.stringify(availableChains.ETHEREUM)
-      );
+      );  
       return availableChains.ETHEREUM;
     }
     return selectedChain;
@@ -186,8 +186,8 @@ const userReducer = (state, action) => {
 
       //check if clicked wallet is currently active wallet
 
-      if (action.walletAddress == state.selectedWallet) {
-        if (updatedWallets.length == 0) {
+      if (action.walletAddress === state.selectedWallet) {
+        if (updatedWallets.length === 0) {
           localStorage.setItem("selectedWallet", JSON.stringify(""));
 
           return {
@@ -198,7 +198,7 @@ const userReducer = (state, action) => {
         }
         const firstWallet = () => {
           //deleted wallet == the first wallet
-          if (action.walletAddress == state.wallets[0]) {
+          if (action.walletAddress === state.wallets[0]) {
             localStorage.setItem(
               "selectedWallet",
               JSON.stringify(state.wallets[1])

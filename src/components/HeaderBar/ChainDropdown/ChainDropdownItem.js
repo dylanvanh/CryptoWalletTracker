@@ -7,7 +7,7 @@ const ChainDropdownItem = (props) => {
 
   //handles highlighting selected item
   let cssClassName;
-  if (userCtx.selectedChain == props.name) {
+  if (userCtx.selectedChain === props.name) {
     cssClassName = "menu-item-selected";
   }
 
@@ -25,12 +25,12 @@ const ChainDropdownItem = (props) => {
   return (
     <div className={classes.container}>
       <a
-        href="#"
+        href="/#"
         onClick={activeChainHandler}
         className={classes[cssClassName]}
       >
         <span className={classes["icon-button"]}>
-          <img src={props.leftIcon}></img>
+          <img src={props.leftIcon} alt='icon'></img>
         </span>
         {props.children}
       </a>

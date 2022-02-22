@@ -10,7 +10,7 @@ const WalletDropdownMenu = () => {
 
   const AddWalletButton = (props) => {
     return (
-      <a href="#" onClick={userCtx.showModal}>
+      <a href="/#" onClick={userCtx.showModal}>
         <span className={classes["add-wallet-button"]}>{props.leftIcon}</span>
         {props.children}
       </a>

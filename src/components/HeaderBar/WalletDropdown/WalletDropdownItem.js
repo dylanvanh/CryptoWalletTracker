@@ -10,7 +10,7 @@ const WalletDropdownItem = (props) => {
 
   //handles highlighting selected item
   let cssClassName;
-  if (userCtx.selectedWallet == props.name) {
+  if (userCtx.selectedWallet === props.name) {
     cssClassName = "menu-item-selected";
   }
 
@@ -32,18 +32,19 @@ const WalletDropdownItem = (props) => {
   return (
     <div className={classes.container}>
       <a
-        href="#"
+        href="/#"
         onClick={activeWalletHandler}
         className={classes[cssClassName]}
       >
-        {/* <span className={classes["icon-button"]}><img src={props.leftIcon}></img></span> */}
         <span className={classes["icon-button"]}>
           <BlockieImage address={props.name} diameter={50} />
         </span>
         {props.children}
       </a>
-      <a className={classes.delete}>
-        <img onClick={deleteWalletHandler} src={Delete}></img>
+      <a
+        href="/#"
+        className={classes.delete}>
+        <img onClick={deleteWalletHandler} src={Delete} alt='delete-icon'></img>
       </a>
     </div>
   );

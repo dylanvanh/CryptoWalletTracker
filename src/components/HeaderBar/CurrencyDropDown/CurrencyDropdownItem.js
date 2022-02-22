@@ -8,9 +8,9 @@ const CurrencyDropdownItem = (props) => {
   //handles highlighting selected item
   let cssClassName;
   //default is 1 -> USA on first load
-  if (userCtx.selectedCurrencyValue == props.value) {
+  if (userCtx.selectedCurrencyValue === props.value) {
     cssClassName = "menu-item-selected";
-  } else if (userCtx.selectedCurrency == props.name) {
+  } else if (userCtx.selectedCurrency === props.name) {
     //change highlighted currency after click
     cssClassName = "menu-item-selected";
   }
@@ -20,7 +20,7 @@ const CurrencyDropdownItem = (props) => {
     const updatedSelectedCurrency = props.name;
 
     let updatedCurrencyValue;
-    if (updatedSelectedCurrency != "USD") {
+    if (updatedSelectedCurrency !== "USD") {
       updatedCurrencyValue = props.value[updatedSelectedCurrency];
     } else {
       updatedCurrencyValue = 1;
@@ -36,12 +36,12 @@ const CurrencyDropdownItem = (props) => {
   return (
     <div className={classes.container}>
       <a
-        href="#"
+        href="/#"
         onClick={activeCurrencyHandler}
         className={classes[cssClassName]}
       >
         <span className={classes["icon-button"]}>
-          <img src={props.leftIcon}></img>
+          <img src={props.leftIcon} alt='icon'></img>
         </span>
         {props.children}
       </a>

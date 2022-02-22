@@ -7,10 +7,10 @@ import { useContext } from "react";
 const WalletIcon = () => {
   const userCtx = useContext(UserContext);
 
-  if (userCtx.selectedWallet == null || userCtx.selectedWallet == undefined) {
+  if (userCtx.selectedWallet === null || userCtx.selectedWallet === undefined) {
     return (
       <div className={classes["wallet-icon"]}>
-        <img src={Unknown} />
+        <img src={Unknown} alt='unknown-icon' />
       </div>
     );
   } else {
