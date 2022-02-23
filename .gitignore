@@ -26,3 +26,4 @@ yarn-error.log*
 tempCodeRunnerFile.js
 test.js
 TokenListBackup.js
+.vscode
