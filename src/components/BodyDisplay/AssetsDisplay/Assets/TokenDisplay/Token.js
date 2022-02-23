@@ -15,7 +15,7 @@ const Token = (props) => {
   const userCtx = useContext(UserContext);
 
   const calcPercentageOfTotal = (portfolioValue, tokenValue) => {
-    if (portfolioValue == 0 || tokenValue == 0) {
+    if (tokenValue == null || tokenValue == 0 || tokenValue == undefined) {
       return 0;
     }
     return (tokenValue / portfolioValue) * 100;
