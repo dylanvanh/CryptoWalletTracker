@@ -7,7 +7,7 @@ Gives the user a wallet portfolio view, by allowing them to view all their asset
 - Multiple wallet handling
 - Metamask connectivity- Currency Switching
 - Chain switching
-- Total value Display
+- Total value display
 - Combined chain display
 - Spam Token display
 
