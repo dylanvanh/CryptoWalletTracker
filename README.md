@@ -12,7 +12,10 @@ Allows the user to view a wallets portfolio by viewing all assets and their comb
 - Combined chain display
 - Spam Token display
 
+
 ## Example View
+<img src = "./example/examplerandomwallet.png" alt="overview"/>
+
 
 
 ## Usage
