@@ -1,5 +1,5 @@
 import classes from "./Main.module.css";
-import Assets from "./Portfolio/Assets/Assets";
+import Assets from "./AssetsDisplay/Assets/Assets";
 import PortfolioSummary from "./PortfolioSummary/PortfolioSummary";
 import ChainGasDisplay from "./GasStats/ChainGasDisplay";
 import Footer from "../FooterBar/Footer";
