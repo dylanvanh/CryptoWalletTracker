@@ -1,6 +1,6 @@
 # Crypto Wallet Tracker
 
-Allows the user to view a wallets portfolio by viewing all assets and their combined value.
+Allows the user to view a wallets portfolio by viewing all assets and their combined token value.
 
 ## Features
 
