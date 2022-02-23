@@ -40,8 +40,14 @@ const Token = (props) => {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     });
+
   const formattedProfitLoss =
-    userCtx.selectedCurrencySymbol + props.profitLoss.toFixed(4);
+    userCtx.selectedCurrencySymbol +
+    (props.profitLoss).toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
   const formattedDayChange = props.dayChange.toFixed(1) + "%";
 
   const AVAILABLE_CHAINS = {
