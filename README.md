@@ -1,12 +1,11 @@
 # Crypto Wallet Tracker
 
-Allows the user to view a wallets portfolio by viewing all assets and their combined token value.
-
+Gives the user a wallet portfolio view, by allowing them to view all their assets and respective values.
+ 
 ## Features
 
 - Multiple wallet handling
-- Metmask connectivity
-- Currency Switching
+- Metamask connectivity- Currency Switching
 - Chain switching
 - Total value Display
 - Combined chain display
