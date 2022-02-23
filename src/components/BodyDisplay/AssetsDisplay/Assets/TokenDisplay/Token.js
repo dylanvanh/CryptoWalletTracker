@@ -15,8 +15,11 @@ const Token = (props) => {
   const userCtx = useContext(UserContext);
 
   const calcPercentageOfTotal = (portfolioValue, tokenValue) => {
+    if (portfolioValue == 0 || tokenValue == 0) {
+      return 0;
+    }
     return (tokenValue / portfolioValue) * 100;
-  };
+  }
 
   const formattedName = props.name.substring(0, 20);
   const formattedValue =
