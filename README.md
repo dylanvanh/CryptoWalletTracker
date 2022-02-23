@@ -1,37 +1,69 @@
 # Crypto Wallet Tracker
 
-Allows the user to track multiple wallets portfolio
+Allows the user to view a wallets portfolio by viewing all assets and their combined value.
 
 ## Features
 
+- Multiple wallet handling
+- Metmask connectivity
+- Currency Switching
+- Chain switching
+- Total value Display
+- Combined chain display
+- Spam Token display
+
+## Example View
+
+
+## Usage
+
 ```
-- Multiple wallet address tracking
-- Connectivity through Metamask / manually adding address.
+yarn install
 ```
 
 ```
-Individual / Multi Chain Viewing
+Create a .env file -> add required api keys:
+REACT_APP_MORALIS_API_KEY=
+REACT_APP_ETHERSCAN_API_KEY=
+REACT_APP_POLYGONSCAN_API_KEY=
+REACT_APP_SNOWTRACE_API_KEY=
+REACT_APP_CURRENCY_API_KEY=
 ```
 
-```
-Currency viewing in USD/ZAR
-```
+## Required API keys from providers:
+
+### Token Balances for wallet
+<img src="https://moralis.io/wp-content/uploads/2021/01/logo_footer.svg" width="200" alt='moralis'/>
 
 ```
-All tokens currently avaialble on the wallet address per chain.
+https://moralis.io/
 ```
 
-```
-View total value of chain/entire portfolio at the current time.
-```
+
+
+### Prices of tokens in wallet
+<img src="https://static.coingecko.com/s/coingecko-logo-d13d6bcceddbb003f146b33c2f7e8193d72b93bb343d38e392897c3df3e78bdd.png" width="200" alt='coingecko'/>
 
 ```
-Portfolio stats
-e.g. Profit / Loss for 24hour period
+https://www.coingecko.com/
 ```
 
+
+
+### Gas (gwei) cost per chain
+<img src="https://etherscan.io/assets/svg/logos/logo-etherscan.svg?v=0.0.2" width="200" alt='etherscan'/>
+<img src="https://polygonscan.com/images/logo.svg?v=0.0.3" width="200" alt='polygonscan'/>
+<img src="https://snowtrace.io/images/logo.svg?v=22.2.3.0" width="200" alt='snowtrace'/>
+
 ```
-Total gwei (gas costs) per chain
-Updates every 10 seconds
+https://etherscan.io/ - ETHEREUM
+https://polygonscan.com/ - POLYGON
+https://snowtrace.io - AVALANCHE
 ```
 
+### Currency vs dollar values
+<img src="https://freecurrencyapi.net/img/freecurrencyapi-logo-dark.svg" width="200" alt='freecurrencyapi'/>
+
+```
+https://freecurrencyapi.net
+```
