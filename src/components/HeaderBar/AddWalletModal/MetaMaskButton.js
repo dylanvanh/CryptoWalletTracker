@@ -57,13 +57,3 @@ const MetaMaskButton = (props) => {
 };
 
 export default MetaMaskButton;
-
-//on metamask button click
-//set the wallet address to that wallet
-//if the wallet address is changed in metamask ,add thatwallet too  and set it to that
-
-//only reload on wallet change in e.g. account 1 in metmask to account 2
-
-//on reload always set the wallet address to the one in the localStorage e.g. if it isnt a metmask wallet address
-//if the user then clicks on the metamask icon , change the wallet address to the currently selected wallet in metamask
-//ignore the chain value that metamask can return
