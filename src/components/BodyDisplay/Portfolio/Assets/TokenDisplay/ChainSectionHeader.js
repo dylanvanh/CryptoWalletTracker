@@ -1,10 +1,10 @@
 import classes from "./ChainSectionHeader.module.css";
-import AllChainsIcon from "../../../../icons/chains/all-chains.svg";
-import EthereumIcon from "../../../../icons/chains/ethereum.svg";
-import AvalancheIcon from "../../../../icons/chains/avalanche.svg";
-import PolygonIcon from "../../../../icons/chains/polygon.svg";
-import UnknownChainIcon from "../../../../icons/token/questionmark.svg";
-import UserContext from "../../../../context/UserContext";
+import AllChainsIcon from "../../../../../icons/chains/all-chains.svg";
+import EthereumIcon from "../../../../../icons/chains/ethereum.svg";
+import AvalancheIcon from "../../../../../icons/chains/avalanche.svg";
+import PolygonIcon from "../../../../../icons/chains/polygon.svg";
+import UnknownChainIcon from "../../../../../icons/token/questionmark.svg";
+import UserContext from "../../../../../context/UserContext";
 import { useContext } from "react";
 
 const ChainSectionHeader = (props) => {

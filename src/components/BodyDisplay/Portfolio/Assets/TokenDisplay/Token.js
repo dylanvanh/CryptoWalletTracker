@@ -1,14 +1,14 @@
 import classes from "./Token.module.css";
-import ArrowUpIcon from "../../../../icons/token/arrowupgreen.svg";
-import ArrowDownIcon from "../../../../icons/token/arrowdownred.svg";
-import PieChartIcon from "../../../../icons/token/piechart.svg";
-import AllChainsIcon from "../../../../icons/chains/all-chains.svg";
-import EthereumIcon from "../../../../icons/chains/ethereum.svg";
-import AvalancheIcon from "../../../../icons/chains/avalanche.svg";
-import PolygonIcon from "../../../../icons/chains/polygon.svg";
-import SpamTokenIcon from "../../../../icons/token/spam.svg";
-import UnknownTokenIcon from "../../../../icons/token/questionmark.svg";
-import UserContext from "../../../../context/UserContext";
+import ArrowUpIcon from "../../../../../icons/token/arrowupgreen.svg";
+import ArrowDownIcon from "../../../../../icons/token/arrowdownred.svg";
+import PieChartIcon from "../../../../../icons/token/piechart.svg";
+import AllChainsIcon from "../../../../../icons/chains/all-chains.svg";
+import EthereumIcon from "../../../../../icons/chains/ethereum.svg";
+import AvalancheIcon from "../../../../../icons/chains/avalanche.svg";
+import PolygonIcon from "../../../../../icons/chains/polygon.svg";
+import SpamTokenIcon from "../../../../../icons/token/spam.svg";
+import UnknownTokenIcon from "../../../../../icons/token/questionmark.svg";
+import UserContext from "../../../../../context/UserContext";
 import { useContext } from "react";
 
 const Token = (props) => {

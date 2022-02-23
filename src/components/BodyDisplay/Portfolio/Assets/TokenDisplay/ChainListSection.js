@@ -1,6 +1,6 @@
 import Token from "./Token";
 import ChainSectionHeader from "./ChainSectionHeader";
-import UserContext from "../../../../context/UserContext";
+import UserContext from "../../../../../context/UserContext";
 import TokenListTitle from "./TokenListTitle";
 import { useEffect, useState, useContext } from "react";
 
@@ -19,7 +19,6 @@ const ChainListSection = (props) => {
   const userCtx = useContext(UserContext);
 
   const mapTokens = (tokenData, spam) => {
-    console.log(tokenData, spam);
     const checkChainIsEmpty = (tokenData, spam) => {
       const foundItem = tokenData.find((token) => token.chain === chain);
 

@@ -1,6 +1,6 @@
 import classes from "./Assets.module.css";
 import TokenList from "./TokenDisplay/TokenList";
-import AssetOptionsMenu from "./Checkbox/AssetOptionsMenu";
+import AssetOptionsMenu from "../Checkbox/AssetOptionsMenu";
 import { useState } from "react";
 
 const Assets = (props) => {
