@@ -42,7 +42,7 @@ const MetaMaskButton = (props) => {
         </li>
       )}
       {!isMetaMaskInstalled && (
-        <li>
+        <li className={classes['list']}>
           <a
             href="https://metamask.io/download/"
             className={classes["icon-button"]}
