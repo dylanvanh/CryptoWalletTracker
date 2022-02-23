@@ -11,8 +11,6 @@ Allows the user to track multiple wallets portfolio
 
 ```
 Individual / Multi Chain Viewing
-<img src=""/>
-
 ```
 
 ```
