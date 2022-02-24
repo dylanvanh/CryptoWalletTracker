@@ -5,7 +5,8 @@ Gives the user a wallet portfolio view, by allowing them to view all their asset
 ## Features
 
 - Multiple wallet handling
-- Metamask connectivity- Currency Switching
+- Metamask connectivity
+- Currency Switching
 - Chain switching
 - Total value display
 - Combined chain display
