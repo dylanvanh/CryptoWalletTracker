@@ -6,6 +6,7 @@ Gives the user a wallet portfolio view, by allowing them to view all their asset
 
 - Multiple wallet handling
 - Metamask connectivity
+- Gas costs per chain in gwei (updated every 10 seconds)
 - Currency Switching
 - Chain switching
 - Total value display
