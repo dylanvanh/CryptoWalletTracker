@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer className={classes.footer}>
       <a
-        href="https://twitter.com/Monkey_incage"
+        href="https://twitter.com/Soda_Water45"
         target="_blank"
         rel="noopener noreferrer"
       >
