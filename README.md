@@ -1,5 +1,12 @@
 # Crypto Wallet Tracker
 
+<a href="https://github.com/SparklingWater45/CryptoWalletTrackerstargazers"><img src="https://img.shields.io/github/stars/SparklingWater45/CryptoWalletTracker" alt="Stars Badge"/></a>
+<a href="https://github.com/SparklingWater45/CryptoWalletTracker/network/members"><img src="https://img.shields.io/github/forks/SparklingWater45/CryptoWalletTracker" alt="Forks Badge"/></a>
+<a href="https://github.com/SparklingWater45/CryptoWalletTracker/pulls"><img src="https://img.shields.io/github/issues-pr/SparklingWater45/CryptoWalletTracker" alt="Pull Requests Badge"/></a>
+<a href="https://github.com/SparklingWater45/CryptoWalletTracker/issues"><img src="https://img.shields.io/github/issues/SparklingWater45/CryptoWalletTracker" alt="Issues Badge"/></a>
+<a href="https://github.com/SparklingWater45/CryptoWalletTracker/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/SparklingWater45/CryptoWalletTracker?color=2b9348"></a>
+
+---
 Gives the user a wallet portfolio view, by allowing them to view all their assets and respective values.
 ```
 https://sparklingwater-crypto-wallet-tracker.netlify.app/
